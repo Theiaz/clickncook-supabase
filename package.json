@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@picocss/pico": "^1.5.10",
     "@prisma/client": "^5.0.0",
     "@supabase/supabase-js": "^2.26.0",
     "vue": "^3.3.4",
