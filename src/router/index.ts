@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { useUser } from '@/composables/useUser'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,13 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     }
   ]
+})
+
+const { isAuthenticated } = useUser()
+router.beforeEach(async (to, from) => {
+  if (!isAuthenticated.value && to.name !== 'login' && to.name !== 'register') {
+    return { name: 'login' }
+  }
 })
 
 export default router

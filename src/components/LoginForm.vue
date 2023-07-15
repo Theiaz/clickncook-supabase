@@ -1,31 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { supabase } from '../supabase'
+import { useAuth } from '@/composables/useAuth'
+import { computed, ref } from 'vue'
 
-const loading = ref<boolean>(false)
+const { login, loading } = useAuth()
+
 const email = ref<string>('')
 const password = ref<string>('')
 
-const login = async () => {
-  try {
-    loading.value = true
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email.value,
-      password: password.value
-    })
-    if (error) throw error
-  } catch (error) {
-    if (error instanceof Error) {
-      alert(error.message)
-    }
-  } finally {
-    loading.value = false
-  }
-}
+const submitText = computed<string>(() => {
+  return loading.value ? 'Loading' : 'Login'
+})
 </script>
 
 <template>
-  <form @submit.prevent="login">
+  <form @submit.prevent="login(email, password)">
     <div>
       <input required type="email" placeholder="Your email" v-model="email" />
     </div>
@@ -33,7 +21,10 @@ const login = async () => {
       <input required type="password" placeholder="Your password" v-model="password" />
     </div>
     <div>
-      <input type="submit" :value="loading ? 'Loading' : 'Login'" :disabled="loading" />
+      <button type="submit" :disabled="loading">{{ submitText }}</button>
+    </div>
+    <div>
+      <router-link :to="{name: 'register'}">Register</router-link>
     </div>
   </form>
 </template>

@@ -1,29 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { supabase } from '../supabase'
-import { useSession } from '@/composables/useSession'
+import { useAuth } from '@/composables/useAuth'
+import { useUser } from '@/composables/useUser'
+import { computed } from 'vue'
 
-const loading = ref<boolean>(false)
-const { hasSession } = useSession()
+const { hasSession } = useUser()
+const { logout, loading } = useAuth()
 
-const logout = async () => {
-  try {
-    loading.value = true
-    const { error } = await supabase.auth.signOut()
-    if (error) throw error
-  } catch (error) {
-    if (error instanceof Error) {
-      alert(error.message)
-    }
-  } finally {
-    loading.value = false
-  }
-}
+const submitText = computed<string>(() => {
+  return loading.value ? 'Loading' : 'Logout'
+})
 </script>
 <template>
   <form v-if="hasSession" @submit.prevent="logout">
     <div>
-      <input type="submit" :value="loading ? 'Loading' : 'Logout'" :disabled="loading" />
+      <button type="submit" :disabled="loading">{{ submitText }}</button>
     </div>
   </form>
 </template>

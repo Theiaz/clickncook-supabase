@@ -3,6 +3,7 @@ import LogoutForm from '@/components/LogoutForm.vue'
 </script>
 <template>
   <header>
+    <div>Header</div>
     <LogoutForm />
   </header>
   <main>
