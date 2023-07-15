@@ -24,7 +24,7 @@ const createReceipt = async () => {
     let { error } = await supabase.from('Receipt').upsert(updates)
 
     if (error) throw error
-  } catch (error) {
+  } catch (error: any) {
     alert(error.message)
   } finally {
     loading.value = false
@@ -47,7 +47,7 @@ const getReceipt = async () => {
       name.value = data.name
       description.value = data.description
     }
-  } catch (error) {
+  } catch (error: any) {
     alert(error.message)
   } finally {
     loading.value = false
