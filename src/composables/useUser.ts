@@ -16,5 +16,5 @@ export function useUser() {
     return undefined
   })
 
-  return { hasSession, user, isAuthenticated }
+  return { user, isAuthenticated }
 }

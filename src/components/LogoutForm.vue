@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useAuth } from '@/composables/useAuth'
-import { useSession } from '@/composables/useSession'
+import { useUser } from '@/composables/useUser'
 import { computed } from 'vue'
 
-const { hasSession } = useSession()
+const { isAuthenticated } = useUser()
 const { logout, loading } = useAuth()
 
 const submitText = computed<string>(() => {
@@ -11,7 +11,7 @@ const submitText = computed<string>(() => {
 })
 </script>
 <template>
-  <form v-if="hasSession" @submit.prevent="logout">
+  <form v-if="isAuthenticated" @submit.prevent="logout">
     <div>
       <button type="submit" :disabled="loading">{{ submitText }}</button>
     </div>
