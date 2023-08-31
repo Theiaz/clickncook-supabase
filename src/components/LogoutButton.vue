@@ -11,9 +11,7 @@ const submitText = computed<string>(() => {
 })
 </script>
 <template>
-  <form v-if="isAuthenticated" @submit.prevent="logout">
-    <div>
-      <button type="submit" :disabled="loading">{{ submitText }}</button>
-    </div>
-  </form>
+  <button v-if="isAuthenticated" type="submit" :disabled="loading" @click="logout">
+    {{ submitText }}
+  </button>
 </template>

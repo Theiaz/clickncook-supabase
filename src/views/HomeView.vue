@@ -3,7 +3,5 @@ import ReceiptForm from '@/components/ReceiptForm.vue'
 </script>
 
 <template>
-  <main>
-    <ReceiptForm />
-  </main>
+  <ReceiptForm />
 </template>

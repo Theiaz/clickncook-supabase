@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import LogoutForm from '@/components/LogoutForm.vue'
+import LogoutButton from '@/components/LogoutButton.vue'
 </script>
 <template>
   <header>
-    <div>Header</div>
-    <LogoutForm />
+    <LogoutButton />
   </header>
   <main>
     <slot />
   </main>
-  <footer>Footer</footer>
+  <footer></footer>
 </template>
