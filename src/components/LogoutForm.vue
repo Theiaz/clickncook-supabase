@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useAuth } from '@/composables/useAuth'
-import { useUser } from '@/composables/useUser'
+import { useSession } from '@/composables/useSession'
 import { computed } from 'vue'
 
-const { hasSession } = useUser()
+const { hasSession } = useSession()
 const { logout, loading } = useAuth()
 
 const submitText = computed<string>(() => {

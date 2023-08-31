@@ -1,25 +1,9 @@
-import { computed, onMounted, ref } from 'vue'
-import { supabase } from '@/supabase'
-import { type User, type Session } from '@supabase/supabase-js'
-
-const session = ref<Session>()
+import { type User } from '@supabase/supabase-js'
+import { computed } from 'vue'
+import { useSession } from './useSession'
 
 export function useUser() {
-  const getSession = () => {
-    supabase.auth.getSession().then(({ data }) => {
-      session.value = data.session!
-    })
-
-    supabase.auth.onAuthStateChange((_, _session) => {
-      session.value = _session!
-    })
-  }
-
-  getSession() // load session immediatly because route guard needs it
-
-  const hasSession = computed<boolean>(() => {
-    return session.value != null
-  })
+  const { session, hasSession } = useSession()
 
   const isAuthenticated = computed<boolean>(() => {
     return !!user.value
@@ -27,8 +11,7 @@ export function useUser() {
 
   const user = computed<User | undefined>(() => {
     if (hasSession.value) {
-      console.log('session', session.value)
-      return session.value!.user
+      return session.value?.user
     }
     return undefined
   })
