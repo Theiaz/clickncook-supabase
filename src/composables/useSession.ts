@@ -15,10 +15,8 @@ export function useSession() {
     })
   }
 
-  getSession() // load session immediatly because route guard needs it
-
   const hasSession = computed<boolean>(() => {
     return session.value != null
   })
-  return { session, hasSession }
+  return { session, getSession, hasSession }
 }
