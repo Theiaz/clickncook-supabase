@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import { useUser } from '@/composables/useUser'
 import { onMounted, ref } from 'vue'
 import { supabase } from '../supabase'
 
 const name = ref<string>('')
 const description = ref<string>('')
 var loading = ref<boolean>(false)
+
+var { user } = useUser()
 
 onMounted(() => {
   getReceipt()
@@ -16,12 +19,12 @@ const createReceipt = async () => {
     // const { user } = session.value
 
     const updates = {
-      id: 1,
       name: name.value,
-      description: description.value
+      description: description.value,
+      author_id: user.value?.id
     }
 
-    let { error } = await supabase.from('Receipt').upsert(updates)
+    let { error } = await supabase.from('receipts').insert(updates)
 
     if (error) throw error
   } catch (error: any) {
@@ -37,7 +40,7 @@ const getReceipt = async () => {
     //const { user } = session.value
 
     let { data, error, status } = await supabase
-      .from('Receipt')
+      .from('receipts')
       .select(`name, description`)
       .single()
 
