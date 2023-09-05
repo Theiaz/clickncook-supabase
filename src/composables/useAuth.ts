@@ -1,10 +1,11 @@
 import { supabase } from '@/supabase'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 export function useAuth() {
   const loading = ref<boolean>(false)
   const router = useRouter()
+  const route = useRoute()
 
   const logout = async () => {
     console.log('logout')
@@ -37,14 +38,16 @@ export function useAuth() {
       }
     } finally {
       loading.value = false
-      router.push({ name: 'home' })
+
+      const url: string = route.query.redirect?.toString() || '/'
+      router.push(url)
     }
   }
 
   const register = async (email: string, password: string) => {
     try {
       loading.value = true
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email: email,
         password: password
       })

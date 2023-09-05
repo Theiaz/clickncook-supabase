@@ -5,16 +5,14 @@ import { useSession } from './useSession'
 export function useUser() {
   const { session, hasSession } = useSession()
 
-  const isAuthenticated = computed<boolean>(() => {
-    return !!user.value
-  })
-
   const user = computed<User | undefined>(() => {
     if (hasSession.value) {
       return session.value?.user
     }
     return undefined
   })
+
+  const isAuthenticated = computed<boolean>(() => !!user.value)
 
   return { user, isAuthenticated }
 }

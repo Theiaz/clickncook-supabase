@@ -44,9 +44,12 @@ const router = createRouter({
 })
 
 const { isAuthenticated } = useUser()
-router.beforeEach(async (to, from) => {
-  if (!isAuthenticated.value && to.name !== 'login' && to.name !== 'register') {
-    return { name: 'login' }
+router.beforeEach((to, from) => {
+  if (to.meta.requiresAuth && !isAuthenticated.value) {
+    return {
+      name: 'login',
+      query: { redirect: to.fullPath }
+    }
   }
 })
 

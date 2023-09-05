@@ -20,7 +20,6 @@ const getReceipt = async () => {
     const { data, error } = await supabase
       .from('receipts')
       .select('name, description')
-      .eq('author_id', user.value!.id)
       .limit(1)
       .single()
 
