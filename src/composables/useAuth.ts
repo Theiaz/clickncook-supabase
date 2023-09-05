@@ -8,7 +8,6 @@ export function useAuth() {
   const route = useRoute()
 
   const logout = async () => {
-    console.log('logout')
     try {
       loading.value = true
       const { error } = await supabase.auth.signOut()
@@ -24,7 +23,6 @@ export function useAuth() {
   }
 
   const login = async (email: string, password: string) => {
-    console.log('login')
     try {
       loading.value = true
       const { error } = await supabase.auth.signInWithPassword({
