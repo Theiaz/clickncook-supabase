@@ -40,3 +40,7 @@ For creating a local user u can register once, dump the data and seed it via `se
 
 - Dump via `pg_dump postgresql://postgres:postgres@localhost:54322/postgres --data-only --inserts --column-inserts -n public -n auth > backup.sql`
 - copy lines `auth.users` and `auth.identities` into `seed.sql`
+
+### Generate types for local setup
+
+- `supabase gen types typescript --local > ./src/schema.ts`
