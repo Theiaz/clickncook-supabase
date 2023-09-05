@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useUser } from '@/composables/useUser'
 import { onMounted, ref } from 'vue'
 import { supabase } from '../supabase'
 
@@ -8,26 +7,25 @@ const description = ref<string>('')
 const loading = ref<boolean>(false)
 
 onMounted(async () => {
-  await getReceipt()
+  await getRandomReceipt()
 })
 
-const getReceipt = async () => {
+const getRandomReceipt = async () => {
   try {
     loading.value = true
 
-    const { user } = useUser()
+    console.log('get')
 
-    const { data, error } = await supabase
-      .from('receipts')
-      .select('name, description')
-      .limit(1)
-      .single()
+    let { data, error } = await supabase.rpc('get_random_receipt').single()
+
+    if (error) console.error(error)
+    else console.log(data)
 
     if (error) throw error
 
     if (data) {
-      name.value = data.name
-      description.value = data.description
+      name.value = data.name!
+      description.value = data.description!
     }
   } catch (error: any) {
     alert(error.message)
@@ -41,5 +39,6 @@ const getReceipt = async () => {
     <h2>{{ name }}</h2>
     <p>{{ description }}</p>
   </article>
+  <button @click="getRandomReceipt">Get a new receipt</button>
   <router-link :to="{ name: 'newReceipt' }">Create new receipt</router-link>
 </template>
