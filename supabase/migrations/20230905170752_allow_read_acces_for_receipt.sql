@@ -1,0 +1,1 @@
+CREATE POLICY "Enable read access for all users" ON public.receipts FOR SELECT USING (true);
