@@ -6,7 +6,7 @@ import { ref } from 'vue'
 
 const name = ref<string>('')
 const description = ref<string>('')
-const imgUrl = ref<string>('')
+const imgName = ref<string>('')
 const loading = ref<boolean>(false)
 
 const { user } = useUser()
@@ -19,7 +19,7 @@ const createReceipt = async () => {
       name: name.value,
       description: description.value,
       author_id: user.value?.id,
-      img_url: imgUrl.value
+      img_name: imgName.value
     }
 
     let { error } = await supabase.from('receipts').insert(receipt)
@@ -42,7 +42,7 @@ const createReceipt = async () => {
       <label for="description">Description</label>
       <textarea id="description" type="text" v-model="description" />
     </div>
-    <ImageUpload v-model="imgUrl" />
+    <ImageUpload v-model="imgName" />
     <div>
       <input
         type="submit"
