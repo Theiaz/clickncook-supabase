@@ -6,7 +6,7 @@ import { ref } from 'vue'
 
 const name = ref<string>('')
 const description = ref<string>('')
-const imgName = ref<string>('')
+const imgName = ref<string | null>(null)
 const loading = ref<boolean>(false)
 
 const { user } = useUser()

@@ -4,7 +4,7 @@ import { supabase } from '../supabase'
 
 const name = ref<string>('')
 const description = ref<string>('')
-const imgUrl = ref<string>('')
+const imgUrl = ref<string | null>()
 const loading = ref<boolean>(false)
 
 onMounted(async () => {
@@ -31,10 +31,9 @@ const getRandomReceipt = async () => {
   }
 }
 
-const hasImg = computed(() => imgUrl.value !== '')
+const hasImg = computed(() => imgUrl.value !== null)
 const getReceiptImage = async (name: string | null) => {
-  if (name === '') {
-    imgUrl.value = ''
+  if (name === null) {
     return
   }
 
@@ -47,7 +46,7 @@ const getReceiptImage = async (name: string | null) => {
   <template v-if="name">
     <article v-if="name">
       <h2>{{ name }}</h2>
-      <img v-if="hasImg" :src="imgUrl" />
+      <img v-if="hasImg" :src="imgUrl!" />
       <p>{{ description }}</p>
     </article>
     <button @click="getRandomReceipt">Get a new receipt</button>
