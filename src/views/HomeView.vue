@@ -16,10 +16,7 @@ const getRandomReceipt = async () => {
 
     console.log('get')
 
-    let { data, error } = await supabase.rpc('get_random_receipt').single()
-
-    if (error) console.error(error)
-    else console.log(data)
+    let { data, error } = await supabase.rpc('get_random_receipt').maybeSingle()
 
     if (error) throw error
 
@@ -35,10 +32,13 @@ const getRandomReceipt = async () => {
 }
 </script>
 <template>
-  <article>
-    <h2>{{ name }}</h2>
-    <p>{{ description }}</p>
-  </article>
-  <button @click="getRandomReceipt">Get a new receipt</button>
+  <template v-if="name">
+    <article v-if="name">
+      <h2>{{ name }}</h2>
+      <p>{{ description }}</p>
+    </article>
+    <button @click="getRandomReceipt">Get a new receipt</button>
+  </template>
+  <p v-else>There are no receipts. Start creating one!</p>
   <router-link :to="{ name: 'newReceipt' }">Create new receipt</router-link>
 </template>
