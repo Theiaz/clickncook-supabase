@@ -18,6 +18,5 @@ const submitText = computed<string>(() => {
 <style scoped>
 button {
   max-width: fit-content;
-  margin-left: auto;  
 }
 </style>

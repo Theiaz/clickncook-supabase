@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import ReceiptCard from '@/components/ReceiptCard.vue'
+import type { Receipt } from '@/types/receipt'
+import { onMounted, ref } from 'vue'
 import { supabase } from '../supabase'
 
-const name = ref<string>('')
-const description = ref<string>('')
-const imgUrl = ref<string | null>()
 const loading = ref<boolean>(false)
+
+const receipt = ref<Receipt>({
+  id: '',
+  name: '',
+  description: null,
+  imgUrl: null,
+  authorId: ''
+})
 
 onMounted(async () => {
   await getRandomReceipt()
@@ -20,8 +27,13 @@ const getRandomReceipt = async () => {
     if (error) throw error
 
     if (data) {
-      name.value = data.name!
-      description.value = data.description!
+      receipt.value = {
+        id: data.id,
+        name: data.name,
+        description: data.description,
+        authorId: data.author_id!
+      }
+
       getReceiptImage(data.img_name)
     }
   } catch (error: any) {
@@ -31,26 +43,20 @@ const getRandomReceipt = async () => {
   }
 }
 
-const hasImg = computed(() => imgUrl.value !== null)
 const getReceiptImage = async (name: string | null) => {
   if (name === null) {
+    receipt.value.imgUrl = null
     return
   }
 
   const { data } = supabase.storage.from('receipt_images').getPublicUrl(name!)
 
-  imgUrl.value = data.publicUrl
+  receipt.value.imgUrl = data.publicUrl
 }
 </script>
 <template>
-  <template v-if="name">
-    <article v-if="name">
-      <header>
-        <h2>{{ name }}</h2>
-        <img v-if="hasImg" :src="imgUrl!" />
-      </header>
-      <p>{{ description }}</p>
-    </article>
+  <template v-if="receipt.id">
+    <ReceiptCard :receipt="receipt" />
     <button @click="getRandomReceipt">Get a new receipt</button>
   </template>
   <p v-else>There are no receipts. Start creating one!</p>

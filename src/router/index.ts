@@ -1,6 +1,7 @@
 import { useUser } from '@/composables/useUser'
 import CreateReceiptView from '@/views/CreateReceiptView.vue'
 import HomeView from '@/views/HomeView.vue'
+import MyReceiptsView from '@/views/MyReceiptsView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 declare module 'vue-router' {
@@ -21,6 +22,14 @@ const router = createRouter({
       path: '/new',
       name: 'newReceipt',
       component: CreateReceiptView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/my',
+      name: 'myReceipts',
+      component: MyReceiptsView,
       meta: {
         requiresAuth: true
       }
