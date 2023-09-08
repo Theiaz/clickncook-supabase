@@ -45,8 +45,10 @@ const getReceiptImage = async (name: string | null) => {
 <template>
   <template v-if="name">
     <article v-if="name">
-      <h2>{{ name }}</h2>
-      <img v-if="hasImg" :src="imgUrl!" />
+      <header>
+        <h2>{{ name }}</h2>
+        <img v-if="hasImg" :src="imgUrl!" />
+      </header>
       <p>{{ description }}</p>
     </article>
     <button @click="getRandomReceipt">Get a new receipt</button>

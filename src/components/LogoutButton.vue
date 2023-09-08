@@ -15,3 +15,9 @@ const submitText = computed<string>(() => {
     {{ submitText }}
   </button>
 </template>
+<style scoped>
+button {
+  max-width: fit-content;
+  margin-left: auto;  
+}
+</style>

@@ -2,7 +2,8 @@
 import ImageUpload from '@/components/ImageUpload.vue'
 import { useUser } from '@/composables/useUser'
 import { supabase } from '@/supabase'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const name = ref<string>('')
 const description = ref<string>('')
@@ -10,6 +11,7 @@ const imgName = ref<string | null>(null)
 const loading = ref<boolean>(false)
 
 const { user } = useUser()
+const router = useRouter()
 
 const createReceipt = async () => {
   try {
@@ -25,12 +27,15 @@ const createReceipt = async () => {
     let { error } = await supabase.from('receipts').insert(receipt)
 
     if (error) throw error
+
+    await router.push({ name: 'home' })
   } catch (error: any) {
     alert(error.message)
-  } finally {
     loading.value = false
   }
 }
+
+const loadingText = computed(() => (loading.value ? 'Loading ...' : 'Create Receipt'))
 </script>
 <template>
   <form @submit.prevent="createReceipt">
@@ -44,11 +49,7 @@ const createReceipt = async () => {
     </div>
     <ImageUpload v-model="imgName" />
     <div>
-      <input
-        type="submit"
-        :value="loading ? 'Loading ...' : 'Create receipt'"
-        :disabled="loading"
-      />
+      <button type="submit" :aria-busy="loading">{{ loadingText }}</button>
     </div>
   </form>
 </template>

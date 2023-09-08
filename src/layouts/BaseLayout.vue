@@ -2,11 +2,11 @@
 import LogoutButton from '@/components/LogoutButton.vue'
 </script>
 <template>
-  <header>
+  <header class="container">
     <LogoutButton />
   </header>
-  <main>
+  <main class="container">
     <slot />
   </main>
-  <footer></footer>
+  <footer class="container"></footer>
 </template>
