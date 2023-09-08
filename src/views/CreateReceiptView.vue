@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import ImageUpload from '@/components/ImageUpload.vue'
 import { useUser } from '@/composables/useUser'
 import { supabase } from '@/supabase'
 import { ref } from 'vue'
 
 const name = ref<string>('')
 const description = ref<string>('')
+const imgUrl = ref<string>('')
 const loading = ref<boolean>(false)
 
 const { user } = useUser()
@@ -16,7 +18,8 @@ const createReceipt = async () => {
     const receipt = {
       name: name.value,
       description: description.value,
-      author_id: user.value?.id
+      author_id: user.value?.id,
+      img_url: imgUrl.value
     }
 
     let { error } = await supabase.from('receipts').insert(receipt)
@@ -39,9 +42,13 @@ const createReceipt = async () => {
       <label for="description">Description</label>
       <textarea id="description" type="text" v-model="description" />
     </div>
-    <ImageUpload />
+    <ImageUpload v-model="imgUrl" />
     <div>
-      <input type="submit" :value="loading ? 'Loading ...' : 'Update'" :disabled="loading" />
+      <input
+        type="submit"
+        :value="loading ? 'Loading ...' : 'Create receipt'"
+        :disabled="loading"
+      />
     </div>
   </form>
 </template>
