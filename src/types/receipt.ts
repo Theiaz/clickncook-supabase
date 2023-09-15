@@ -32,4 +32,14 @@ const mapImageNameToURL = async (name: string | null) => {
   return data.publicUrl
 }
 
-export { mapToDomain, type Receipt, type ReceiptDAO }
+const mapToDAO = (data: Receipt): Omit<ReceiptDAO, 'created_at'> => {
+  return {
+    id: data.id,
+    name: data.name,
+    description: data.description!,
+    author_id: data.authorId!,
+    img_name: data.imgUrl!
+  }
+}
+
+export { mapToDAO, mapToDomain, type Receipt, type ReceiptDAO }
