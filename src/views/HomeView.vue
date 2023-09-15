@@ -1,18 +1,12 @@
 <script setup lang="ts">
 import ReceiptCard from '@/components/ReceiptCard.vue'
-import type { Receipt } from '@/types/receipt'
+import { useReceiptStore } from '@/stores/receipt'
+import { storeToRefs } from 'pinia'
 import { onMounted, ref } from 'vue'
 import { supabase } from '../supabase'
 
 const loading = ref<boolean>(false)
-
-const receipt = ref<Receipt>({
-  id: '',
-  name: '',
-  description: null,
-  imgUrl: null,
-  authorId: ''
-})
+const { receipt } = storeToRefs(useReceiptStore())
 
 onMounted(async () => {
   await getRandomReceipt()

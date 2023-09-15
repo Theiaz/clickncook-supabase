@@ -2,7 +2,7 @@
 import ReceiptCard from '@/components/ReceiptCard.vue'
 import { useUser } from '@/composables/useUser'
 import { supabase } from '@/supabase'
-import type { Receipt } from '@/types/receipt'
+import { mapToDomain, type Receipt } from '@/types/receipt'
 import { onMounted, ref } from 'vue'
 
 const receipts = ref<Receipt[]>([])
@@ -18,29 +18,10 @@ const getReceipts = async (authorId: string) => {
 
     if (error) throw error
 
-    receipts.value = await Promise.all(
-      data.map(async (el) => ({
-        id: el.id,
-        name: el.name,
-        description: el.description,
-        authorId: el.author_id!,
-        imgUrl: el.name ? await getReceiptImage(el.img_name) : null
-      }))
-    )
+    receipts.value = await Promise.all(data.map(async (el) => mapToDomain(el)))
   } catch (error) {
     alert(error)
   }
-}
-
-// TODO schaefer - duplicated in home view
-const getReceiptImage = async (name: string | null) => {
-  if (name === null) {
-    return null
-  }
-
-  const { data } = await supabase.storage.from('receipt_images').getPublicUrl(name!)
-
-  return data.publicUrl
 }
 </script>
 <template>

@@ -2,6 +2,7 @@
 import ImageUpload from '@/components/ImageUpload.vue'
 import { useUser } from '@/composables/useUser'
 import { supabase } from '@/supabase'
+import type { ReceiptDAO } from '@/types/receipt'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -17,10 +18,10 @@ const createReceipt = async () => {
   try {
     loading.value = true
 
-    const receipt = {
+    const receipt: Omit<ReceiptDAO, 'id' | 'created_at'> = {
       name: name.value,
       description: description.value,
-      author_id: user.value?.id,
+      author_id: user.value!.id,
       img_name: imgName.value
     }
 
