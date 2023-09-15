@@ -8,6 +8,7 @@ const { isAuthenticated } = useUser()
   <header class="container">
     <router-link :to="{ name: 'home' }">Home</router-link>
     <router-link v-if="isAuthenticated" :to="{ name: 'myReceipts' }">My receipts</router-link>
+    <router-link v-if="!isAuthenticated" :to="{ name: 'login' }">Login</router-link>
     <LogoutButton />
   </header>
   <main class="container">
