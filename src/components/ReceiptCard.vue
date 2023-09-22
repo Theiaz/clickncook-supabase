@@ -16,10 +16,10 @@ const isEditable = computed(() => props.receipt.authorId === user.value?.id)
   <article>
     <header>
       <h2>{{ props.receipt.name }}</h2>
-      <img v-if="hasImg" :src="props.receipt.imgUrl!" />
       <router-link v-if="isEditable" :to="{ name: 'details', params: { id: receipt.id } }">
         Edit
       </router-link>
+      <img v-if="hasImg" :src="props.receipt.imgUrl!" />
     </header>
     <p>{{ props.receipt.description }}</p>
   </article>

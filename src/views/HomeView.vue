@@ -49,10 +49,8 @@ const getReceiptImage = async (name: string | null) => {
 }
 </script>
 <template>
-  <template v-if="receipt.id">
-    <ReceiptCard :receipt="receipt" />
-    <button @click="getRandomReceipt">Get a new receipt</button>
-  </template>
-  <p v-else>There are no receipts. Start creating one!</p>
+  <button v-if="receipt.id" @click="getRandomReceipt">Get a new receipt</button>
   <router-link :to="{ name: 'newReceipt' }">Create new receipt</router-link>
+  <ReceiptCard v-if="receipt.id" :receipt="receipt" />
+  <p v-else>There are no receipts. Start creating one!</p>
 </template>
