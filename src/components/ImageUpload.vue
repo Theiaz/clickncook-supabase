@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { supabase } from '@/supabase'
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 
 const inProgress = ref<boolean>(false)
 const hasError = ref<boolean>(false)
 const file = ref<File | null>()
 const src = ref<string>('')
 
-defineProps(['modelValue'])
-const emit = defineEmits(['update:modelValue'])
+const props = defineProps<{
+  modelValue: string
+}>()
+const emit = defineEmits<{
+  'update:modelValue': [modelValue: string]
+}>()
+
+onBeforeMount(() => {
+  src.value = props.modelValue
+})
 
 async function uploadImage() {
   try {
