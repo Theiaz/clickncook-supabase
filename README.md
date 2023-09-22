@@ -23,7 +23,7 @@
 
 ## Local vs. remote diffs
 
-- identify diffs between local and remote: [supabase db diff](https://supabase.com/docs/reference/cli/supabase-db-diff)
+- identify diffs (like updated policies) between local and remote: [supabase db diff](https://supabase.com/docs/reference/cli/supabase-db-diff)
 - apply database migration locally [`supabase db reset`](https://supabase.com/docs/reference/cli/supabase-db-reset)
 - push local migrations to remote [`supabase db push`](https://supabase.com/docs/reference/cli/supabase-db-push)
 

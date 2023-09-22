@@ -25,7 +25,8 @@ const getRandomReceipt = async () => {
         id: data.id,
         name: data.name,
         description: data.description!,
-        authorId: data.author_id!
+        authorId: data.author_id!,
+        imgName: data.img_name!
       }
 
       getReceiptImage(data.img_name)

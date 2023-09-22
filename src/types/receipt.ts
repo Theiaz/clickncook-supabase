@@ -7,6 +7,7 @@ interface Receipt {
   name: string | null
   description?: string
   imgUrl?: string
+  imgName?: string
   authorId: Author['id']
 }
 
@@ -17,13 +18,14 @@ const mapToDomain = async (data: ReceiptDAO): Promise<Receipt> => {
     id: data.id,
     name: data.name,
     description: data.description ?? '',
-    authorId: data.author_id!,
-    imgUrl: await mapImageNameToURL(data.img_name)
+    imgUrl: await mapImageNameToPublicURL(data.img_name),
+    imgName: data.img_name ?? '',
+    authorId: data.author_id!
   }
 }
 
-const mapImageNameToURL = async (name: ReceiptDAO['img_name']): Promise<string> => {
-  if (name === null) {
+const mapImageNameToPublicURL = async (name: ReceiptDAO['img_name']): Promise<string> => {
+  if (name === '') {
     return ''
   }
 
@@ -37,7 +39,7 @@ const mapToDAO = (data: Receipt): ReceiptDAO => {
     name: data.name,
     description: data.description!,
     author_id: data.authorId!,
-    img_name: data.imgUrl!
+    img_name: data.imgName!
   }
 }
 
