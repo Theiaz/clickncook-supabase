@@ -1,28 +1,15 @@
 <script setup lang="ts">
 import ReceiptCard from '@/components/ReceiptCard.vue'
-import { useUser } from '@/composables/useUser'
-import { supabase } from '@/supabase'
-import { mapToDomain, type Receipt } from '@/types/receipt'
-import { onMounted, ref } from 'vue'
+import { useReceiptStore } from '@/stores/receipt'
+import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue'
 
-const receipts = ref<Receipt[]>([])
-const { user } = useUser()
+const receiptStore = useReceiptStore()
+const { receipts } = storeToRefs(receiptStore)
 
 onMounted(() => {
-  getReceipts(user.value!.id)
+  receiptStore.getReceiptsForCurrentUser()
 })
-
-const getReceipts = async (authorId: string) => {
-  try {
-    const { data, error } = await supabase.from('receipts').select().eq('author_id', authorId)
-
-    if (error) throw error
-
-    receipts.value = await Promise.all(data.map(async (el) => mapToDomain(el)))
-  } catch (error) {
-    alert(error)
-  }
-}
 </script>
 <template>
   <template v-for="receipt in receipts" :key="receipt.id">

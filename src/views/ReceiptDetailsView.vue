@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import ImageUpload from '@/components/ImageUpload.vue'
 import { useReceiptStore } from '@/stores/receipt'
-import { supabase } from '@/supabase'
-import { mapToDAO, type ReceiptDAO } from '@/types/receipt'
 import { storeToRefs } from 'pinia'
 import { computed, onBeforeMount, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -13,53 +11,25 @@ const props = defineProps<{
 
 const loading = ref<boolean>(false)
 const router = useRouter()
-const { receipt } = storeToRefs(useReceiptStore())
+const receiptStore = useReceiptStore()
+const { receipt } = storeToRefs(receiptStore)
 
 onBeforeMount(async () => {
-  if (receipt.value.id === '' || receipt.value.id !== props.id)
-    try {
-      loading.value = true
-      let { data, error } = await supabase.from('receipts').select('*').eq('id', props.id).single()
-
-      if (error) throw error
-
-      if (data) {
-        receipt.value = {
-          id: data.id,
-          name: data.name,
-          description: data.description!,
-          authorId: data.author_id!,
-          imgUrl: data.img_name!
-        }
-      }
-    } catch (error: any) {
-      alert(error.message)
-    } finally {
-      loading.value = false
-    }
-})
-
-const updateReceipt = async () => {
-  try {
+  if (receipt.value.id === '' || receipt.value.id !== props.id) {
     loading.value = true
-
-    const receiptDao: ReceiptDAO = mapToDAO(receipt.value)
-
-    let { error } = await supabase.from('receipts').update(receiptDao).eq('id', receiptDao.id)
-
-    if (error) throw error
-
-    await router.push({ name: 'home' })
-  } catch (error: any) {
-    alert(error.message)
+    await receiptStore.getReceiptById(props.id)
     loading.value = false
   }
-}
+})
 
+const onSubmit = async () => {
+  await receiptStore.updateReceipt(receipt.value)
+  await router.push({ name: 'home' })
+}
 const loadingText = computed(() => (loading.value ? 'Loading ...' : 'Edit Receipt'))
 </script>
 <template>
-  <form @submit.prevent="updateReceipt">
+  <form @submit.prevent="onSubmit">
     <div>
       <label for="name">Name</label>
       <input id="name" type="text" v-model="receipt.name" />
