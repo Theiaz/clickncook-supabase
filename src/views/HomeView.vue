@@ -24,7 +24,7 @@ const getRandomReceipt = async () => {
       receipt.value = {
         id: data.id,
         name: data.name,
-        description: data.description,
+        description: data.description!,
         authorId: data.author_id!
       }
 
@@ -39,7 +39,7 @@ const getRandomReceipt = async () => {
 
 const getReceiptImage = async (name: string | null) => {
   if (name === null) {
-    receipt.value.imgUrl = null
+    receipt.value.imgUrl = ''
     return
   }
 

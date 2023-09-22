@@ -5,34 +5,33 @@ import type { Author } from './author'
 interface Receipt {
   id: string
   name: string | null
-  description?: string | null
-  imgUrl?: string | null
+  description?: string
+  imgUrl?: string
   authorId: Author['id']
 }
 
-type ReceiptDAO = Database['public']['Tables']['receipts']['Row']
+type ReceiptDAO = Omit<Database['public']['Tables']['receipts']['Row'], 'created_at'>
 
 const mapToDomain = async (data: ReceiptDAO): Promise<Receipt> => {
   return {
     id: data.id,
     name: data.name,
-    description: data.description,
+    description: data.description ?? '',
     authorId: data.author_id!,
     imgUrl: await mapImageNameToURL(data.img_name)
   }
 }
 
-const mapImageNameToURL = async (name: string | null) => {
+const mapImageNameToURL = async (name: ReceiptDAO['img_name']): Promise<string> => {
   if (name === null) {
-    return null
+    return ''
   }
 
-  const { data } = supabase.storage.from('receipt_images').getPublicUrl(name!)
-
+  const { data } = await supabase.storage.from('receipt_images').getPublicUrl(name!)
   return data.publicUrl
 }
 
-const mapToDAO = (data: Receipt): Omit<ReceiptDAO, 'created_at'> => {
+const mapToDAO = (data: Receipt): ReceiptDAO => {
   return {
     id: data.id,
     name: data.name,

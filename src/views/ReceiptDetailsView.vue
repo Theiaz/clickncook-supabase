@@ -27,9 +27,9 @@ onBeforeMount(async () => {
         receipt.value = {
           id: data.id,
           name: data.name,
-          description: data.description,
+          description: data.description!,
           authorId: data.author_id!,
-          imgUrl: data.img_name
+          imgUrl: data.img_name!
         }
       }
     } catch (error: any) {

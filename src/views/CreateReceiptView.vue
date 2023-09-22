@@ -8,7 +8,7 @@ import { useRouter } from 'vue-router'
 
 const name = ref<string>('')
 const description = ref<string>('')
-const imgName = ref<string | null>(null)
+const imgName = ref<string>('')
 const loading = ref<boolean>(false)
 
 const { user } = useUser()

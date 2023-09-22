@@ -8,14 +8,16 @@ const file = ref<File | null>()
 const src = ref<string>('')
 
 const props = defineProps<{
-  modelValue: string
+  modelValue: string | undefined
 }>()
 const emit = defineEmits<{
   'update:modelValue': [modelValue: string]
 }>()
 
 onBeforeMount(() => {
-  src.value = props.modelValue
+  if (props.modelValue) {
+    src.value = props.modelValue
+  }
 })
 
 async function uploadImage() {

@@ -6,9 +6,9 @@ import { ref } from 'vue'
 export const useReceiptStore = defineStore('receipt', () => {
   const receipt = ref<Receipt>({
     id: '',
-    name: null,
-    description: null,
-    imgUrl: null,
+    name: '',
+    description: '',
+    imgUrl: '',
     authorId: ''
   })
 
