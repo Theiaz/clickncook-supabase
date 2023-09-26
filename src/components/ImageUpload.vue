@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { useReceiptStore } from '@/stores/receipt'
 import { supabase } from '@/supabase'
+import { storeToRefs } from 'pinia'
 import { onBeforeMount, ref } from 'vue'
 
 const inProgress = ref<boolean>(false)
@@ -14,9 +16,11 @@ const emit = defineEmits<{
   'update:modelValue': [modelValue: string]
 }>()
 
+const { receipt } = storeToRefs(useReceiptStore())
+
 onBeforeMount(() => {
   if (props.modelValue) {
-    src.value = props.modelValue
+    src.value = receipt.value.imgUrl!
   }
 })
 
@@ -37,13 +41,23 @@ async function uploadImage() {
   }
 }
 
-function onFileSelected(event: Event) {
+async function onFileSelected(event: Event) {
   const target = event.target as HTMLInputElement
   if (!target.files) {
     return
   }
-  file.value = target.files[0]
 
+  const oldImgExists = src.value
+  if (oldImgExists) {
+    const { error: errorImg } = await supabase.storage
+      .from('receipt_images')
+      .remove([receipt.value.imgName!])
+    if (errorImg) throw errorImg
+    receipt.value.imgName = undefined
+    receipt.value.imgUrl = undefined
+  }
+
+  file.value = target.files[0]
   src.value = URL.createObjectURL(file.value)
 
   uploadImage()

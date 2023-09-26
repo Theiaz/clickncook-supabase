@@ -38,7 +38,7 @@ const loadingText = computed(() => (loading.value ? 'Loading ...' : 'Edit Receip
       <label for="description">Description</label>
       <textarea id="description" type="text" v-model="receipt.description" />
     </div>
-    <ImageUpload v-model="receipt.imgUrl" />
+    <ImageUpload v-model="receipt.imgName" />
     <div>
       <button type="submit" :aria-busy="loading">{{ loadingText }}</button>
     </div>
