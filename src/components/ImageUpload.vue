@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { useReceiptStore } from '@/stores/receipt'
 import { supabase } from '@/supabase'
+import { storeToRefs } from 'pinia'
 import { onBeforeMount, ref } from 'vue'
 
 const inProgress = ref<boolean>(false)
@@ -14,9 +16,11 @@ const emit = defineEmits<{
   'update:modelValue': [modelValue: string]
 }>()
 
+const { receipt } = storeToRefs(useReceiptStore())
+
 onBeforeMount(() => {
   if (props.modelValue) {
-    src.value = props.modelValue
+    src.value = receipt.value.imgUrl!
   }
 })
 
