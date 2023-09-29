@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { deleteImage, uploadImage } from '@/api/receipts/api'
 import { useReceiptStore } from '@/stores/receipt'
-import { supabase } from '@/supabase'
 import { storeToRefs } from 'pinia'
 import { onBeforeMount, ref } from 'vue'
 
@@ -20,19 +20,16 @@ const { receipt } = storeToRefs(useReceiptStore())
 
 onBeforeMount(() => {
   if (props.modelValue) {
-    src.value = receipt.value.imgUrl!
+    src.value = receipt.value!.imgUrl!
   }
 })
 
-async function uploadImage() {
+async function upload() {
+  inProgress.value = true
+  const fileExt = file.value!.name.split('.').pop()
+  const filename = `${crypto.randomUUID()}.${fileExt}`
   try {
-    inProgress.value = true
-    const fileExt = file.value!.name.split('.').pop()
-    const filename = `${crypto.randomUUID()}.${fileExt}`
-    const { error } = await supabase.storage.from('receipt_images').upload(filename, file.value!)
-
-    if (error) throw error
-
+    await uploadImage(file.value!, filename)
     emit('update:modelValue', filename)
   } catch (error) {
     hasError.value = true
@@ -47,20 +44,20 @@ async function onFileSelected(event: Event) {
     return
   }
 
-  const oldImgExists = src.value
-  if (oldImgExists) {
-    const { error: errorImg } = await supabase.storage
-      .from('receipt_images')
-      .remove([receipt.value.imgName!])
-    if (errorImg) throw errorImg
-    receipt.value.imgName = undefined
-    receipt.value.imgUrl = undefined
+  if (receipt.value && receipt.value.imgName) {
+    try {
+      await deleteImage(receipt.value.imgName)
+      receipt.value.imgName = undefined
+      receipt.value.imgUrl = undefined
+    } catch (error) {
+      alert(`Deletion of old image with name ${receipt.value.imgName} failed`)
+    }
   }
 
   file.value = target.files[0]
   src.value = URL.createObjectURL(file.value)
 
-  uploadImage()
+  upload()
 }
 </script>
 <template>

@@ -8,7 +8,7 @@ const receiptStore = useReceiptStore()
 const { receipts } = storeToRefs(receiptStore)
 
 onMounted(() => {
-  receiptStore.getReceiptsForCurrentUser()
+  receiptStore.getMyReceipts()
 })
 </script>
 <template>
