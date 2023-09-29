@@ -15,4 +15,5 @@ onMounted(() => {
   <template v-for="receipt in receipts" :key="receipt.id">
     <ReceiptCard :receipt="receipt" />
   </template>
+  <p v-if="receipts.length === 0">There are no receipts. Start creating one!</p>
 </template>
