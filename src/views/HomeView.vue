@@ -12,8 +12,8 @@ onBeforeMount(async () => {
 })
 </script>
 <template>
-  <button v-if="receipt.id" @click="receiptStore.getRandomReceipt">Get a new receipt</button>
+  <button v-if="receipt" @click="receiptStore.getRandomReceipt">Get a new receipt</button>
   <router-link :to="{ name: 'newReceipt' }">Create new receipt</router-link>
-  <ReceiptCard v-if="receipt.id" :receipt="receipt" />
+  <ReceiptCard v-if="receipt" :receipt="receipt" />
   <p v-else>There are no receipts. Start creating one!</p>
 </template>

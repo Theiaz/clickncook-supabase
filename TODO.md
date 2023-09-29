@@ -11,3 +11,11 @@
 - PWA (install screen)
 - remove orphan images
 - use more types
+- custom font
+- CSP & CSRF
+
+## Can
+- lazy loading images
+- srcset images
+- preloading resources
+- a11y

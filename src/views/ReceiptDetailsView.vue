@@ -15,7 +15,7 @@ const receiptStore = useReceiptStore()
 const { receipt } = storeToRefs(receiptStore)
 
 onBeforeMount(async () => {
-  if (receipt.value.id === '' || receipt.value.id !== props.id) {
+  if (receipt.value || receipt.value!.id !== props.id) {
     loading.value = true
     await receiptStore.getReceiptById(props.id)
     loading.value = false
@@ -23,13 +23,15 @@ onBeforeMount(async () => {
 })
 
 const onSubmit = async () => {
-  await receiptStore.updateReceipt(receipt.value)
-  await router.push({ name: 'home' })
+  if (receipt.value) {
+    await receiptStore.updateReceipt(receipt.value)
+    await router.push({ name: 'home' })
+  }
 }
 const loadingText = computed(() => (loading.value ? 'Loading ...' : 'Edit Receipt'))
 </script>
 <template>
-  <form @submit.prevent="onSubmit">
+  <form v-if="receipt" @submit.prevent="onSubmit">
     <div>
       <label for="name">Name</label>
       <input id="name" type="text" v-model="receipt.name" />
@@ -43,4 +45,5 @@ const loadingText = computed(() => (loading.value ? 'Loading ...' : 'Edit Receip
       <button type="submit" :aria-busy="loading">{{ loadingText }}</button>
     </div>
   </form>
+  <p v-else>Something went wrong! Please try to reload this page.</p>
 </template>
