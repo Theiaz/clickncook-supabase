@@ -1,5 +1,5 @@
 import { supabase } from '@/supabase'
-import type { Database } from '../schema'
+import type { Database } from '../schemas/schema'
 import type { Author } from './author'
 
 interface Receipt {
