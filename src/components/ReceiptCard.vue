@@ -4,13 +4,9 @@ import { useReceiptStore } from '@/stores/receipt'
 import type { Receipt } from '@/types/receipt'
 import { computed } from 'vue'
 
-export interface Props {
+const props = defineProps<{
   receipt: Receipt
-  isReadonly: boolean
-}
-const props = withDefaults(defineProps<Props>(), {
-  isReadonly: false
-})
+}>()
 
 const hasImg = computed(() => props.receipt.imgUrl !== null)
 
@@ -23,14 +19,10 @@ const receiptStore = useReceiptStore()
   <article>
     <header>
       <h2>{{ props.receipt.name }}</h2>
-
-      <router-link v-if="isOwnReceipt" :to="{ name: 'details', params: { id: receipt.id } }"
-        >{{ isReadonly ? 'Show' : 'Edit' }}
+      <router-link :to="{ name: 'details', params: { id: receipt.id } }">
+        Show details
       </router-link>
-      <button v-if="isOwnReceipt && !isReadonly" @click="receiptStore.deleteReceipt(props.receipt)">
-        Delete
-      </button>
-
+      <button v-if="isOwnReceipt" @click="receiptStore.deleteReceipt(props.receipt)">Delete</button>
       <img v-if="hasImg" :src="props.receipt.imgUrl" />
     </header>
     <p>{{ props.receipt.description }}</p>

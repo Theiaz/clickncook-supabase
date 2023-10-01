@@ -1,49 +1,41 @@
 <script setup lang="ts">
-import ImageUpload from '@/components/ImageUpload.vue'
+import ReceiptEdit from '@/components/ReceiptEdit.vue'
+import ReceiptReadonly from '@/components/ReceiptReadonly.vue'
+import { useUser } from '@/composables/useUser'
 import { useReceiptStore } from '@/stores/receipt'
 import { storeToRefs } from 'pinia'
 import { computed, onBeforeMount, ref } from 'vue'
-import { useRouter } from 'vue-router'
 
 const props = defineProps<{
   id: string
 }>()
 
-const loading = ref<boolean>(false)
-const router = useRouter()
 const receiptStore = useReceiptStore()
 const { receipt } = storeToRefs(receiptStore)
 
+const { user } = useUser()
+const isOwnReceipt = computed(() => receipt.value!.authorId === user.value?.id)
+const isEditing = ref<boolean>(false)
+
+const loading = ref<boolean>(false)
 onBeforeMount(async () => {
-  if (receipt.value || receipt.value!.id !== props.id) {
+  if (receipt.value === null || receipt.value!.id !== props.id) {
     loading.value = true
     await receiptStore.getReceiptById(props.id)
     loading.value = false
   }
 })
-
-const onSubmit = async () => {
-  if (receipt.value) {
-    await receiptStore.updateReceipt(receipt.value)
-    await router.push({ name: 'home' })
-  }
-}
-const loadingText = computed(() => (loading.value ? 'Loading ...' : 'Edit Receipt'))
 </script>
 <template>
-  <form v-if="receipt" @submit.prevent="onSubmit">
-    <div>
-      <label for="name">Name</label>
-      <input id="name" type="text" v-model="receipt.name" />
-    </div>
-    <div>
-      <label for="description">Description</label>
-      <textarea id="description" type="text" v-model="receipt.description" />
-    </div>
-    <ImageUpload v-model="receipt.imgName" />
-    <div>
-      <button type="submit" :aria-busy="loading">{{ loadingText }}</button>
-    </div>
-  </form>
-  <p v-else>Something went wrong! Please try to reload this page.</p>
+  <section :aria-buy="loading">
+    <template v-if="receipt">
+      <label for="switch-1" v-if="isOwnReceipt">
+        <input type="checkbox" id="switch-1" name="switch-1" role="switch" v-model="isEditing" />
+        Edit receipt
+      </label>
+      <ReceiptEdit v-if="isEditing" :receipt="receipt!" />
+      <ReceiptReadonly v-else :receipt="receipt!" />
+    </template>
+    <p v-else>Something went wrong! Please try to reload this page.</p>
+  </section>
 </template>
