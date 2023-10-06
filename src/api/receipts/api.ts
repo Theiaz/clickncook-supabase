@@ -67,20 +67,17 @@ const deleteReceipt = async (receipt: Receipt): Promise<void> => {
   const { error: errorReceipt } = await supabase.from('receipts').delete().eq('id', receipt.id)
   if (errorReceipt) throw errorReceipt
 
-  const { error: errorImg } = await supabase.storage
-    .from('receipt_images')
-    .remove([receipt.imgName!])
-  if (errorImg) throw errorImg
+  deleteImage(receipt.imgName!)
 }
 
 // image
-const uploadImage = async (file: File, filename: string) => {
+const uploadImage = async (file: File, filename: string): Promise<void> => {
   const { error } = await supabase.storage.from('receipt_images').upload(filename, file)
 
   if (error) throw error
 }
 
-const deleteImage = async (imgName: string) => {
+const deleteImage = async (imgName: string): Promise<void> => {
   const { error: errorImg } = await supabase.storage.from('receipt_images').remove([imgName])
   if (errorImg) throw errorImg
 }

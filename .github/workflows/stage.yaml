@@ -3,7 +3,7 @@ name: Deploy Migrations to Staging
 on:
   push:
     branches:
-      - staging
+      - staging # use main here and automatically deploy it after main has been updated?
   workflow_dispatch:
 
 jobs:

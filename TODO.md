@@ -13,7 +13,7 @@
   - [ ] add license
 - [ ] CI/CD
   - [x] automatically deploy migrations via [github actions](https://supabase.com/docs/guides/cli/managing-environments)
-  - [ ] stageing environment
+  - [x] stageing environment
   - [x] database backup
 
 ## Should

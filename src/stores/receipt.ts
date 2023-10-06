@@ -8,7 +8,7 @@ import {
 } from '@/api/receipts/api'
 import { useUser } from '@/composables/useUser'
 import type { Receipt } from '@/types/receipt'
-import { defineStore } from 'pinia'
+import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
 
 export const useReceiptStore = defineStore('receipt', () => {
@@ -83,3 +83,7 @@ export const useReceiptStore = defineStore('receipt', () => {
     deleteReceipt
   }
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useReceiptStore, import.meta.hot))
+}
