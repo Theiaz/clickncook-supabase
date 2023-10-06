@@ -1,8 +1,8 @@
-import type { Receipt } from '@/types/receipt'
-import type { ReceiptDto } from '@/types/supabase'
+import type { Recipe } from '@/types/recipe'
+import type { RecipeDto } from '@/types/supabase'
 import { getPublicUrlForImage } from './api'
 
-const mapToDomain = async (data: ReceiptDto): Promise<Receipt> => {
+const mapToDomain = async (data: RecipeDto): Promise<Recipe> => {
   return {
     id: data.id,
     name: data.name,

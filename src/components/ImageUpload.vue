@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { deleteImage, uploadImage } from '@/api/receipts/api'
-import { useReceiptStore } from '@/stores/receipt'
+import { deleteImage, uploadImage } from '@/api/recipes/api'
+import { useRecipeStore } from '@/stores/recipe'
 import { storeToRefs } from 'pinia'
 import { onBeforeMount, ref } from 'vue'
 
@@ -16,11 +16,11 @@ const emit = defineEmits<{
   'update:modelValue': [modelValue: string]
 }>()
 
-const { receipt } = storeToRefs(useReceiptStore())
+const { recipe } = storeToRefs(useRecipeStore())
 
 onBeforeMount(() => {
   if (props.modelValue) {
-    src.value = receipt.value!.imgUrl!
+    src.value = recipe.value!.imgUrl!
   }
 })
 
@@ -44,13 +44,13 @@ async function onFileSelected(event: Event) {
     return
   }
 
-  if (receipt.value && receipt.value.imgName) {
+  if (recipe.value && recipe.value.imgName) {
     try {
-      await deleteImage(receipt.value.imgName)
-      receipt.value.imgName = undefined
-      receipt.value.imgUrl = undefined
+      await deleteImage(recipe.value.imgName)
+      recipe.value.imgName = undefined
+      recipe.value.imgUrl = undefined
     } catch (error) {
-      alert(`Deletion of old image with name ${receipt.value.imgName} failed`)
+      alert(`Deletion of old image with name ${recipe.value.imgName} failed`)
     }
   }
 

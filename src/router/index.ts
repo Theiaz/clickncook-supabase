@@ -1,8 +1,8 @@
 import { useUser } from '@/composables/useUser'
-import CreateReceiptView from '@/views/CreateReceiptView.vue'
+import CreateRecipeView from '@/views/CreateRecipeView.vue'
 import HomeView from '@/views/HomeView.vue'
-import MyReceiptsView from '@/views/MyReceiptsView.vue'
-import ReceiptDetailsView from '@/views/ReceiptDetailsView.vue'
+import MyRecipesView from '@/views/MyRecipesView.vue'
+import RecipeDetailsView from '@/views/RecipeDetailsView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 declare module 'vue-router' {
@@ -21,8 +21,8 @@ const router = createRouter({
     },
     {
       path: '/new',
-      name: 'newReceipt',
-      component: CreateReceiptView,
+      name: 'newRecipe',
+      component: CreateRecipeView,
       meta: {
         requiresAuth: true
       }
@@ -30,7 +30,7 @@ const router = createRouter({
     {
       path: '/:id',
       name: 'details',
-      component: ReceiptDetailsView,
+      component: RecipeDetailsView,
       props: true,
       meta: {
         requiresAuth: true
@@ -38,8 +38,8 @@ const router = createRouter({
     },
     {
       path: '/my',
-      name: 'myReceipts',
-      component: MyReceiptsView,
+      name: 'myRecipes',
+      component: MyRecipesView,
       meta: {
         requiresAuth: true
       }
