@@ -3,7 +3,7 @@
 ## Must
 
 - [ ] features
-  - [ ] receipt details view with edit trigger
+  - [ ] recipe details view with edit trigger
 - [ ] testing
   - [ ] unit tests
   - [ ] e2e tests

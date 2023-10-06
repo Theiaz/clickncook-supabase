@@ -34,7 +34,7 @@ export interface Database {
   }
   public: {
     Tables: {
-      receipts: {
+      recipes: {
         Row: {
           author_id: string | null
           created_at: string | null
@@ -73,7 +73,7 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      get_random_receipt: {
+      get_random_recipe: {
         Args: Record<PropertyKey, never>
         Returns: {
           author_id: string | null

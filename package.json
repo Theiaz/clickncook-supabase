@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
-    "generate-types": "npx supabase gen types typescript --local > ./src/schemas/schema.ts",
+    "generate-types": "npx supabase gen types typescript --local > ./src/types/schema.ts",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",

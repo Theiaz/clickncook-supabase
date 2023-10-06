@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import ReceiptCard from '@/components/ReceiptCard.vue'
-import { useReceiptStore } from '@/stores/receipt'
+import RecipeCard from '@/components/RecipeCard.vue'
+import { useRecipeStore } from '@/stores/recipe'
 import { storeToRefs } from 'pinia'
 import { onBeforeMount } from 'vue'
 
-const receiptStore = useReceiptStore()
-const { receipt } = storeToRefs(receiptStore)
+const recipeStore = useRecipeStore()
+const { recipe } = storeToRefs(recipeStore)
 
 onBeforeMount(async () => {
-  await receiptStore.getRandomReceipt()
+  await recipeStore.getRandomRecipe()
 })
 </script>
 <template>
-  <button v-if="receipt" @click="receiptStore.getRandomReceipt">Get a new receipt</button>
-  <router-link :to="{ name: 'newReceipt' }">Create new receipt</router-link>
-  <ReceiptCard v-if="receipt" :receipt="receipt" :is-readonly="true" />
-  <p v-else>There are no receipts. Start creating one!</p>
+  <button v-if="recipe" @click="recipeStore.getRandomRecipe">Get a new recipe</button>
+  <router-link :to="{ name: 'newRecipe' }">Create new recipe</router-link>
+  <RecipeCard v-if="recipe" :recipe="recipe" :is-readonly="true" />
+  <p v-else>There are no recipes. Start creating one!</p>
 </template>

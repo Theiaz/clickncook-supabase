@@ -1,4 +1,4 @@
-interface Receipt {
+interface Recipe {
   id: string
   name: string | null
   description?: string
@@ -12,4 +12,4 @@ interface Author {
   name: string
 }
 
-export { type Author, type Receipt }
+export { type Author, type Recipe }
