@@ -1,6 +1,6 @@
 import type { Recipe } from '@/types/recipe'
-import type { RecipeDto } from '@/types/supabase'
 import { getPublicUrlForImage } from './api'
+import type { RecipeDto } from './dto'
 
 const mapToDomain = async (data: RecipeDto): Promise<Recipe> => {
   return {
