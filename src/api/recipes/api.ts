@@ -1,6 +1,6 @@
 import { supabase } from '@/supabase'
-import type { Recipe } from '@/types/recipe'
-import type { RecipeDto, RecipeInsertDto, RecipeUpdateDto } from '@/types/supabase'
+import type { Recipe, RecipeData } from '@/types/recipe'
+import type { RecipeDto, RecipeInsertDto, RecipeUpdateDto } from './dto'
 import { mapToDomain } from './mapper'
 
 const findRecipesByAuthorId = async (id: string): Promise<Recipe[]> => {
@@ -35,10 +35,7 @@ const findRandomRecipe = async (): Promise<Recipe | null> => {
   return data ? await mapToDomain(data) : null
 }
 
-const createRecipeForUser = async (
-  recipe: Omit<Recipe, 'id' | 'imgUrl' | 'authorId'>,
-  userId: string
-): Promise<void> => {
+const createRecipeForUser = async (recipe: RecipeData, userId: string): Promise<void> => {
   const dto: RecipeInsertDto = {
     name: recipe.name,
     description: recipe.description!,

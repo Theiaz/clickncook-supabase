@@ -1,15 +1,19 @@
-interface Recipe {
-  id: string
+type RecipeData = {
   name: string | null
   description?: string
-  imgUrl?: string
   imgName?: string
+  imgUrl?: string
+}
+
+type RecipeMeta = {
+  id: string
   authorId: Author['id']
 }
 
-interface Author {
+type Recipe = RecipeData & RecipeMeta
+type Author = {
   id: string
   name: string
 }
 
-export { type Author, type Recipe }
+export { type Author, type Recipe, type RecipeData }

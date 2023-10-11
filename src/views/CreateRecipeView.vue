@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import ImageUpload from '@/components/ImageUpload.vue'
 import { useRecipeStore } from '@/stores/recipe'
-import type { Recipe } from '@/types/recipe'
+import type { RecipeData } from '@/types/recipe'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const loading = ref<boolean>(false)
-const recipe = ref<Omit<Recipe, 'id' | 'imgUrl' | 'authorId'>>({
+const recipe = ref<RecipeData>({
   name: '',
   description: '',
   imgName: ''

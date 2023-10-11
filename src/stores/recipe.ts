@@ -7,7 +7,7 @@ import {
   findRecipesByAuthorId
 } from '@/api/recipes/api'
 import { useUser } from '@/composables/useUser'
-import type { Recipe } from '@/types/recipe'
+import type { Recipe, RecipeData } from '@/types/recipe'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
 
@@ -44,7 +44,7 @@ export const useRecipeStore = defineStore('recipe', () => {
     }
   }
 
-  const createRecipe = async (recipe: Omit<Recipe, 'id' | 'imgUrl' | 'authorId'>) => {
+  const createRecipe = async (recipe: RecipeData) => {
     try {
       if (user.value) {
         await createRecipeForUser(recipe, user.value.id)
