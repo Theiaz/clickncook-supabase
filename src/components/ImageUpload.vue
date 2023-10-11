@@ -63,7 +63,7 @@ async function onFileSelected(event: Event) {
 <template>
   <img v-if="src" :src="src" :alt="file?.name" />
   <label>
-    <div v-show="inProgress">Uploading...</div>
+    <div v-show="inProgress" :aria-busy="inProgress">Uploading image...</div>
     <p v-if="hasError">An error occured during image upload!</p>
     <input type="file" accept="image/*" ref="imageInput" @change="onFileSelected($event)" />
   </label>
