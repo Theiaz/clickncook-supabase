@@ -2,12 +2,12 @@
 import RecipeCard from '@/components/RecipeCard.vue'
 import { useRecipeStore } from '@/stores/recipe'
 import { storeToRefs } from 'pinia'
-import { onMounted } from 'vue'
+import { onBeforeMount } from 'vue'
 
 const recipeStore = useRecipeStore()
 const { recipes } = storeToRefs(recipeStore)
 
-onMounted(() => {
+onBeforeMount(() => {
   recipeStore.getMyRecipes()
 })
 </script>

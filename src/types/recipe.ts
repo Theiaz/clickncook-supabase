@@ -1,8 +1,7 @@
 type RecipeData = {
   name: string | null
   description?: string
-  imgName?: string
-  imgUrl?: string
+  images: File[]
 }
 
 type RecipeMeta = {

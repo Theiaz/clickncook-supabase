@@ -1,5 +1,5 @@
 import type { Recipe } from '@/types/recipe'
-import { getPublicUrlForImage } from './api'
+import { getImagesForRecipe } from './api'
 import type { RecipeDto } from './dto'
 
 const mapToDomain = async (data: RecipeDto): Promise<Recipe> => {
@@ -7,14 +7,9 @@ const mapToDomain = async (data: RecipeDto): Promise<Recipe> => {
     id: data.id,
     name: data.name,
     description: data.description ?? '',
-    imgUrl: data.img_name ? await mapImageNameToPublicURL(data.img_name) : undefined,
-    imgName: data.img_name ?? '',
-    authorId: data.author_id!
+    authorId: data.author_id!,
+    images: (await getImagesForRecipe(data.id)) ?? [] // TODO schaefer - this should not be empty
   }
-}
-
-const mapImageNameToPublicURL = async (name: string): Promise<string> => {
-  return await getPublicUrlForImage(name)
 }
 
 export { mapToDomain }

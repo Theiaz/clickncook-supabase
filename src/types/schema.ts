@@ -40,7 +40,6 @@ export interface Database {
           created_at: string | null
           description: string | null
           id: string
-          img_name: string | null
           name: string | null
         }
         Insert: {
@@ -48,7 +47,6 @@ export interface Database {
           created_at?: string | null
           description?: string | null
           id?: string
-          img_name?: string | null
           name?: string | null
         }
         Update: {
@@ -56,12 +54,11 @@ export interface Database {
           created_at?: string | null
           description?: string | null
           id?: string
-          img_name?: string | null
           name?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "receipts_author_id_fkey"
+            foreignKeyName: "recipes_author_id_fkey"
             columns: ["author_id"]
             referencedRelation: "users"
             referencedColumns: ["id"]
@@ -80,7 +77,6 @@ export interface Database {
           created_at: string | null
           description: string | null
           id: string
-          img_name: string | null
           name: string | null
         }[]
       }
