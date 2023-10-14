@@ -3,7 +3,9 @@
 ## Must
 
 - [ ] features
-  - [ ] recipe details view with edit trigger
+  - [x] recipe details view with edit trigger
+  - [ ] fix image upload if upload is not complete
+  - [ ] allow multiple images
 - [ ] testing
   - [ ] unit tests
   - [ ] e2e tests

@@ -24,7 +24,6 @@ export const useRecipeStore = defineStore('recipe', () => {
       }
     }
   }
-  getMyRecipes()
 
   // current recipe
   const recipe: Ref<Recipe | null> = ref(null)
@@ -71,6 +70,8 @@ export const useRecipeStore = defineStore('recipe', () => {
       alert(error.message)
     }
   }
+
+
 
   return {
     recipes,

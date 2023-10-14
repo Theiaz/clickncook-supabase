@@ -9,7 +9,7 @@ const loading = ref<boolean>(false)
 const recipe = ref<RecipeData>({
   name: '',
   description: '',
-  imgName: ''
+  images: []
 })
 
 const recipeStore = useRecipeStore()
@@ -32,7 +32,7 @@ const loadingText = computed(() => (loading.value ? 'Loading ...' : 'Create Reci
       <label for="description">Description</label>
       <textarea id="description" type="text" v-model="recipe.description" />
     </div>
-    <ImageUpload v-model="recipe.imgName" />
+    <ImageUpload v-model="recipe.images" />
     <div>
       <button type="submit" :aria-busy="loading">{{ loadingText }}</button>
     </div>

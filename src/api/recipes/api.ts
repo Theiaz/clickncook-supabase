@@ -39,11 +39,14 @@ const createRecipeForUser = async (recipe: RecipeData, userId: string): Promise<
   const dto: RecipeInsertDto = {
     name: recipe.name,
     description: recipe.description!,
-    author_id: userId, // TODO schaefer - can we delete this cause supabase tracks it?
-    img_name: recipe.imgName!
+    author_id: userId // TODO schaefer - can we delete this cause supabase tracks it?
   }
 
-  const { error } = await supabase.from('recipes').insert(dto)
+  const { data, error } = await supabase.from('recipes').insert(dto).select().maybeSingle()
+
+  if (data) {
+    await uploadImages(data.id, recipe.images)
+  }
 
   if (error) throw error
 }
@@ -51,47 +54,82 @@ const createRecipeForUser = async (recipe: RecipeData, userId: string): Promise<
 const updateRecipe = async (recipe: Recipe): Promise<void> => {
   const dto: RecipeUpdateDto = {
     name: recipe.name,
-    description: recipe.description!,
-    img_name: recipe.imgName!
+    description: recipe.description!
   }
 
   const { error } = await supabase.from('recipes').update(dto).eq('id', recipe.id)
 
   if (error) throw error
+
+  await uploadImages(recipe.id, recipe.images)
 }
 
 const deleteRecipe = async (recipe: Recipe): Promise<void> => {
   const { error: errorRecipe } = await supabase.from('recipes').delete().eq('id', recipe.id)
   if (errorRecipe) throw errorRecipe
 
-  deleteImage(recipe.imgName!)
+  deleteImages(recipe.id, [], { all: true })
 }
 
 // image
-const uploadImage = async (file: File, filename: string): Promise<void> => {
-  const { error } = await supabase.storage.from('recipe_images').upload(filename, file)
+const uploadImages = async (recipeId: string, images: File[]): Promise<void> => {
+  for (const img of images) {
+    const { error } = await supabase.storage
+      .from('recipe_images')
+      .upload(`${recipeId}/${img.name}`, img, { upsert: true })
+    if (error) throw error
+  }
+}
 
+const deleteImages = async (
+  recipeId: string,
+  imgNames: string[],
+  options: { all: boolean } = { all: false }
+): Promise<void> => {
+  let filesToRemove: string[] = []
+  if (options && options.all) {
+    const { data: imgList, error: listError } = await supabase.storage
+      .from('recipe_images')
+      .list(`${recipeId}`)
+    if (listError) throw listError
+
+    filesToRemove = imgList.map((img) => `${recipeId}/${img.name}`)
+  } else {
+    filesToRemove = imgNames.map((name) => `${recipeId}/${name}`)
+  }
+
+  const { error } = await supabase.storage.from('recipe_images').remove(filesToRemove)
   if (error) throw error
 }
 
-const deleteImage = async (imgName: string): Promise<void> => {
-  const { error: errorImg } = await supabase.storage.from('recipe_images').remove([imgName])
-  if (errorImg) throw errorImg
-}
+const getImagesForRecipe = async (recipeId: string): Promise<File[]> => {
+  const { data: imgList, error } = await supabase.storage.from('recipe_images').list(`${recipeId}`)
 
-const getPublicUrlForImage = async (imgName: string): Promise<string> => {
-  const { data } = await supabase.storage.from('recipe_images').getPublicUrl(imgName)
-  return data.publicUrl
+  if (error) throw error
+
+  const images: File[] = []
+  if (imgList) {
+    for (const img of imgList) {
+      const { data, error } = await supabase.storage
+        .from('recipe_images')
+        .download(`${recipeId}/${img.name}`)
+      if (error) throw error
+
+      images.push(new File([data], img.name))
+    }
+  }
+
+  return images
 }
 
 export {
   createRecipeForUser,
-  deleteImage,
+  deleteImages,
   deleteRecipe,
   findRandomRecipe,
   findRecipeById,
   findRecipesByAuthorId,
-  getPublicUrlForImage,
+  getImagesForRecipe,
   updateRecipe,
-  uploadImage
+  uploadImages as uploadImage
 }

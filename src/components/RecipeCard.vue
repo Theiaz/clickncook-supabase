@@ -8,12 +8,14 @@ const props = defineProps<{
   recipe: Recipe
 }>()
 
-const hasImg = computed(() => props.recipe.imgUrl !== null)
-
 const { user } = useUser()
 const isOwnRecipe = computed(() => props.recipe.authorId === user.value?.id)
 
 const recipeStore = useRecipeStore()
+
+function toSrc(file: File) {
+  return URL.createObjectURL(file)
+}
 </script>
 <template>
   <article>
@@ -21,7 +23,9 @@ const recipeStore = useRecipeStore()
       <h2>{{ props.recipe.name }}</h2>
       <router-link :to="{ name: 'details', params: { id: recipe.id } }"> Show details </router-link>
       <button v-if="isOwnRecipe" @click="recipeStore.deleteRecipe(props.recipe)">Delete</button>
-      <img v-if="hasImg" :src="props.recipe.imgUrl" />
+      <template v-for="file in recipe!.images" :key="file.name">
+        <img :src="toSrc(file)" :alt="file?.name" />
+      </template>
     </header>
     <p>{{ props.recipe.description }}</p>
   </article>
