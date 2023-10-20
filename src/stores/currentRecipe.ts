@@ -1,7 +1,8 @@
 import {
   deleteRecipe as apiDeleteRecipe,
   updateRecipe as apiUpdateRecipe,
-  createRecipeForUser
+  createRecipeForUser,
+  deleteImages
 } from '@/api/recipes/api'
 import { useUser } from '@/composables/useUser'
 import type { Recipe, RecipeData } from '@/types/recipe'
@@ -60,13 +61,18 @@ export const useCurrentRecipeStore = defineStore('currentRecipe', () => {
   }
 
   // TODO schaefer - operations for images like delete?
+  const deleteImage = async (file: File) => {
+    currentRecipe.value.images = currentRecipe.value?.images.filter((img) => file.name !== img.name)
+    await deleteImages(currentRecipe.value.id!, [file.name])
+  }
 
   return {
     recipe: currentRecipe,
     $reset,
     createRecipe,
     updateRecipe,
-    deleteRecipe
+    deleteRecipe,
+    deleteImage
   }
 })
 

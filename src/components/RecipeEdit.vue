@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { deleteImages } from '@/api/recipes/api'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
@@ -24,13 +23,6 @@ function toSrc(file: File) {
   return URL.createObjectURL(file)
 }
 
-async function deleteImage(file: File) {
-  if (recipe.value) {
-    recipe.value.images = recipe.value?.images.filter((img) => file.name !== img.name)
-    await deleteImages(recipe.value.id!, [file.name])
-  }
-}
-
 const btnText = computed(() => (loading.value ? 'Loading ...' : 'Update Recipe'))
 </script>
 <template>
@@ -41,7 +33,7 @@ const btnText = computed(() => (loading.value ? 'Loading ...' : 'Update Recipe')
     </div>
     <template v-for="file in recipe!.images" :key="file.name">
       <img :src="toSrc(file)" :alt="file?.name" />
-      <button type="button" @click="deleteImage(file)">Delete image</button>
+      <button type="button" @click="recipeStore.deleteImage(file)">Delete image</button>
     </template>
     <ImageUpload v-model="recipe!.images" />
     <div>
