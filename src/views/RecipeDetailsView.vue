@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ActionBar from '@/components/ActionBar.vue'
 import RecipeEdit from '@/components/RecipeEdit.vue'
 import RecipeReadonly from '@/components/RecipeReadonly.vue'
 import { useUser } from '@/composables/useUser'
@@ -29,10 +30,13 @@ onBeforeMount(async () => {
 <template>
   <section :aria-buy="loading">
     <template v-if="recipe">
-      <label for="switch-1" v-if="isOwnRecipe">
-        <input type="checkbox" id="switch-1" name="switch-1" role="switch" v-model="isEditing" />
-        Edit recipe
-      </label>
+      <ActionBar v-if="isOwnRecipe">
+        <label for="switch-1">
+          <input type="checkbox" id="switch-1" name="switch-1" role="switch" v-model="isEditing" />
+          Edit recipe
+        </label>
+        <button @click="recipeStore.deleteRecipe(recipe)">Delete</button>
+      </ActionBar>
       <RecipeEdit v-if="isEditing" :recipe="recipe!" />
       <RecipeReadonly v-else :recipe="recipe!" />
     </template>
