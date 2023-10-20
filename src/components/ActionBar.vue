@@ -7,6 +7,6 @@
 <style scoped>
 div {
   display: flex;
-  gap: 1rem
+  gap: 1rem;
 }
 </style>

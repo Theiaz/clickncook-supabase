@@ -33,7 +33,7 @@ const findRandomRecipe = async (): Promise<Recipe | null> => {
   return data ? await mapToDomain(data) : null
 }
 
-const createRecipeForUser = async (recipe: RecipeData, userId: string): Promise<void> => {
+const createRecipeForUser = async (recipe: RecipeData, userId: string): Promise<Recipe> => {
   const dto: RecipeInsertDto = {
     name: recipe.name,
     description: recipe.description!,
@@ -42,11 +42,14 @@ const createRecipeForUser = async (recipe: RecipeData, userId: string): Promise<
 
   const { data, error } = await supabase.from('recipes').insert(dto).select().maybeSingle()
 
-  if (data) {
-    await uploadImages(data.id, recipe.images)
+  if (!data) {
+    throw new Error('Creation of recipe failed')
   }
 
   if (error) throw error
+
+  await uploadImages(data.id, recipe.images)
+  return await mapToDomain(data)
 }
 
 const updateRecipe = async (recipe: Recipe): Promise<void> => {
