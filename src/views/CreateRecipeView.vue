@@ -21,7 +21,7 @@ const onSubmit = async () => {
   await router.push({ name: 'home' })
 }
 
-const loadingText = computed(() => (loading.value ? 'Loading ...' : 'Create Recipe'))
+const btnText = computed(() => (loading.value ? 'Loading ...' : 'Create Recipe'))
 </script>
 <template>
   <form @submit.prevent="onSubmit">
@@ -35,7 +35,7 @@ const loadingText = computed(() => (loading.value ? 'Loading ...' : 'Create Reci
     </div>
     <ImageUpload v-model="recipe!.images" />
     <div>
-      <button type="submit" :aria-busy="loading">{{ loadingText }}</button>
+      <button type="submit" :aria-busy="loading">{{ btnText }}</button>
     </div>
   </form>
 </template>

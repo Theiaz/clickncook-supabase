@@ -2,18 +2,21 @@
 import { deleteImages } from '@/api/recipes/api'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import { storeToRefs } from 'pinia'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import ImageUpload from './ImageUpload.vue'
 
 const router = useRouter()
 const recipeStore = useCurrentRecipeStore()
 const { recipe } = storeToRefs(recipeStore)
+const loading = ref(false)
 
 const onSubmit = async () => {
   if (recipe.value) {
+    loading.value = true
     await recipeStore.updateRecipe(recipe.value)
+    loading.value = false
     await router.push({ name: 'home' })
-    recipeStore.$reset()
   }
 }
 
@@ -27,6 +30,8 @@ async function deleteImage(file: File) {
     await deleteImages(recipe.value.id!, [file.name])
   }
 }
+
+const btnText = computed(() => (loading.value ? 'Loading ...' : 'Update Recipe'))
 </script>
 <template>
   <form @submit.prevent="onSubmit">
@@ -44,7 +49,7 @@ async function deleteImage(file: File) {
       <textarea id="description" type="text" v-model="recipe!.description" />
     </div>
     <div>
-      <button type="submit">Edit recipe</button>
+      <button type="submit" :aria-busy="loading">{{ btnText }}</button>
     </div>
   </form>
 </template>
