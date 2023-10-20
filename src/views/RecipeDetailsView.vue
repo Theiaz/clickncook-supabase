@@ -1,18 +1,21 @@
 <script setup lang="ts">
+import { findRecipeById } from '@/api/recipes/api'
 import ActionBar from '@/components/ActionBar.vue'
 import RecipeEdit from '@/components/RecipeEdit.vue'
 import RecipeReadonly from '@/components/RecipeReadonly.vue'
 import { useUser } from '@/composables/useUser'
-import { useRecipeStore } from '@/stores/recipe'
+import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import { storeToRefs } from 'pinia'
 import { computed, onBeforeMount, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const props = defineProps<{
   id: string
 }>()
 
-const recipeStore = useRecipeStore()
+const recipeStore = useCurrentRecipeStore()
 const { recipe } = storeToRefs(recipeStore)
+const router = useRouter()
 
 const { user } = useUser()
 const isOwnRecipe = computed(() => recipe.value!.authorId === user.value?.id)
@@ -22,10 +25,21 @@ const loading = ref<boolean>(false)
 onBeforeMount(async () => {
   if (recipe.value === null || recipe.value!.id !== props.id) {
     loading.value = true
-    await recipeStore.getRecipeById(props.id)
+    try {
+      recipe.value = await findRecipeById(props.id)
+    } catch (error: any) {
+      alert(error.message)
+    }
     loading.value = false
   }
 })
+
+const onDelete = async () => {
+  if (recipe.value) {
+    await recipeStore.deleteRecipe(recipe.value)
+    await router.push({ name: 'home' })
+  }
+}
 </script>
 <template>
   <section :aria-buy="loading">
@@ -35,7 +49,7 @@ onBeforeMount(async () => {
           <input type="checkbox" id="switch-1" name="switch-1" role="switch" v-model="isEditing" />
           Edit recipe
         </label>
-        <button @click="recipeStore.deleteRecipe(recipe)">Delete</button>
+        <button @click="onDelete">Delete</button>
       </ActionBar>
       <RecipeEdit v-if="isEditing" :recipe="recipe!" />
       <RecipeReadonly v-else :recipe="recipe!" />

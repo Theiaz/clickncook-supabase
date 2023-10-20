@@ -1,22 +1,23 @@
 <script setup lang="ts">
 import ImageUpload from '@/components/ImageUpload.vue'
-import { useRecipeStore } from '@/stores/recipe'
-import type { RecipeData } from '@/types/recipe'
-import { computed, ref } from 'vue'
+import { useCurrentRecipeStore } from '@/stores/currentRecipe'
+import { storeToRefs } from 'pinia'
+import { computed, onBeforeMount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const loading = ref<boolean>(false)
-const recipe = ref<RecipeData>({
-  name: '',
-  description: '',
-  images: []
-})
-
-const recipeStore = useRecipeStore()
+const recipeStore = useCurrentRecipeStore()
+const { recipe } = storeToRefs(recipeStore)
 const router = useRouter()
 
+onBeforeMount(() => {
+  recipeStore.$reset()
+})
+
 const onSubmit = async () => {
-  recipeStore.createRecipe(recipe.value)
+  loading.value = true
+  await recipeStore.createRecipe(recipe.value!)
+  loading.value = false
   await router.push({ name: 'home' })
 }
 
@@ -26,13 +27,13 @@ const loadingText = computed(() => (loading.value ? 'Loading ...' : 'Create Reci
   <form @submit.prevent="onSubmit">
     <div>
       <label for="name">Name</label>
-      <input id="name" type="text" v-model="recipe.name" />
+      <input id="name" type="text" v-model="recipe!.name" />
     </div>
     <div>
       <label for="description">Description</label>
-      <textarea id="description" type="text" v-model="recipe.description" />
+      <textarea id="description" type="text" v-model="recipe!.description" />
     </div>
-    <ImageUpload v-model="recipe.images" />
+    <ImageUpload v-model="recipe!.images" />
     <div>
       <button type="submit" :aria-busy="loading">{{ loadingText }}</button>
     </div>

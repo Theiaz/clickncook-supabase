@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import { deleteImages } from '@/api/recipes/api'
-import { useRecipeStore } from '@/stores/recipe'
+import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import ImageUpload from './ImageUpload.vue'
 
 const router = useRouter()
-const recipeStore = useRecipeStore()
+const recipeStore = useCurrentRecipeStore()
 const { recipe } = storeToRefs(recipeStore)
 
 const onSubmit = async () => {
   if (recipe.value) {
     await recipeStore.updateRecipe(recipe.value)
     await router.push({ name: 'home' })
+    recipeStore.$reset()
   }
 }
 
@@ -23,7 +24,7 @@ function toSrc(file: File) {
 async function deleteImage(file: File) {
   if (recipe.value) {
     recipe.value.images = recipe.value?.images.filter((img) => file.name !== img.name)
-    await deleteImages(recipe.value.id, [file.name])
+    await deleteImages(recipe.value.id!, [file.name])
   }
 }
 </script>
@@ -37,7 +38,6 @@ async function deleteImage(file: File) {
       <img :src="toSrc(file)" :alt="file?.name" />
       <button type="button" @click="deleteImage(file)">Delete image</button>
     </template>
-
     <ImageUpload v-model="recipe!.images" />
     <div>
       <label for="description">Description</label>

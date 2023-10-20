@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import RecipeCard from '@/components/RecipeCard.vue'
-import { useRecipeStore } from '@/stores/recipe'
+import { useMyRecipesStore } from '@/stores/myRecipes'
 import { storeToRefs } from 'pinia'
 import { onBeforeMount } from 'vue'
 
-const recipeStore = useRecipeStore()
+const recipeStore = useMyRecipesStore()
 const { recipes } = storeToRefs(recipeStore)
 
 onBeforeMount(() => {
