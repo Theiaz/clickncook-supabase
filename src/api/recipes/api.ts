@@ -28,9 +28,7 @@ const findRecipeById = async (id: string): Promise<Recipe> => {
 }
 
 const findRandomRecipe = async (): Promise<Recipe | null> => {
-  const { data, error } = await supabase.rpc('get_random_recipe').maybeSingle()
-
-  if (error) throw error
+  const { data } = await supabase.rpc('get_random_recipe').maybeSingle()
 
   return data ? await mapToDomain(data) : null
 }
