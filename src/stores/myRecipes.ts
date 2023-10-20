@@ -18,6 +18,10 @@ export const useMyRecipesStore = defineStore('myRecipes', () => {
     }
   }
 
+  const getRecipeById = (id: string): Recipe | undefined => {
+    return recipes.value.find((r) => r.id === id)
+  }
+
   const addRecipe = (recipe: Recipe) => {
     recipes.value.push(recipe)
   }
@@ -33,6 +37,7 @@ export const useMyRecipesStore = defineStore('myRecipes', () => {
 
   return {
     recipes,
+    getRecipeById,
     getMyRecipes,
     addRecipe,
     updateRecipe,
