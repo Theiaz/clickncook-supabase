@@ -9,6 +9,7 @@ const index = ref(0)
 const currentImage = computed(() => URL.createObjectURL(props.images[index.value]))
 const isFirstImage = computed(() => index.value == 0)
 const isLastImage = computed(() => index.value == props.images.length - 1)
+const hasMultipleImages = computed(() => props.images.length > 1)
 
 const nextImage = () => {
   if (isLastImage.value) {
@@ -28,7 +29,7 @@ const previousImage = () => {
 <template>
   <template v-if="images.length > 0">
     <img :src="currentImage" />
-    <button @click="previousImage">Previous</button>
-    <button @click="nextImage">Next</button>
+    <button v-if="hasMultipleImages" @click="previousImage">Previous</button>
+    <button v-if="hasMultipleImages" @click="nextImage">Next</button>
   </template>
 </template>
