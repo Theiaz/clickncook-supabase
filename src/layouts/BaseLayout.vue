@@ -1,18 +1,31 @@
 <script setup lang="ts">
-import LogoutButton from '@/components/LogoutButton.vue'
+import AddIcon from '@/components/icons/AddIcon.vue'
+import LoginIcon from '@/components/icons/LoginIcon.vue'
+import LogoutIcon from '@/components/icons/LogoutIcon.vue'
+import RecipeListIcon from '@/components/icons/RecipeListIcon.vue'
+import { useAuth } from '@/composables/useAuth'
 import { useUser } from '@/composables/useUser'
 
 const { isAuthenticated } = useUser()
+const { logout } = useAuth()
 </script>
 <template>
-  <header class="flex gap-4 justify-end items-center">
-    <router-link :to="{ name: 'home' }">Home</router-link>
-    <router-link v-if="isAuthenticated" :to="{ name: 'myRecipes' }">My recipes</router-link>
-    <router-link v-if="!isAuthenticated" :to="{ name: 'login' }">Login</router-link>
-    <LogoutButton />
+  <header class="flex gap-4 justify-end items-center p-8">
+    <router-link class="mr-auto" :to="{ name: 'home' }">Home</router-link>
+    <router-link :to="{ name: 'newRecipe' }">
+      <AddIcon />
+    </router-link>
+    <router-link v-if="isAuthenticated" :to="{ name: 'myRecipes' }">
+      <RecipeListIcon />
+    </router-link>
+    <router-link v-if="!isAuthenticated" :to="{ name: 'login' }">
+      <LoginIcon />
+    </router-link>
+    <button v-else @click="logout">
+      <LogoutIcon />
+    </button>
   </header>
-  <main class="container">
+  <main class="p-8">
     <slot />
   </main>
-  <footer class="container"></footer>
 </template>
