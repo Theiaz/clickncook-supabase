@@ -41,8 +41,3 @@ async function onFilesSelected(event: Event) {
     />
   </label>
 </template>
-<style scoped>
-img {
-  margin-bottom: 1rem;
-}
-</style>

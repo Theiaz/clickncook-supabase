@@ -33,7 +33,7 @@ const getRandomRecipe = async () => {
 }
 </script>
 <template>
-  <button v-if="hasRecipe" @click="getRandomRecipe" :aria-busy="loading">Get a new recipe</button>
+  <button v-if="hasRecipe" @click="getRandomRecipe" :aria-busy="loading"> Get a new recipe </button>
   <router-link :to="{ name: 'newRecipe' }">Create new recipe</router-link>
   <RecipeCard v-if="hasRecipe" :recipe="recipe" />
   <p v-else>There are no recipes. Start creating one!</p>
