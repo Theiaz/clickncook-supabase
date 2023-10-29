@@ -11,12 +11,13 @@ const submitText = computed<string>(() => {
 })
 </script>
 <template>
-  <button v-if="isAuthenticated" type="submit" :disabled="loading" @click="logout">
+  <button
+    class="max-w-fit"
+    v-if="isAuthenticated"
+    type="submit"
+    :disabled="loading"
+    @click="logout"
+  >
     {{ submitText }}
   </button>
 </template>
-<style scoped>
-button {
-  max-width: fit-content;
-}
-</style>

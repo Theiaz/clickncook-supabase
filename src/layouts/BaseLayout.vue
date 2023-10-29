@@ -5,7 +5,7 @@ import { useUser } from '@/composables/useUser'
 const { isAuthenticated } = useUser()
 </script>
 <template>
-  <header class="container">
+  <header class="flex gap-4 justify-end items-center">
     <router-link :to="{ name: 'home' }">Home</router-link>
     <router-link v-if="isAuthenticated" :to="{ name: 'myRecipes' }">My recipes</router-link>
     <router-link v-if="!isAuthenticated" :to="{ name: 'login' }">Login</router-link>
@@ -16,11 +16,3 @@ const { isAuthenticated } = useUser()
   </main>
   <footer class="container"></footer>
 </template>
-<style scoped>
-header {
-  display: flex;
-  gap: 2rem;
-  justify-content: end;
-  align-items: center;
-}
-</style>

@@ -1,12 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <div>
+  <div class="flex gap-2">
     <slot />
   </div>
 </template>
-<style scoped>
-div {
-  display: flex;
-  gap: 1rem;
-}
-</style>
