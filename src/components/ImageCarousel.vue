@@ -30,23 +30,24 @@ const previousImage = () => {
 </script>
 <template>
   <div class="relative">
-    <template v-if="images.length > 0">
-      <img :src="currentImage" class="image object-cover" />
-      <div
-        v-if="hasMultipleImages"
-        class="absolute top-1/2 w-full flex justify-between px-4 text-secondary"
-      >
-        <button class="backdrop-blur p-1 rounded-lg" @click="previousImage">
-          <ChevronLeftIcon />
-        </button>
-        <button class="backdrop-blur p-1 rounded-lg" @click="nextImage">
-          <ChevronRightIcon />
-        </button>
-      </div>
-    </template>
-    <template v-else>
-      <div class="image bg-neutral"></div>
-    </template>
+    <div
+      class="absolute top-0 w-full flex justify-end gap-4 px-6 text-secondary backdrop-blur rounded-t-lg"
+    >
+      <slot name="actions"></slot>
+    </div>
+    <img v-if="images.length > 0" :src="currentImage" class="image object-cover" />
+    <div v-else class="image bg-neutral flex justify-center items-center">No image yet!</div>
+    <div
+      v-if="hasMultipleImages"
+      class="absolute top-1/2 w-full flex justify-between px-4 text-secondary"
+    >
+      <button class="backdrop-blur p-1 rounded-lg" @click="previousImage">
+        <ChevronLeftIcon />
+      </button>
+      <button class="backdrop-blur p-1 rounded-lg" @click="nextImage">
+        <ChevronRightIcon />
+      </button>
+    </div>
   </div>
 </template>
 <style>

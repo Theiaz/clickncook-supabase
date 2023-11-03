@@ -20,3 +20,8 @@ header {
 main {
   grid-area: main;
 }
+
+a,
+button {
+  @apply p-2;
+}
