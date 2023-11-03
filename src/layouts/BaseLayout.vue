@@ -29,9 +29,3 @@ const { logout } = useAuth()
     <slot />
   </main>
 </template>
-<style scoped>
-a,
-button {
-  @apply p-2;
-}
-</style>

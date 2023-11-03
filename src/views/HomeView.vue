@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { findRandomRecipe } from '@/api/recipes/api'
-import ImageCarousel from '@/components/ImageCarousel.vue'
 import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
-import RecipeHeader from '@/components/recipes/RecipeHeader.vue'
+import RecipeDetails from '@/components/recipes/RecipeDetails.vue'
 import BottomButtonLayout from '@/layouts/BottomButtonLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import { storeToRefs } from 'pinia'
@@ -39,8 +38,7 @@ const getRandomRecipe = async () => {
   <BottomButtonLayout>
     <template #content>
       <template v-if="hasRecipe">
-        <ImageCarousel class="full-width" :images="recipe!.images" />
-        <RecipeHeader :recipe="recipe" />
+        <RecipeDetails :recipe="recipe" />
       </template>
       <p v-else>There are no recipes. Start creating one!</p>
     </template>
@@ -54,8 +52,3 @@ const getRandomRecipe = async () => {
     </template>
   </BottomButtonLayout>
 </template>
-<style scoped>
-.full-width {
-  @apply relative left-1/2 right-1/2 w-screen max-w-[100vw] -mx-[50vw];
-}
-</style>
