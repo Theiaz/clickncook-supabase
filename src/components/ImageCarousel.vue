@@ -36,7 +36,9 @@ const previousImage = () => {
       <slot name="actions"></slot>
     </div>
     <img v-if="images.length > 0" :src="currentImage" class="image object-cover" />
-    <div v-else class="image bg-neutral flex justify-center items-center">No image yet!</div>
+    <div v-else class="image bg-primary-text text-white flex justify-center items-center">
+      No image yet!
+    </div>
     <div
       v-if="hasMultipleImages"
       class="absolute top-1/2 w-full flex justify-between px-4 text-secondary"
