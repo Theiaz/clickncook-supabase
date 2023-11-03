@@ -31,7 +31,7 @@ const previousImage = () => {
 <template>
   <div class="relative">
     <div
-      class="absolute top-0 w-full flex justify-end gap-4 px-6 text-secondary backdrop-blur rounded-t-lg"
+      class="absolute top-0 w-full flex justify-end gap-4 px-6 text-secondary backdrop-blur bg-primary/10 rounded-t-lg"
     >
       <slot name="actions"></slot>
     </div>
