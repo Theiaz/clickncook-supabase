@@ -29,8 +29,8 @@ const previousImage = () => {
 }
 </script>
 <template>
-  <template v-if="images.length > 0">
-    <div class="full-width">
+  <div class="relative">
+    <template v-if="images.length > 0">
       <img :src="currentImage" class="aspect-video w-full object-cover" />
       <div
         v-if="hasMultipleImages"
@@ -43,14 +43,9 @@ const previousImage = () => {
           <ChevronRightIcon />
         </button>
       </div>
-    </div>
-  </template>
-  <template v-else>
-    <div class="full-width bg-neutral aspect-video w-full"></div>
-  </template>
+    </template>
+    <template v-else>
+      <div class="bg-neutral aspect-video w-full"></div>
+    </template>
+  </div>
 </template>
-<style scoped>
-.full-width {
-  @apply relative left-1/2 right-1/2 w-screen max-w-[100vw] -mx-[50vw];
-}
-</style>
