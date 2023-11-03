@@ -25,7 +25,7 @@ const { logout } = useAuth()
       <LogoutIcon />
     </button>
   </header>
-  <main class="px-8 pb-4">
+  <main class="px-8 pb-8">
     <slot />
   </main>
 </template>
