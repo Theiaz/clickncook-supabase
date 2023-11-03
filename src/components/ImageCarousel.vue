@@ -31,7 +31,7 @@ const previousImage = () => {
 <template>
   <div class="relative">
     <template v-if="images.length > 0">
-      <img :src="currentImage" class="aspect-video w-full object-cover" />
+      <img :src="currentImage" class="image object-cover" />
       <div
         v-if="hasMultipleImages"
         class="absolute top-1/2 w-full flex justify-between px-4 text-secondary"
@@ -45,7 +45,12 @@ const previousImage = () => {
       </div>
     </template>
     <template v-else>
-      <div class="bg-neutral aspect-video w-full"></div>
+      <div class="image bg-neutral"></div>
     </template>
   </div>
 </template>
+<style>
+.image {
+  @apply aspect-[3/2] max-h-64 w-full rounded-t-2xl;
+}
+</style>
