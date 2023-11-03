@@ -10,7 +10,7 @@ const { isAuthenticated } = useUser()
 const { logout } = useAuth()
 </script>
 <template>
-  <header class="flex gap-4 justify-end items-center p-8 pb-4">
+  <header class="flex gap-4 justify-end items-center px-6 py-2">
     <router-link class="mr-auto" :to="{ name: 'home' }">Home</router-link>
     <router-link :to="{ name: 'newRecipe' }">
       <AddIcon />
@@ -29,3 +29,9 @@ const { logout } = useAuth()
     <slot />
   </main>
 </template>
+<style scoped>
+a,
+button {
+  @apply p-2;
+}
+</style>
