@@ -2,7 +2,7 @@
 import RecipeCard from '@/components/RecipeCard.vue'
 import { useMyRecipesStore } from '@/stores/myRecipes'
 import { storeToRefs } from 'pinia'
-import { onBeforeMount, ref } from 'vue'
+import { onBeforeMount } from 'vue'
 
 const recipeStore = useMyRecipesStore()
 const { recipes } = storeToRefs(recipeStore)
@@ -12,8 +12,17 @@ onBeforeMount(async () => {
 })
 </script>
 <template>
-  <template v-for="recipe in recipes" :key="recipe.id">
-    <RecipeCard :recipe="recipe" />
-  </template>
+  <ul class="auto-grid">
+    <li v-for="recipe in recipes" :key="recipe.id">
+      <RecipeCard :recipe="recipe" />
+    </li>
+  </ul>
   <p v-if="recipes.length === 0">There are no recipes. Start creating one!</p>
 </template>
+<style scoped>
+.auto-grid {
+  --min-col-size: 16rem;
+  @apply grid gap-4;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--min-col-size), 100%), 1fr));
+}
+</style>
