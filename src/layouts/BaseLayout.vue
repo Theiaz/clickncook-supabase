@@ -10,8 +10,8 @@ const { isAuthenticated } = useUser()
 const { logout } = useAuth()
 </script>
 <template>
-  <header class="flex gap-4 justify-end items-center px-6 py-2">
-    <router-link class="mr-auto" :to="{ name: 'home' }">Home</router-link>
+  <header class="flex gap-4 justify-end items-center px-6 py-2 text-primary">
+    <router-link class="mr-auto text-primary-text" :to="{ name: 'home' }">Home</router-link>
     <router-link :to="{ name: 'newRecipe' }">
       <AddIcon />
     </router-link>
