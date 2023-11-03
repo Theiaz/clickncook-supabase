@@ -9,9 +9,8 @@ const props = defineProps<{
 <template>
   <article>
     <header>
-      <h2>{{ props.recipe.name }}</h2>
-      <router-link :to="{ name: 'details', params: { id: recipe.id } }"> Show details </router-link>
       <ImageCarousel :images="recipe!.images" />
+      <h2>{{ props.recipe.name }}</h2>
     </header>
     <p>{{ props.recipe.description }}</p>
   </article>
