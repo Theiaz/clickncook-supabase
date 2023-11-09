@@ -2,8 +2,9 @@ import { useUser } from '@/composables/useUser'
 import CreateRecipeView from '@/views/CreateRecipeView.vue'
 import HomeView from '@/views/HomeView.vue'
 import MyRecipesView from '@/views/MyRecipesView.vue'
+import RecipeDetailsEditView from '@/views/RecipeDetailsEditView.vue'
+import RecipeDetailsReadView from '@/views/RecipeDetailsReadView.vue'
 import RecipeDetailsView from '@/views/RecipeDetailsView.vue'
-import RecipeEditView from '@/views/RecipeEditView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 declare module 'vue-router' {
@@ -30,21 +31,23 @@ const router = createRouter({
     },
     {
       path: '/:id',
-      name: 'details',
       component: RecipeDetailsView,
       props: true,
       meta: {
         requiresAuth: true
-      }
-    },
-    {
-      path: '/:id/edit',
-      name: 'edit',
-      component: RecipeEditView,
-      props: true,
-      meta: {
-        requiresAuth: true
-      }
+      },
+      children: [
+        {
+          path: '/:id',
+          name: 'details',
+          component: RecipeDetailsReadView
+        },
+        {
+          path: '/:id/edit',
+          name: 'edit',
+          component: RecipeDetailsEditView
+        }
+      ]
     },
     {
       path: '/my',

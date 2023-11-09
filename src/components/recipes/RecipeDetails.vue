@@ -19,6 +19,7 @@ const { user } = useUser()
 const isOwnRecipe = computed(() => props.recipe.authorId === user.value?.id)
 const route = useRoute()
 const isHomeScreen = computed(() => route.name === 'home')
+const shouldDisplayActions = computed(() => isOwnRecipe.value && !isHomeScreen.value)
 
 const onDelete = async () => {
   if (props.recipe) {
@@ -29,7 +30,7 @@ const onDelete = async () => {
 </script>
 <template>
   <ImageCarousel class="full-width" :images="recipe!.images">
-    <template #actions v-if="isOwnRecipe && !isHomeScreen">
+    <template #actions v-if="shouldDisplayActions">
       <router-link :to="{ name: 'edit', params: { id: recipe.id } }">
         <EditIcon />
       </router-link>
