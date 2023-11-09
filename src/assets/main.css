@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply min-h-[100dvh];
+  @apply min-h-[100dvh] overflow-x-hidden;
 }
 #app {
   @apply grid min-h-[100dvh];
