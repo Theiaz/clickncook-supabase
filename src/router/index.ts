@@ -1,9 +1,9 @@
 import { useUser } from '@/composables/useUser'
-import CreateView from '@/views/CreateView.vue'
-import DetailsView from '@/views/DetailsView.vue'
-import EditView from '@/views/EditView.vue'
 import HomeView from '@/views/HomeView.vue'
-import MyRecipesView from '@/views/MyRecipesView.vue'
+import CreateView from '@/views/recipes/CreateView.vue'
+import DetailsView from '@/views/recipes/DetailsView.vue'
+import EditView from '@/views/recipes/EditView.vue'
+import MyRecipesView from '@/views/recipes/MyRecipesView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 declare module 'vue-router' {
@@ -57,12 +57,12 @@ const router = createRouter({
     {
       path: '/register',
       name: 'register',
-      component: () => import('../views/RegistrationView.vue')
+      component: () => import('../views/auth/RegistrationView.vue')
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/LoginView.vue')
+      component: () => import('../views/auth/LoginView.vue')
     },
     {
       path: '/about',
