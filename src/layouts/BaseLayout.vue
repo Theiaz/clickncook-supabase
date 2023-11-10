@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AddIcon from '@/components/icons/AddIcon.vue'
+import AddDocument from '@/components/icons/AddDocument.vue'
 import LoginIcon from '@/components/icons/LoginIcon.vue'
 import LogoutIcon from '@/components/icons/LogoutIcon.vue'
 import RecipeListIcon from '@/components/icons/RecipeListIcon.vue'
@@ -13,7 +13,7 @@ const { logout } = useAuth()
   <header class="flex gap-4 justify-end items-center px-6 py-2 text-primary">
     <router-link class="mr-auto text-primary-text" :to="{ name: 'home' }">Home</router-link>
     <router-link :to="{ name: 'newRecipe' }">
-      <AddIcon />
+      <AddDocument />
     </router-link>
     <router-link v-if="isAuthenticated" :to="{ name: 'myRecipes' }">
       <RecipeListIcon />
