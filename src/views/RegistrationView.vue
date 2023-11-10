@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
 import { useAuth } from '@/composables/useAuth'
 import { computed, ref } from 'vue'
 
@@ -15,18 +16,45 @@ const submitText = computed<string>(() => {
 </script>
 
 <template>
-  <form @submit.prevent="register(email, password)">
+  <form class="flex flex-col gap-4" @submit.prevent="register(email, password)">
     <div>
-      <input required type="email" placeholder="Your email" v-model="email" />
-    </div>
-    <div>
-      <input required type="email" placeholder="Confirm email" v-model="emailConfirmation" />
-    </div>
-    <div>
-      <input required type="password" placeholder="Your password" v-model="password" />
-    </div>
-    <div>
+      <label class="block mb-2 text-sm font-medium" for="email">Email</label>
       <input
+        id="email"
+        class="border border-primary text-sm rounded-lg block w-full p-2.5"
+        required
+        type="email"
+        placeholder="Your email"
+        v-model="email"
+      />
+    </div>
+    <div>
+      <label class="block mb-2 text-sm font-medium" for="confirmEmail">Confirm Email</label>
+      <input
+        id="confirmEmail"
+        class="border border-primary text-sm rounded-lg block w-full p-2.5"
+        required
+        type="email"
+        placeholder="Confirm email"
+        v-model="emailConfirmation"
+      />
+    </div>
+    <div>
+      <label class="block mb-2 text-sm font-medium" for="password">Password</label>
+      <input
+        id="password"
+        class="border border-primary text-sm rounded-lg block w-full p-2.5"
+        required
+        type="password"
+        placeholder="Your password"
+        v-model="password"
+      />
+    </div>
+    <div>
+      <label class="block mb-2 text-sm font-medium" for="confirmPassword">Confirm Password</label>
+      <input
+        id="confirmPassword"
+        class="border border-primary text-sm rounded-lg block w-full p-2.5"
         required
         type="password"
         placeholder="Confirm password"
@@ -34,7 +62,7 @@ const submitText = computed<string>(() => {
       />
     </div>
     <div>
-      <button type="submit" :disabled="loading">{{ submitText }}</button>
+      <PrimaryButton>{{ submitText }}</PrimaryButton>
     </div>
   </form>
 </template>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
 import { useAuth } from '@/composables/useAuth'
 import { computed, ref } from 'vue'
 
@@ -13,18 +14,35 @@ const submitText = computed<string>(() => {
 </script>
 
 <template>
-  <form @submit.prevent="login(email, password)">
+  <form @submit.prevent="login(email, password)" class="flex flex-col gap-4">
     <div>
-      <input required type="email" placeholder="Your email" v-model="email" />
+      <label class="block mb-2 text-sm font-medium" for="email">Email</label>
+      <input
+        id="email"
+        class="border border-primary text-sm rounded-lg block w-full p-2.5"
+        required
+        type="email"
+        placeholder="Your email"
+        v-model="email"
+      />
     </div>
     <div>
-      <input required type="password" placeholder="Your password" v-model="password" />
+      <label class="block mb-2 text-sm font-medium" for="password">Password</label>
+      <input
+        id="password"
+        class="border border-primary text-sm rounded-lg block w-full p-2.5"
+        required
+        type="password"
+        placeholder="Your password"
+        v-model="password"
+      />
     </div>
-    <div>
-      <button type="submit" :disabled="loading">{{ submitText }}</button>
+    <div class="flex gap-4">
+      <router-link class="rounded-full px-4 py-2 text-white bg-secondary" :to="{ name: 'register' }"
+        >Register</router-link
+      >
+      <PrimaryButton>{{ submitText }}</PrimaryButton>
     </div>
-    <div>
-      <router-link :to="{ name: 'register' }">Register</router-link>
-    </div>
+    <div></div>
   </form>
 </template>
