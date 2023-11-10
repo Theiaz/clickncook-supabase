@@ -1,5 +1,5 @@
 <template>
-  <article class="border-transparent rounded-2xl shadow-md shadow-primary/30">
+  <article class="h-full border-transparent rounded-2xl shadow-md shadow-primary/30">
     <header>
       <slot name="header"></slot>
     </header>

@@ -21,8 +21,8 @@ onBeforeMount(async () => {
 </template>
 <style scoped>
 .auto-grid {
-  --min-col-size: 16rem;
+  --min-col-size: 20rem;
   @apply grid gap-4;
-  grid-template-columns: repeat(auto-fit, minmax(min(var(--min-col-size), 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--min-col-size), 100%), 1fr));
 }
 </style>
