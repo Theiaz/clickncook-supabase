@@ -2,7 +2,8 @@ import {
   deleteRecipe as apiDeleteRecipe,
   updateRecipe as apiUpdateRecipe,
   createRecipeForUser,
-  deleteImages
+  deleteImages,
+  findRecipeById
 } from '@/api/recipes/api'
 import { useUser } from '@/composables/useUser'
 import type { Recipe, RecipeData } from '@/types/recipe'
@@ -30,6 +31,22 @@ export const useCurrentRecipeStore = defineStore('currentRecipe', () => {
     }
   }
 
+  const fetchRecipe = async (id: string) => {
+    try {
+      // load from my recipes if available
+      const myRecipe = myRecipeStore.getRecipeById(id)
+      if (myRecipe) {
+        console.log('fetch from my store', myRecipe)
+
+        currentRecipe.value = myRecipe
+        return
+      }
+      // else fetch it
+      currentRecipe.value = await findRecipeById(id)
+    } catch (error: any) {
+      alert(error.message)
+    }
+  }
   const createRecipe = async (recipe: RecipeData) => {
     const { user } = useUser()
     try {
@@ -69,6 +86,7 @@ export const useCurrentRecipeStore = defineStore('currentRecipe', () => {
   return {
     recipe: currentRecipe,
     $reset,
+    fetchRecipe,
     createRecipe,
     updateRecipe,
     deleteRecipe,
