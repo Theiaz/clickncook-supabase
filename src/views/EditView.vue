@@ -3,9 +3,12 @@ import ImageUpload from '@/components/ImageUpload.vue'
 import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
 import BottomButtonLayout from '@/layouts/BottomButtonLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
+import type { Recipe } from '@/types/recipe'
+import { deepEqual } from '@/util/deepEqual'
 import { storeToRefs } from 'pinia'
-import { computed, onBeforeMount, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import type { Ref } from 'vue'
+import { computed, onBeforeMount, ref, watch } from 'vue'
+import { onBeforeRouteLeave, useRouter } from 'vue-router'
 
 const props = defineProps<{
   id: string
@@ -14,39 +17,66 @@ const props = defineProps<{
 const router = useRouter()
 const recipeStore = useCurrentRecipeStore()
 const { recipe } = storeToRefs(recipeStore)
+const tempRecipe: Ref<Recipe> = ref({ ...recipe.value })
 
 onBeforeMount(async () => {
   if (!recipe.value.id || recipe.value.id !== props.id) {
     await recipeStore.fetchRecipe(props.id)
+    tempRecipe.value = { ...recipe.value }
   }
 })
 
 const submitting = ref(false)
 const onSubmit = async () => {
-  if (recipe.value) {
+  if (tempRecipe.value) {
     submitting.value = true
-    // TODO schaefer - we already write in the store
-    await recipeStore.updateRecipe(recipe.value)
+    hasBeenEdited.value = false // user expect that he updated
+    await recipeStore.updateRecipe(tempRecipe.value)
     submitting.value = false
     await router.push({ name: 'home' })
   }
 }
 
-const btnText = computed(() => (submitting.value ? 'Loading ...' : 'Update Recipe'))
+const hasBeenEdited = ref<boolean>(false)
+watch(
+  tempRecipe,
+  () => {
+    if (
+      deepEqual(recipe.value, tempRecipe.value) &&
+      deepEqual(recipe.value.images, tempRecipe.value.images)
+    ) {
+      hasBeenEdited.value = false
+      return
+    }
+    hasBeenEdited.value = true
+  },
+  { deep: true }
+)
+
+onBeforeRouteLeave(() => {
+  if (hasBeenEdited.value) {
+    const answer = window.confirm('Do you really want to leave? You have unsaved changes!')
+    // cancel the navigation and stay on the same page
+    if (!answer) return false
+  }
+  return true
+})
+
+const btnText = computed(() => (submitting.value ? 'Updating ...' : 'Update Recipe'))
 </script>
 <template>
   <BottomButtonLayout>
     <template #content>
-      <template v-if="recipe">
+      <template v-if="tempRecipe">
         <form class="flex flex-col gap-4">
-          <ImageUpload v-model="recipe.images" />
+          <ImageUpload v-model="tempRecipe.images" />
           <div>
             <label class="block mb-2 text-sm font-medium" for="name">Name</label>
             <input
               class="border border-primary text-sm rounded-lg block w-full p-2.5"
               id="name"
               type="text"
-              v-model="recipe.name"
+              v-model="tempRecipe.name"
             />
           </div>
           <div>
@@ -55,7 +85,7 @@ const btnText = computed(() => (submitting.value ? 'Loading ...' : 'Update Recip
               class="border border-primary text-sm rounded-lg block w-full p-2.5"
               id="description"
               type="text"
-              v-model="recipe.description"
+              v-model="tempRecipe.description"
             />
           </div>
         </form>

@@ -62,6 +62,7 @@ const updateRecipe = async (recipe: Recipe): Promise<void> => {
 
   if (error) throw error
 
+  await deleteImages(recipe.id, [], { all: true })
   await uploadImages(recipe.id, recipe.images)
 }
 
@@ -69,7 +70,7 @@ const deleteRecipe = async (recipe: Recipe): Promise<void> => {
   const { error: errorRecipe } = await supabase.from('recipes').delete().eq('id', recipe.id)
   if (errorRecipe) throw errorRecipe
 
-  deleteImages(recipe.id, [], { all: true })
+  await deleteImages(recipe.id, [], { all: true })
 }
 
 // image
@@ -88,17 +89,20 @@ const deleteImages = async (
   options: { all: boolean } = { all: false }
 ): Promise<void> => {
   let filesToRemove: string[] = []
-  if (options && options.all) {
-    const { data: imgList, error: listError } = await supabase.storage
+  if (options.all) {
+    const { data: peristedImages, error: listError } = await supabase.storage
       .from('recipe_images')
       .list(`${recipeId}`)
     if (listError) throw listError
 
-    filesToRemove = imgList.map((img) => `${recipeId}/${img.name}`)
+    filesToRemove = peristedImages.map((img) => `${recipeId}/${img.name}`)
   } else {
     filesToRemove = imgNames.map((name) => `${recipeId}/${name}`)
   }
 
+  if (filesToRemove.length == 0) {
+    return
+  }
   const { error } = await supabase.storage.from('recipe_images').remove(filesToRemove)
   if (error) throw error
 }

@@ -61,6 +61,7 @@ export const useCurrentRecipeStore = defineStore('currentRecipe', () => {
 
   const updateRecipe = async (recipe: Recipe) => {
     try {
+      currentRecipe.value = recipe
       await apiUpdateRecipe(recipe)
       myRecipeStore.updateRecipe(recipe)
     } catch (error: any) {
