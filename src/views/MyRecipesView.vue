@@ -12,6 +12,7 @@ onBeforeMount(async () => {
 })
 </script>
 <template>
+  <h2 class="mb-4 text-primary">Your recipes</h2>
   <ul class="auto-grid">
     <li v-for="recipe in recipes" :key="recipe.id">
       <RecipeCard :recipe="recipe" />

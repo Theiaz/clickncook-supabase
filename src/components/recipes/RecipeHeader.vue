@@ -30,8 +30,8 @@ const onDelete = async () => {
 }
 </script>
 <template>
-  <div class="flex justify-between text-primary">
-    <h2 class="font-bold">{{ recipe.name }}</h2>
+  <div class="flex justify-between text-primary items-center">
+    <h3 class="font-bold">{{ recipe.name }}</h3>
     <div v-if="shouldDisplayActions" class="flex gap-4">
       <router-link v-if="isMyRecipeScreen" :to="{ name: 'details', params: { id: recipe.id } }">
         <DetailsIcon />
