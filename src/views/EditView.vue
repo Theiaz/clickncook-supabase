@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ImageUpload from '@/components/ImageUpload.vue'
 import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
+import ImageUpload from '@/components/images/ImageUpload.vue'
 import BottomButtonLayout from '@/layouts/BottomButtonLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import type { Recipe } from '@/types/recipe'

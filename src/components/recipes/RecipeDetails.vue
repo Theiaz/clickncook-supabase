@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import ImageCarousel from '@/components/images/ImageCarousel.vue'
 import type { Recipe } from '@/types/recipe'
-import ImageCarousel from '../ImageCarousel.vue'
 import RecipeHeader from './RecipeHeader.vue'
 
 defineProps<{

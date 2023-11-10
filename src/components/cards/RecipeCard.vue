@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ImageCarousel from '@/components/ImageCarousel.vue'
+import ImageCarousel from '@/components/images/ImageCarousel.vue'
 import BaseCard from '@/components/cards/BaseCard.vue'
 import RecipeHeader from '@/components/recipes/RecipeHeader.vue'
 import type { Recipe } from '@/types/recipe'

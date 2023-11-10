@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import AddIcon from '@/components/icons/AddIcon.vue'
+import TrashIcon from '@/components/icons/TrashIcon.vue'
 import { onBeforeMount, ref, watch } from 'vue'
 import ImageCarousel from './ImageCarousel.vue'
-import AddIcon from './icons/AddIcon.vue'
-import TrashIcon from './icons/TrashIcon.vue'
 
 const props = defineProps<{
   modelValue: File[] | undefined
