@@ -5,8 +5,8 @@ import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import type { Recipe } from '@/types/recipe'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import DetailsIcon from '../icons/DetailsIcon.vue'
 import EditIcon from '../icons/EditIcon.vue'
-import EyeIcon from '../icons/EyeIcon.vue'
 import TrashIcon from '../icons/TrashIcon.vue'
 
 const props = defineProps<{
@@ -34,7 +34,7 @@ const onDelete = async () => {
     <h2 class="font-bold">{{ recipe.name }}</h2>
     <div v-if="shouldDisplayActions" class="flex gap-4">
       <router-link v-if="isMyRecipeScreen" :to="{ name: 'details', params: { id: recipe.id } }">
-        <EyeIcon />
+        <DetailsIcon />
       </router-link>
       <router-link :to="{ name: 'edit', params: { id: recipe.id } }">
         <EditIcon />
