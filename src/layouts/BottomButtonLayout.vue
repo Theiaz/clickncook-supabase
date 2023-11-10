@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <div class="grid h-full">
+  <div class="grid h-full gap-4">
     <section>
       <slot name="content"></slot>
     </section>

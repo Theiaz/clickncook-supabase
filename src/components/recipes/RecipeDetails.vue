@@ -9,7 +9,7 @@ defineProps<{
 </script>
 <template>
   <ImageCarousel class="full-width" :images="recipe!.images" />
-  <section class="mt-2 flex flex-col gap-4">
+  <section class="mt-4 flex flex-col gap-4">
     <RecipeHeader :recipe="recipe" />
     <div>{{ recipe.description }}</div>
   </section>
