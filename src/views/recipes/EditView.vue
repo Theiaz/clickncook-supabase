@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
 import ImageUpload from '@/components/images/ImageUpload.vue'
+import RecipeRating from '@/components/rating/RecipeRating.vue'
 import BottomButtonLayout from '@/layouts/BottomButtonLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import type { Recipe } from '@/types/recipe'
@@ -79,6 +80,7 @@ const btnText = computed(() => (submitting.value ? 'Updating ...' : 'Update Reci
               v-model="tempRecipe.name"
             />
           </div>
+          <RecipeRating v-model="tempRecipe.rating" :is-readonly="false" />
           <div>
             <label class="block mb-2 text-sm font-medium" for="description">Description</label>
             <textarea

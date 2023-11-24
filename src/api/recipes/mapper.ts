@@ -8,7 +8,8 @@ const mapToDomain = async (data: RecipeDto): Promise<Recipe> => {
     name: data.name,
     description: data.description ?? '',
     authorId: data.author_id!,
-    images: (await getImagesForRecipe(data.id)) ?? [] // TODO schaefer - this should not be empty
+    images: (await getImagesForRecipe(data.id)) ?? [], // TODO schaefer - this should not be empty
+    rating: data.rating
   }
 }
 

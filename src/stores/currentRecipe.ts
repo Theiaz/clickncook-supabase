@@ -17,7 +17,8 @@ export const useCurrentRecipeStore = defineStore('currentRecipe', () => {
     authorId: '',
     name: '',
     description: '',
-    images: []
+    images: [],
+    rating: 0
   })
   const myRecipeStore = useMyRecipesStore()
 
@@ -27,7 +28,8 @@ export const useCurrentRecipeStore = defineStore('currentRecipe', () => {
       authorId: '',
       name: '',
       description: '',
-      images: []
+      images: [],
+      rating: 0
     }
   }
 

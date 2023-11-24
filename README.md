@@ -42,7 +42,7 @@ For creating a local user u can register once, dump the data and seed it via `se
 
 ### Generate types for local setup
 
-- `supabase gen types typescript --local > ./src/schema.ts`
+- `supabase gen types typescript --local > ./src/types/schema.ts`
 
 ## Staging and production
 

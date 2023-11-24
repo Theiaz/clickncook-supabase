@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ImageCarousel from '@/components/images/ImageCarousel.vue'
+import RecipeRating from '@/components/rating/RecipeRating.vue'
 import type { Recipe } from '@/types/recipe'
 import RecipeHeader from './RecipeHeader.vue'
 
@@ -11,6 +12,7 @@ defineProps<{
   <ImageCarousel class="full-width" :images="recipe!.images" />
   <section class="mt-4 flex flex-col gap-4">
     <RecipeHeader :recipe="recipe" />
+    <RecipeRating :model-value="recipe.rating" />
     <div>{{ recipe.description }}</div>
   </section>
 </template>

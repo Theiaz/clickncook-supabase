@@ -41,6 +41,7 @@ export interface Database {
           description: string | null
           id: string
           name: string | null
+          rating: number
         }
         Insert: {
           author_id?: string | null
@@ -48,6 +49,7 @@ export interface Database {
           description?: string | null
           id?: string
           name?: string | null
+          rating?: number
         }
         Update: {
           author_id?: string | null
@@ -55,6 +57,7 @@ export interface Database {
           description?: string | null
           id?: string
           name?: string | null
+          rating?: number
         }
         Relationships: [
           {
@@ -78,6 +81,7 @@ export interface Database {
           description: string | null
           id: string
           name: string | null
+          rating: number
         }[]
       }
     }
