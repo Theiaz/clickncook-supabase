@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ImageCarousel from '@/components/images/ImageCarousel.vue'
 import BaseCard from '@/components/cards/BaseCard.vue'
+import ImageCarousel from '@/components/images/ImageCarousel.vue'
 import RecipeHeader from '@/components/recipes/RecipeHeader.vue'
 import type { Recipe } from '@/types/recipe'
 
@@ -14,8 +14,10 @@ const props = defineProps<{
       <ImageCarousel :images="recipe!.images" />
     </template>
     <template #content>
-      <RecipeHeader :recipe="recipe" />
-      <p>{{ props.recipe.description }}</p>
+      <div class="flex flex-col gap-4">
+        <RecipeHeader :recipe="recipe" />
+        <p>{{ props.recipe.description }}</p>
+      </div>
     </template>
   </BaseCard>
 </template>

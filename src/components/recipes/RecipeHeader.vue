@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import RecipeRating from '@/components/rating/RecipeRating.vue'
 import { useUser } from '@/composables/useUser'
 import router from '@/router'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
@@ -30,7 +31,7 @@ const onDelete = async () => {
 }
 </script>
 <template>
-  <div class="flex justify-between text-primary items-center h-10">
+  <div class="flex justify-between text-primary items-center">
     <h3 class="font-bold">{{ recipe.name }}</h3>
     <div v-if="shouldDisplayActions" class="flex gap-4">
       <router-link v-if="isMyRecipeScreen" :to="{ name: 'details', params: { id: recipe.id } }">
@@ -44,4 +45,5 @@ const onDelete = async () => {
       </button>
     </div>
   </div>
+  <RecipeRating :model-value="recipe.rating" />
 </template>
