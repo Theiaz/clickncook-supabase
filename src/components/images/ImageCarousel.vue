@@ -47,7 +47,7 @@ watch(
 <template>
   <div class="relative">
     <div
-      class="absolute top-0 w-full flex justify-end gap-4 px-6 text-secondary backdrop-blur bg-primary/10 rounded-t-2xl"
+      class="absolute top-0 w-full flex justify-end gap-4 px-6 text-white backdrop-blur bg-black/30 rounded-t-2xl"
     >
       <slot name="actions" :currentImage="props.images[index]"></slot>
     </div>
@@ -57,12 +57,16 @@ watch(
     </div>
     <div
       v-if="hasMultipleImages"
-      class="absolute top-1/2 w-full flex justify-between px-4 text-secondary"
+      class="absolute top-1/2 w-full flex justify-between px-4 text-white"
     >
-      <button type="button" class="backdrop-blur p-1 rounded-lg" @click="previousImage">
+      <button
+        type="button"
+        class="backdrop-blur bg-black/30 p-1 rounded-lg"
+        @click="previousImage"
+      >
         <ChevronLeftIcon />
       </button>
-      <button type="button" class="backdrop-blur p-1 rounded-lg" @click="nextImage">
+      <button type="button" class="backdrop-blur bg-black/30 p-1 rounded-lg" @click="nextImage">
         <ChevronRightIcon />
       </button>
     </div>
