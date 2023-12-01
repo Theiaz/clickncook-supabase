@@ -4,7 +4,7 @@ import TheHeader from '@/components/TheHeader.vue'
 <template>
   <div id="layout">
     <TheHeader />
-    <main class="px-8">
+    <main class="px-8 pb-4">
       <slot name="content"></slot>
     </main>
     <div id="actionbar" class="flex gap-4 justify-center sticky bottom-0 bg-white pt-4 pb-8">
