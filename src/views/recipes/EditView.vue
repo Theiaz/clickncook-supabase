@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import RecipeGrid from '@/components/RecipeGrid.vue'
 import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
 import ImageUpload from '@/components/images/ImageUpload.vue'
 import RecipeRating from '@/components/rating/RecipeRating.vue'
@@ -69,31 +70,35 @@ const btnText = computed(() => (submitting.value ? 'Updating ...' : 'Update Reci
 <template>
   <StickyBottomLayout>
     <template #content>
-      <template v-if="tempRecipe">
-        <form class="flex flex-col gap-4">
-          <ImageUpload v-model="tempRecipe.images" />
-          <div>
-            <label class="block mb-2 text-sm font-medium" for="name">Name</label>
-            <input
-              class="border border-primary text-sm rounded-lg block w-full p-2.5"
-              id="name"
-              type="text"
-              v-model="tempRecipe.name"
-            />
-          </div>
-          <RecipeRating v-model="tempRecipe.rating" :is-readonly="false" />
-          <CookingTime v-model="tempRecipe.cookingTime" :is-readonly="false" />
-          <div>
-            <label class="block mb-2 text-sm font-medium" for="description">Description</label>
-            <textarea
-              class="border border-primary text-sm rounded-lg block w-full p-2.5"
-              id="description"
-              type="text"
-              v-model="tempRecipe.description"
-            />
-          </div>
-        </form>
-      </template>
+      <form v-if="tempRecipe" class="flex flex-col gap-4">
+        <RecipeGrid>
+          <template #left>
+            <ImageUpload v-model="tempRecipe.images" />
+            <div>
+              <label class="block mb-2 text-sm font-medium" for="name">Name</label>
+              <input
+                class="border border-primary text-sm rounded-lg block w-full p-2.5"
+                id="name"
+                type="text"
+                v-model="tempRecipe.name"
+              />
+            </div>
+            <RecipeRating v-model="tempRecipe.rating" :is-readonly="false" />
+            <CookingTime v-model="tempRecipe.cookingTime" :is-readonly="false" />
+          </template>
+          <template #right>
+            <div>
+              <label class="block mb-2 text-sm font-medium" for="description">Description</label>
+              <textarea
+                class="border border-primary text-sm rounded-lg block w-full p-2.5"
+                id="description"
+                type="text"
+                v-model="tempRecipe.description"
+              />
+            </div>
+          </template>
+        </RecipeGrid>
+      </form>
       <p v-else>Something went wrong! Please try to reload this page.</p>
     </template>
     <template #actions>
@@ -101,3 +106,4 @@ const btnText = computed(() => (submitting.value ? 'Updating ...' : 'Update Reci
     </template>
   </StickyBottomLayout>
 </template>
+

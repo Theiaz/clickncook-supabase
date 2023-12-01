@@ -46,10 +46,12 @@ watch(
 </script>
 <template>
   <div class="relative">
-    <div
-      class="absolute top-0 z-10 w-full flex justify-end gap-4 px-6 text-white overlay-blur rounded-t-2xl"
-    >
-      <slot name="actions" :currentImage="props.images[index]"></slot>
+    <div class="relative">
+      <div
+        class="absolute top-0 z-10 w-full flex justify-end gap-4 px-6 text-white overlay-blur rounded-t-2xl"
+      >
+        <slot name="actions" :currentImage="props.images[index]"></slot>
+      </div>
     </div>
     <div class="relative">
       <img
