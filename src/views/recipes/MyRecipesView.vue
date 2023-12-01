@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import RecipeCard from '@/components/cards/RecipeCard.vue'
+import BaseLayout from '@/layouts/BaseLayout.vue'
 import { useMyRecipesStore } from '@/stores/myRecipes'
 import { storeToRefs } from 'pinia'
 import { onBeforeMount } from 'vue'
@@ -12,13 +13,15 @@ onBeforeMount(async () => {
 })
 </script>
 <template>
-  <h2 class="mb-4 text-primary">Your recipes</h2>
-  <ul class="auto-grid">
-    <li v-for="recipe in recipes" :key="recipe.id">
-      <RecipeCard :recipe="recipe" />
-    </li>
-  </ul>
-  <p v-if="recipes.length === 0">There are no recipes. Start creating one!</p>
+  <BaseLayout>
+    <h2 class="mb-4 text-primary">Your recipes</h2>
+    <ul class="auto-grid">
+      <li v-for="recipe in recipes" :key="recipe.id">
+        <RecipeCard :recipe="recipe" />
+      </li>
+    </ul>
+    <p v-if="recipes.length === 0">There are no recipes. Start creating one!</p>
+  </BaseLayout>
 </template>
 <style scoped>
 .auto-grid {

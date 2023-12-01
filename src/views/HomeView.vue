@@ -2,7 +2,7 @@
 import { findRandomRecipe } from '@/api/recipes/api'
 import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
 import RecipeDetails from '@/components/recipes/RecipeDetails.vue'
-import BottomButtonLayout from '@/layouts/BottomButtonLayout.vue'
+import StickyBottomLayout from '@/layouts/StickyBottomLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import { storeToRefs } from 'pinia'
 import { computed, onBeforeMount, ref } from 'vue'
@@ -35,7 +35,7 @@ const getRandomRecipe = async () => {
 }
 </script>
 <template>
-  <BottomButtonLayout>
+  <StickyBottomLayout>
     <template #content>
       <template v-if="hasRecipe">
         <RecipeDetails :recipe="recipe" />
@@ -50,5 +50,5 @@ const getRandomRecipe = async () => {
       </router-link>
       <PrimaryButton @click="getRandomRecipe">New Recipe</PrimaryButton>
     </template>
-  </BottomButtonLayout>
+  </StickyBottomLayout>
 </template>

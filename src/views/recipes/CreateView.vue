@@ -3,7 +3,7 @@ import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
 import ImageUpload from '@/components/images/ImageUpload.vue'
 import RecipeRating from '@/components/rating/RecipeRating.vue'
 import CookingTime from '@/components/recipes/CookingTime.vue'
-import BottomButtonLayout from '@/layouts/BottomButtonLayout.vue'
+import StickyBottomLayout from '@/layouts/StickyBottomLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import { storeToRefs } from 'pinia'
 import { computed, onBeforeMount, ref } from 'vue'
@@ -28,7 +28,7 @@ const onSubmit = async () => {
 const btnText = computed(() => (loading.value ? 'Loading ...' : 'Create Recipe'))
 </script>
 <template>
-  <BottomButtonLayout>
+  <StickyBottomLayout>
     <template #content>
       <form class="flex flex-col gap-4">
         <ImageUpload v-model="recipe!.images" />
@@ -57,5 +57,5 @@ const btnText = computed(() => (loading.value ? 'Loading ...' : 'Create Recipe')
     <template #actions>
       <PrimaryButton @click="onSubmit">{{ btnText }}</PrimaryButton>
     </template>
-  </BottomButtonLayout>
+  </StickyBottomLayout>
 </template>
