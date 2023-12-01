@@ -3,7 +3,7 @@ import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
 import ImageUpload from '@/components/images/ImageUpload.vue'
 import RecipeRating from '@/components/rating/RecipeRating.vue'
 import CookingTime from '@/components/recipes/CookingTime.vue'
-import BottomButtonLayout from '@/layouts/BottomButtonLayout.vue'
+import StickyBottomLayout from '@/layouts/StickyBottomLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import type { Recipe } from '@/types/recipe'
 import { deepEqual } from '@/util/deepEqual'
@@ -67,7 +67,7 @@ onBeforeRouteLeave(() => {
 const btnText = computed(() => (submitting.value ? 'Updating ...' : 'Update Recipe'))
 </script>
 <template>
-  <BottomButtonLayout>
+  <StickyBottomLayout>
     <template #content>
       <template v-if="tempRecipe">
         <form class="flex flex-col gap-4">
@@ -99,5 +99,5 @@ const btnText = computed(() => (submitting.value ? 'Updating ...' : 'Update Reci
     <template #actions>
       <PrimaryButton @click="onSubmit">{{ btnText }}</PrimaryButton>
     </template>
-  </BottomButtonLayout>
+  </StickyBottomLayout>
 </template>

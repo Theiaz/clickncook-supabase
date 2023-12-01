@@ -1,5 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import BaseLayout from '@/layouts/BaseLayout.vue'
+</script>
 
 <template>
-  <div>About</div>
+  <BaseLayout>
+    <div>About</div>
+  </BaseLayout>
 </template>
