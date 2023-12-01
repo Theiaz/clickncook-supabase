@@ -16,7 +16,9 @@ const props = defineProps<{
     <template #content>
       <div class="flex flex-col gap-4">
         <RecipeHeader :recipe="recipe" />
-        <p class="whitespace-pre-wrap break-all max-h-16 truncate">{{ props.recipe.description }}</p>
+        <p class="whitespace-pre-wrap break-all h-full max-h-16 truncate">
+          {{ props.recipe.description }}
+        </p>
       </div>
     </template>
   </BaseCard>
