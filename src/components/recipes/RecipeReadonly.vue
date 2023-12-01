@@ -23,10 +23,6 @@ defineProps<{
   </RecipeGrid>
 </template>
 <style scoped>
-.recipe-container {
-  container-name: recipe;
-  container-type: inline-size;
-}
 .full-width {
   @apply relative left-1/2 right-1/2 w-screen max-w-[100vw] -mx-[50vw];
 }

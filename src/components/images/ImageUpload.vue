@@ -68,6 +68,12 @@ function deleteImage(file: File) {
 </template>
 <style scoped>
 .full-width {
-  @apply relative left-1/2 right-1/2 w-[100dvw]  -mx-[50vw];
+  @apply relative left-1/2 right-1/2 w-screen max-w-[100vw] -mx-[50vw];
+}
+
+@container recipe (width > 700px) {
+  .full-width {
+    @apply static w-full mx-0;
+  }
 }
 </style>
