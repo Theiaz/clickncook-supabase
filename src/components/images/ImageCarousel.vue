@@ -47,33 +47,43 @@ watch(
 <template>
   <div class="relative">
     <div
-      class="absolute top-0 w-full flex justify-end gap-4 px-6 text-white backdrop-blur bg-black/30 rounded-t-2xl"
+      class="absolute top-0 z-10 w-full flex justify-end gap-4 px-6 text-white overlay-blur rounded-t-2xl"
     >
       <slot name="actions" :currentImage="props.images[index]"></slot>
     </div>
-    <img v-if="images.length > 0" :src="getImagePreview(currentImage)" class="image object-cover" />
-    <div v-else class="image bg-primary-text text-white flex justify-center items-center">
-      No image yet!
-    </div>
-    <div
-      v-if="hasMultipleImages"
-      class="absolute top-1/2 w-full flex justify-between px-4 text-white"
-    >
-      <button
-        type="button"
-        class="backdrop-blur bg-black/30 p-1 rounded-lg"
-        @click="previousImage"
+    <div class="relative">
+      <img
+        v-if="images.length > 0"
+        :src="getImagePreview(currentImage)"
+        class="image object-cover"
+      />
+      <div v-else class="image bg-primary-text text-white flex justify-center items-center">
+        No image yet!
+      </div>
+      <div
+        v-if="hasMultipleImages"
+        class="absolute top-1/2 w-full flex justify-between px-4 text-white"
       >
-        <ChevronLeftIcon />
-      </button>
-      <button type="button" class="backdrop-blur bg-black/30 p-1 rounded-lg" @click="nextImage">
-        <ChevronRightIcon />
-      </button>
+        <button type="button" class="overlay-blur navButton" @click="previousImage">
+          <ChevronLeftIcon />
+        </button>
+        <button type="button" class="overlay-blur navButton" @click="nextImage">
+          <ChevronRightIcon />
+        </button>
+      </div>
     </div>
   </div>
 </template>
 <style>
 .image {
   @apply aspect-[3/2] max-h-64 w-full rounded-t-2xl;
+}
+
+.overlay-blur {
+  @apply backdrop-blur bg-black/30;
+}
+
+.navButton {
+  @apply p-1 rounded-lg;
 }
 </style>
