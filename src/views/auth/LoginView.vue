@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
+import BaseInput from '@/components/forms/BaseInput.vue'
 import { useAuth } from '@/composables/useAuth'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import { computed, ref } from 'vue'
@@ -17,28 +18,8 @@ const submitText = computed<string>(() => {
 <template>
   <BaseLayout>
     <form @submit.prevent="login(email, password)" class="flex flex-col gap-4">
-      <div>
-        <label class="block mb-2 text-sm font-medium" for="email">Email</label>
-        <input
-          id="email"
-          class="border border-primary text-sm rounded-lg block w-full p-2.5"
-          required
-          type="email"
-          placeholder="Your email"
-          v-model="email"
-        />
-      </div>
-      <div>
-        <label class="block mb-2 text-sm font-medium" for="password">Password</label>
-        <input
-          id="password"
-          class="border border-primary text-sm rounded-lg block w-full p-2.5"
-          required
-          type="password"
-          placeholder="Your password"
-          v-model="password"
-        />
-      </div>
+      <BaseInput type="email" label="Email" v-model="email" />
+      <BaseInput type="password" label="Password" v-model="password" />
       <div class="flex gap-4">
         <router-link
           class="rounded-full px-4 py-2 text-white bg-secondary"

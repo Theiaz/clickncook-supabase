@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
+import BaseInput from '@/components/forms/BaseInput.vue'
 import { useAuth } from '@/composables/useAuth'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import { computed, ref } from 'vue'
@@ -19,50 +20,10 @@ const submitText = computed<string>(() => {
 <template>
   <BaseLayout>
     <form class="flex flex-col gap-4" @submit.prevent="register(email, password)">
-      <div>
-        <label class="block mb-2 text-sm font-medium" for="email">Email</label>
-        <input
-          id="email"
-          class="border border-primary text-sm rounded-lg block w-full p-2.5"
-          required
-          type="email"
-          placeholder="Your email"
-          v-model="email"
-        />
-      </div>
-      <div>
-        <label class="block mb-2 text-sm font-medium" for="confirmEmail">Confirm Email</label>
-        <input
-          id="confirmEmail"
-          class="border border-primary text-sm rounded-lg block w-full p-2.5"
-          required
-          type="email"
-          placeholder="Confirm email"
-          v-model="emailConfirmation"
-        />
-      </div>
-      <div>
-        <label class="block mb-2 text-sm font-medium" for="password">Password</label>
-        <input
-          id="password"
-          class="border border-primary text-sm rounded-lg block w-full p-2.5"
-          required
-          type="password"
-          placeholder="Your password"
-          v-model="password"
-        />
-      </div>
-      <div>
-        <label class="block mb-2 text-sm font-medium" for="confirmPassword">Confirm Password</label>
-        <input
-          id="confirmPassword"
-          class="border border-primary text-sm rounded-lg block w-full p-2.5"
-          required
-          type="password"
-          placeholder="Confirm password"
-          v-model="passwordConfirmation"
-        />
-      </div>
+      <BaseInput type="email" label="Email" v-model="email" />
+      <BaseInput type="email" label="Confirm Email" v-model="emailConfirmation" />
+      <BaseInput type="password" label="Password" v-model="password" />
+      <BaseInput type="password" label="Confirm Password" v-model="passwordConfirmation" />
       <div>
         <PrimaryButton>{{ submitText }}</PrimaryButton>
       </div>
