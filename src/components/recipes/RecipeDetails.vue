@@ -13,7 +13,7 @@ defineProps<{
       <ImageCarousel class="full-width" :images="recipe!.images" />
       <section class="flex flex-col gap-4">
         <RecipeHeader :recipe="recipe" />
-        <div class="whitespace-pre-wrap break-all">{{ recipe.description }}</div>
+        <p class="whitespace-pre-wrap break-all">{{ recipe.description }}</p>
       </section>
     </div>
   </div>
