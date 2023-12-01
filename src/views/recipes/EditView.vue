@@ -75,7 +75,7 @@ const btnText = computed(() => (submitting.value ? 'Updating ...' : 'Update Reci
       <RecipeGrid v-if="tempRecipe">
         <template #left>
           <ImageUpload v-model="tempRecipe.images" />
-          <BaseInput v-model="tempRecipe.name" type="text" label="Name" />
+          <BaseInput v-model="tempRecipe.name" type="text" label="Name" v-focus />
           <RecipeRating v-model="tempRecipe.rating" :is-readonly="false" />
           <CookingTime v-model="tempRecipe.cookingTime" :is-readonly="false" />
         </template>

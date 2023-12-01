@@ -20,7 +20,7 @@ const submitText = computed<string>(() => {
 <template>
   <BaseLayout>
     <form class="flex flex-col gap-4" @submit.prevent="register(email, password)">
-      <BaseInput type="email" label="Email" v-model="email" />
+      <BaseInput type="email" label="Email" v-model="email" v-focus />
       <BaseInput type="email" label="Confirm Email" v-model="emailConfirmation" />
       <BaseInput type="password" label="Password" v-model="password" />
       <BaseInput type="password" label="Confirm Password" v-model="passwordConfirmation" />

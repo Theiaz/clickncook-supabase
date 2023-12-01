@@ -6,6 +6,7 @@ import BaseTextArea from '@/components/forms/BaseTextArea.vue'
 import ImageUpload from '@/components/images/ImageUpload.vue'
 import RecipeRating from '@/components/rating/RecipeRating.vue'
 import CookingTime from '@/components/recipes/CookingTime.vue'
+
 import StickyBottomLayout from '@/layouts/StickyBottomLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import { storeToRefs } from 'pinia'
@@ -36,12 +37,12 @@ const btnText = computed(() => (loading.value ? 'Loading ...' : 'Create Recipe')
       <RecipeGrid>
         <template #left>
           <ImageUpload v-model="recipe!.images" />
-          <BaseInput v-model="recipe.name" type="text" label="Name" />
+          <BaseInput v-model="recipe.name" type="text" label="Name" v-focus />
           <RecipeRating v-model="recipe.rating" :is-readonly="false" />
           <CookingTime v-model="recipe.cookingTime" :is-readonly="false" />
         </template>
         <template #right>
-          <BaseTextArea v-model="recipe.description" label="Description"/>
+          <BaseTextArea v-model="recipe.description" label="Description" />
         </template>
       </RecipeGrid>
     </template>

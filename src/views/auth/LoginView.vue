@@ -18,7 +18,7 @@ const submitText = computed<string>(() => {
 <template>
   <BaseLayout>
     <form @submit.prevent="login(email, password)" class="flex flex-col gap-4">
-      <BaseInput type="email" label="Email" v-model="email" />
+      <BaseInput type="email" label="Email" v-model="email" v-focus />
       <BaseInput type="password" label="Password" v-model="password" />
       <div class="flex gap-4">
         <router-link
