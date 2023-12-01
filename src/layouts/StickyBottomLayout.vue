@@ -2,13 +2,37 @@
 import TheHeader from '@/components/TheHeader.vue'
 </script>
 <template>
-  <TheHeader />
-  <main class="px-8">
-    <div class="h-full">
+  <div id="layout">
+    <TheHeader />
+    <main class="px-8">
       <slot name="content"></slot>
-    </div>
-    <section class="flex gap-4 justify-center sticky bottom-0 bg-white pt-4 pb-8">
+    </main>
+    <div id="actionbar" class="flex gap-4 justify-center sticky bottom-0 bg-white pt-4 pb-8">
       <slot name="actions"></slot>
-    </section>
-  </main>
+    </div>
+  </div>
 </template>
+<style scoped>
+#layout {
+  @apply grid min-h-[100dvh];
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'header'
+    'main'
+    'actionbar';
+  height: 100dvh;
+}
+
+header {
+  grid-area: header;
+}
+
+main {
+  grid-area: main;
+  overflow-y: scroll;
+}
+
+#actionbar {
+  grid-area: actionbar;
+}
+</style>

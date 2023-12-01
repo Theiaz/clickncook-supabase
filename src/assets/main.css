@@ -3,29 +3,13 @@
 @tailwind utilities;
 
 body {
-  @apply min-h-[100dvh] overflow-x-hidden;
-}
-#app {
-  @apply grid min-h-[100dvh];
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    'header'
-    'main';
-}
-
-header {
-  grid-area: header;
-}
-
-main {
-  grid-area: main;
+  @apply min-h-[100dvh] overflow-hidden;
 }
 
 a,
 button {
   @apply p-2;
 }
-
 
 h1 {
   @apply text-3xl;
@@ -35,11 +19,10 @@ h2 {
   @apply text-2xl;
 }
 
-
 h3 {
   @apply text-xl;
 }
 
 h4 {
-  @apply text-lg
+  @apply text-lg;
 }
