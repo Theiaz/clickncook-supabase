@@ -3,6 +3,7 @@ type RecipeData = {
   description?: string
   images: File[]
   rating: number
+  cookingTime?: number
 }
 
 type RecipeMeta = {

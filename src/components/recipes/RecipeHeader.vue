@@ -6,9 +6,11 @@ import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import type { Recipe } from '@/types/recipe'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+
 import DetailsIcon from '../icons/DetailsIcon.vue'
 import EditIcon from '../icons/EditIcon.vue'
 import TrashIcon from '../icons/TrashIcon.vue'
+import CookingTime from './CookingTime.vue'
 
 const props = defineProps<{
   recipe: Recipe
@@ -45,5 +47,8 @@ const onDelete = async () => {
       </button>
     </div>
   </div>
-  <RecipeRating :model-value="recipe.rating" />
+  <div class="flex items-center justify-between gap-4">
+    <RecipeRating :model-value="recipe.rating" />
+    <CookingTime :model-value="recipe.cookingTime" />
+  </div>
 </template>

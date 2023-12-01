@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import ImageUpload from '@/components/images/ImageUpload.vue'
 import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
+import ImageUpload from '@/components/images/ImageUpload.vue'
+import RecipeRating from '@/components/rating/RecipeRating.vue'
+import CookingTime from '@/components/recipes/CookingTime.vue'
 import BottomButtonLayout from '@/layouts/BottomButtonLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import { storeToRefs } from 'pinia'
@@ -39,6 +41,8 @@ const btnText = computed(() => (loading.value ? 'Loading ...' : 'Create Recipe')
             v-model="recipe!.name"
           />
         </div>
+        <RecipeRating v-model="recipe.rating" :is-readonly="false" />
+        <CookingTime v-model="recipe.cookingTime" :is-readonly="false" />
         <div>
           <label class="block mb-2 text-sm font-medium" for="description">Description</label>
           <textarea

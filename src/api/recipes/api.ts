@@ -38,6 +38,7 @@ const createRecipeForUser = async (recipe: RecipeData, userId: string): Promise<
     name: recipe.name,
     description: recipe.description!,
     rating: recipe.rating,
+    cooking_time: recipe.cookingTime,
     author_id: userId // TODO schaefer - can we delete this cause supabase tracks it?
   }
 
@@ -57,7 +58,8 @@ const updateRecipe = async (recipe: Recipe): Promise<void> => {
   const dto: RecipeUpdateDto = {
     name: recipe.name,
     description: recipe.description!,
-    rating: recipe.rating
+    rating: recipe.rating,
+    cooking_time: recipe.cookingTime
   }
 
   const { error } = await supabase.from('recipes').update(dto).eq('id', recipe.id)

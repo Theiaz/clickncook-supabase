@@ -37,6 +37,7 @@ export interface Database {
       recipes: {
         Row: {
           author_id: string | null
+          cooking_time: number | null
           created_at: string | null
           description: string | null
           id: string
@@ -45,6 +46,7 @@ export interface Database {
         }
         Insert: {
           author_id?: string | null
+          cooking_time?: number | null
           created_at?: string | null
           description?: string | null
           id?: string
@@ -53,6 +55,7 @@ export interface Database {
         }
         Update: {
           author_id?: string | null
+          cooking_time?: number | null
           created_at?: string | null
           description?: string | null
           id?: string
@@ -77,6 +80,7 @@ export interface Database {
         Args: Record<PropertyKey, never>
         Returns: {
           author_id: string | null
+          cooking_time: number | null
           created_at: string | null
           description: string | null
           id: string
@@ -103,6 +107,7 @@ export interface Database {
           id: string
           name: string
           owner: string | null
+          owner_id: string | null
           public: boolean | null
           updated_at: string | null
         }
@@ -114,6 +119,7 @@ export interface Database {
           id: string
           name: string
           owner?: string | null
+          owner_id?: string | null
           public?: boolean | null
           updated_at?: string | null
         }
@@ -125,17 +131,11 @@ export interface Database {
           id?: string
           name?: string
           owner?: string | null
+          owner_id?: string | null
           public?: boolean | null
           updated_at?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "buckets_owner_fkey"
-            columns: ["owner"]
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
       migrations: {
         Row: {
@@ -167,6 +167,7 @@ export interface Database {
           metadata: Json | null
           name: string | null
           owner: string | null
+          owner_id: string | null
           path_tokens: string[] | null
           updated_at: string | null
           version: string | null
@@ -179,6 +180,7 @@ export interface Database {
           metadata?: Json | null
           name?: string | null
           owner?: string | null
+          owner_id?: string | null
           path_tokens?: string[] | null
           updated_at?: string | null
           version?: string | null
@@ -191,6 +193,7 @@ export interface Database {
           metadata?: Json | null
           name?: string | null
           owner?: string | null
+          owner_id?: string | null
           path_tokens?: string[] | null
           updated_at?: string | null
           version?: string | null
