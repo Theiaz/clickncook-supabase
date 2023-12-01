@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RecipeDetails from '@/components/recipes/RecipeDetails.vue'
+import RecipeReadonly from '@/components/recipes/RecipeReadonly.vue'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import { storeToRefs } from 'pinia'
@@ -20,9 +20,7 @@ onBeforeMount(async () => {
 </script>
 <template>
   <BaseLayout>
-    <template v-if="recipe">
-      <RecipeDetails :recipe="recipe" />
-    </template>
+    <RecipeReadonly v-if="recipe" :recipe="recipe" />
     <p v-else>Something went wrong! Please try to reload this page.</p>
   </BaseLayout>
 </template>
