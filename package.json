@@ -4,15 +4,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "run-p type-check build-only",
-    "generate-types": "npx supabase gen types typescript --local > ./src/types/schema.ts",
+    "build-only": "vite build",
+    "dev": "vite",
+    "format": "prettier --write src/",
+    "generate-types": "npx supabase gen types typescript --local > ./src/types/schema.ts && npm run format",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.1",
