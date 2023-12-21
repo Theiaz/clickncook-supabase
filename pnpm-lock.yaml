@@ -22,15 +22,15 @@ devDependencies:
   '@rushstack/eslint-patch':
     specifier: ^1.6.1
     version: 1.6.1
-  '@tsconfig/node18':
-    specifier: ^18.2.2
-    version: 18.2.2
+  '@tsconfig/node20':
+    specifier: ^20.1.2
+    version: 20.1.2
   '@types/jsdom':
     specifier: ^21.1.6
     version: 21.1.6
   '@types/node':
-    specifier: ^18.16.17
-    version: 18.19.3
+    specifier: ^20.10.5
+    version: 20.10.5
   '@vitejs/plugin-vue':
     specifier: ^4.5.2
     version: 4.5.2(vite@5.0.10)(vue@3.3.13)
@@ -78,10 +78,10 @@ devDependencies:
     version: 5.3.3
   vite:
     specifier: ^5.0.10
-    version: 5.0.10(@types/node@18.19.3)
+    version: 5.0.10(@types/node@20.10.5)
   vitest:
     specifier: ^1.1.0
-    version: 1.1.0(@types/node@18.19.3)(jsdom@23.0.1)
+    version: 1.1.0(@types/node@20.10.5)(jsdom@23.0.1)
   vue-tsc:
     specifier: ^1.8.25
     version: 1.8.25(typescript@5.3.3)
@@ -645,14 +645,14 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@tsconfig/node18@18.2.2:
-    resolution: {integrity: sha512-d6McJeGsuoRlwWZmVIeE8CUA27lu6jLjvv1JzqmpsytOYYbVi1tHZEnwCNVOXnj4pyLvneZlFlpXUK+X9wBWyw==}
+  /@tsconfig/node20@20.1.2:
+    resolution: {integrity: sha512-madaWq2k+LYMEhmcp0fs+OGaLFk0OenpHa4gmI4VEmCKX4PJntQ6fnnGADVFrVkBj0wIdAlQnK/MrlYTHsa1gQ==}
     dev: true
 
   /@types/jsdom@21.1.6:
     resolution: {integrity: sha512-/7kkMsC+/kMs7gAYmmBR9P0vGTnOoLhQhyhQJSlXGI5bzTHp6xdo0TtKWQAsz6pmSAeVqKSbqeyP6hytqr9FDw==}
     dependencies:
-      '@types/node': 18.19.3
+      '@types/node': 20.10.5
       '@types/tough-cookie': 4.0.5
       parse5: 7.1.2
     dev: true
@@ -661,8 +661,8 @@ packages:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
     dev: true
 
-  /@types/node@18.19.3:
-    resolution: {integrity: sha512-k5fggr14DwAytoA/t8rPrIz++lXK7/DqckthCmoZOKNsEbJkId4Z//BqgApXBUGrGddrigYa1oqheo/7YmW4rg==}
+  /@types/node@20.10.5:
+    resolution: {integrity: sha512-nNPsNE65wjMxEKI93yOP+NPGGBJz/PoN3kZsVLee0XMiJolxSekEVD8wRwBUBqkwc7UWop0edW50yrCQW4CyRw==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -821,7 +821,7 @@ packages:
       vite: ^4.0.0 || ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.0.10(@types/node@18.19.3)
+      vite: 5.0.10(@types/node@20.10.5)
       vue: 3.3.13(typescript@5.3.3)
     dev: true
 
@@ -3875,7 +3875,7 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-node@1.1.0(@types/node@18.19.3):
+  /vite-node@1.1.0(@types/node@20.10.5):
     resolution: {integrity: sha512-jV48DDUxGLEBdHCQvxL1mEh7+naVy+nhUUUaPAZLd3FJgXuxQiewHcfeZebbJ6onDqNGkP4r3MhQ342PRlG81Q==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -3884,7 +3884,7 @@ packages:
       debug: 4.3.4
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 5.0.10(@types/node@18.19.3)
+      vite: 5.0.10(@types/node@20.10.5)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -3896,7 +3896,7 @@ packages:
       - terser
     dev: true
 
-  /vite@5.0.10(@types/node@18.19.3):
+  /vite@5.0.10(@types/node@20.10.5):
     resolution: {integrity: sha512-2P8J7WWgmc355HUMlFrwofacvr98DAjoE52BfdbwQtyLH06XKwaL/FMnmKM2crF0iX4MpmMKoDlNCB1ok7zHCw==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -3924,7 +3924,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 18.19.3
+      '@types/node': 20.10.5
       esbuild: 0.19.10
       postcss: 8.4.32
       rollup: 4.9.1
@@ -3932,7 +3932,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@1.1.0(@types/node@18.19.3)(jsdom@23.0.1):
+  /vitest@1.1.0(@types/node@20.10.5)(jsdom@23.0.1):
     resolution: {integrity: sha512-oDFiCrw7dd3Jf06HoMtSRARivvyjHJaTxikFxuqJjO76U436PqlVw1uLn7a8OSPrhSfMGVaRakKpA2lePdw79A==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -3957,7 +3957,7 @@ packages:
       jsdom:
         optional: true
     dependencies:
-      '@types/node': 18.19.3
+      '@types/node': 20.10.5
       '@vitest/expect': 1.1.0
       '@vitest/runner': 1.1.0
       '@vitest/snapshot': 1.1.0
@@ -3977,8 +3977,8 @@ packages:
       strip-literal: 1.3.0
       tinybench: 2.5.1
       tinypool: 0.8.1
-      vite: 5.0.10(@types/node@18.19.3)
-      vite-node: 1.1.0(@types/node@18.19.3)
+      vite: 5.0.10(@types/node@20.10.5)
+      vite-node: 1.1.0(@types/node@20.10.5)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
