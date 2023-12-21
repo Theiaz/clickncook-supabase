@@ -1,10 +1,4 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[]
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
 
 export interface Database {
   graphql_public: {
@@ -64,10 +58,10 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "recipes_author_id_fkey"
-            columns: ["author_id"]
-            referencedRelation: "users"
-            referencedColumns: ["id"]
+            foreignKeyName: 'recipes_author_id_fkey'
+            columns: ['author_id']
+            referencedRelation: 'users'
+            referencedColumns: ['id']
           }
         ]
       }
@@ -200,10 +194,10 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "objects_bucketId_fkey"
-            columns: ["bucket_id"]
-            referencedRelation: "buckets"
-            referencedColumns: ["id"]
+            foreignKeyName: 'objects_bucketId_fkey'
+            columns: ['bucket_id']
+            referencedRelation: 'buckets'
+            referencedColumns: ['id']
           }
         ]
       }
@@ -275,4 +269,3 @@ export interface Database {
     }
   }
 }
-
