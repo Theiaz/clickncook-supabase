@@ -2,6 +2,7 @@
 import ChevronLeftIcon from '@/components/icons/ChevronLeftIcon.vue'
 import ChevronRightIcon from '@/components/icons/ChevronRightIcon.vue'
 import { computed, ref, watch } from 'vue'
+import Button from '../ui/button/Button.vue'
 
 const props = defineProps<{
   images: File[]
@@ -45,10 +46,10 @@ watch(
 )
 </script>
 <template>
-  <div class="relative">
+  <div class="relative text-white">
     <div class="relative">
       <div
-        class="absolute top-0 z-10 w-full flex justify-end gap-4 px-6 text-white overlay-blur rounded-t-2xl"
+        class="absolute top-0 z-10 w-full flex justify-end gap-4 px-6 bg-black/30 rounded-t-2xl"
       >
         <slot name="actions" :currentImage="props.images[index]"></slot>
       </div>
@@ -59,19 +60,14 @@ watch(
         :src="getImagePreview(currentImage)"
         class="image object-cover"
       />
-      <div v-else class="image bg-primary-text text-white flex justify-center items-center">
-        No image yet!
-      </div>
-      <div
-        v-if="hasMultipleImages"
-        class="absolute top-1/2 w-full flex justify-between px-4 text-white"
-      >
-        <button type="button" class="overlay-blur navButton" @click="previousImage">
+      <div v-else class="image bg-primary flex justify-center items-center">No image yet!</div>
+      <div v-if="hasMultipleImages" class="absolute top-1/2 w-full flex justify-between px-4">
+        <Button variant="blur" size="icon" @click="previousImage">
           <ChevronLeftIcon />
-        </button>
-        <button type="button" class="overlay-blur navButton" @click="nextImage">
+        </Button>
+        <Button variant="blur" size="icon" @click="nextImage">
           <ChevronRightIcon />
-        </button>
+        </Button>
       </div>
     </div>
   </div>
@@ -79,13 +75,5 @@ watch(
 <style>
 .image {
   @apply aspect-[3/2] max-h-64 w-full rounded-t-2xl;
-}
-
-.overlay-blur {
-  @apply backdrop-blur bg-black/30;
-}
-
-.navButton {
-  @apply p-1 rounded-lg;
 }
 </style>

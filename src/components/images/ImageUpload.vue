@@ -2,6 +2,7 @@
 import AddIcon from '@/components/icons/AddIcon.vue'
 import TrashIcon from '@/components/icons/TrashIcon.vue'
 import { onBeforeMount, ref, watch } from 'vue'
+import Button from '../ui/button/Button.vue'
 import ImageCarousel from './ImageCarousel.vue'
 
 const props = defineProps<{
@@ -56,13 +57,13 @@ function deleteImage(file: File) {
   <p v-if="hasError">An error occured during image upload!</p>
   <ImageCarousel class="full-width" :images="files!">
     <template v-slot:actions="slotProps">
-      <label class="p-2 hover:cursor-pointer">
+      <label class="p-2 hover:cursor-pointer hover:bg-accent hover:text-accent-foreground rounded-md">
         <input class="hidden" type="file" accept="image/*" multiple @change="addImages($event)" />
         <AddIcon />
       </label>
-      <button type="button" @click="deleteImage(slotProps.currentImage)">
+      <Button size="icon" variant="ghost" @click="deleteImage(slotProps.currentImage)">
         <TrashIcon />
-      </button>
+      </Button>
     </template>
   </ImageCarousel>
 </template>

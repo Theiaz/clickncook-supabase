@@ -6,10 +6,10 @@ import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import type { Recipe } from '@/types/recipe'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-
 import DetailsIcon from '../icons/DetailsIcon.vue'
 import EditIcon from '../icons/EditIcon.vue'
 import TrashIcon from '../icons/TrashIcon.vue'
+import Button from '../ui/button/Button.vue'
 import CookingTime from './CookingTime.vue'
 
 const props = defineProps<{
@@ -36,15 +36,19 @@ const onDelete = async () => {
   <div class="flex justify-between text-primary items-center h-10">
     <h3 class="font-bold">{{ recipe.name }}</h3>
     <div v-if="shouldDisplayActions" class="flex gap-4">
-      <router-link v-if="isMyRecipeScreen" :to="{ name: 'details', params: { id: recipe.id } }">
-        <DetailsIcon />
+      <router-link v-if="isMyRecipeScreen" :to="{ name: 'details', params: { id: recipe.id } }" v-slot="{ href, navigate }">
+        <Button variant="ghost" size="icon" :href="href" @click="navigate">
+          <DetailsIcon />
+        </Button>
       </router-link>
-      <router-link :to="{ name: 'edit', params: { id: recipe.id } }">
-        <EditIcon />
+      <router-link :to="{ name: 'edit', params: { id: recipe.id } }" v-slot="{ href, navigate }">
+        <Button variant="ghost" size="icon" :href="href" @click="navigate">
+          <EditIcon />
+        </Button>
       </router-link>
-      <button @click="onDelete">
+      <Button variant="ghost" size="icon" @click="onDelete">
         <TrashIcon />
-      </button>
+      </Button>
     </div>
   </div>
   <div class="flex items-center justify-between gap-4">
