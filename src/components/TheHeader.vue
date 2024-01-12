@@ -5,6 +5,7 @@ import LogoutIcon from '@/components/icons/LogoutIcon.vue'
 import RecipeListIcon from '@/components/icons/RecipeListIcon.vue'
 import { useAuth } from '@/composables/useAuth'
 import { useUser } from '@/composables/useUser'
+import Button from './ui/button/Button.vue'
 
 const { isAuthenticated } = useUser()
 const { logout } = useAuth()
@@ -14,17 +15,23 @@ const { logout } = useAuth()
     class="flex gap-4 justify-end items-center px-6 py-2 text-primary sticky top-0 bg-white z-10"
   >
     <router-link class="mr-auto text-primary-text" :to="{ name: 'home' }">Home</router-link>
-    <router-link :to="{ name: 'newRecipe' }">
-      <AddDocument />
+    <router-link :to="{ name: 'newRecipe' }" v-slot="{ href, navigate }">
+      <Button variant="outline" size="icon" :href="href" @click="navigate">
+        <AddDocument />
+      </Button>
     </router-link>
-    <router-link v-if="isAuthenticated" :to="{ name: 'myRecipes' }">
-      <RecipeListIcon />
+    <router-link :to="{ name: 'myRecipes' }" v-slot="{ href, navigate }">
+      <Button variant="outline" size="icon" :href="href" @click="navigate">
+        <RecipeListIcon />
+      </Button>
     </router-link>
-    <router-link v-if="!isAuthenticated" :to="{ name: 'login' }">
-      <LoginIcon />
+    <router-link v-if="!isAuthenticated" :to="{ name: 'login' }" v-slot="{ href, navigate }">
+      <Button variant="outline" size="icon" :href="href" @click="navigate">
+        <LoginIcon />
+      </Button>
     </router-link>
-    <button v-else @click="logout">
+    <Button variant="outline" size="icon" v-else @click="logout">
       <LogoutIcon />
-    </button>
+    </Button>
   </header>
 </template>

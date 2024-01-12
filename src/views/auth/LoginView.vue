@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
 import BaseInput from '@/components/forms/BaseInput.vue'
+import { Button } from '@/components/ui/button'
 import { useAuth } from '@/composables/useAuth'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import { computed, ref } from 'vue'
@@ -21,12 +21,10 @@ const submitText = computed<string>(() => {
       <BaseInput type="email" label="Email" v-model="email" v-focus />
       <BaseInput type="password" label="Password" v-model="password" />
       <div class="flex gap-4">
-        <router-link
-          class="rounded-full px-4 py-2 text-white bg-secondary"
-          :to="{ name: 'register' }"
-          >Register</router-link
-        >
-        <PrimaryButton>{{ submitText }}</PrimaryButton>
+        <router-link :to="{ name: 'register' }" v-slot="{ href, navigate }">
+          <Button variant="secondary" :href="href" @click="navigate">Register</Button>
+        </router-link>
+        <Button>{{ submitText }}</Button>
       </div>
     </form>
   </BaseLayout>

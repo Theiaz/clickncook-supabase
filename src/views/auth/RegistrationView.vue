@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import PrimaryButton from '@/components/buttons/PrimaryButton.vue'
 import BaseInput from '@/components/forms/BaseInput.vue'
+import Button from '@/components/ui/button/Button.vue'
 import { useAuth } from '@/composables/useAuth'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import { computed, ref } from 'vue'
@@ -25,7 +25,7 @@ const submitText = computed<string>(() => {
       <BaseInput type="password" label="Password" v-model="password" />
       <BaseInput type="password" label="Confirm Password" v-model="passwordConfirmation" />
       <div>
-        <PrimaryButton>{{ submitText }}</PrimaryButton>
+        <Button>{{ submitText }}</Button>
       </div>
     </form>
   </BaseLayout>
