@@ -335,6 +335,7 @@ COPY "auth"."audit_log_entries" ("instance_id", "id", "payload", "created_at", "
 00000000-0000-0000-0000-000000000000	6a52184a-1c00-4cec-8f6f-bcf277ef81cc	{"action":"token_revoked","actor_id":"d669b21b-62c6-4d0f-8f76-40738e274c87","actor_username":"julian_schaefer93@web.de","actor_via_sso":false,"log_type":"token"}	2024-01-19 13:42:51.132071+00	
 00000000-0000-0000-0000-000000000000	d486a7de-8400-42fc-9803-60d628cff7b2	{"action":"logout","actor_id":"d669b21b-62c6-4d0f-8f76-40738e274c87","actor_username":"julian_schaefer93@web.de","actor_via_sso":false,"log_type":"account"}	2024-01-19 13:43:50.587893+00	
 00000000-0000-0000-0000-000000000000	994f5ad5-e9f3-4cff-bbac-5e08e86dc0c3	{"action":"login","actor_id":"d669b21b-62c6-4d0f-8f76-40738e274c87","actor_username":"julian_schaefer93@web.de","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}	2024-01-19 13:44:00.287845+00	
+00000000-0000-0000-0000-000000000000	5c685c2d-59af-4cae-9f13-82bb270917a0	{"action":"login","actor_id":"d669b21b-62c6-4d0f-8f76-40738e274c87","actor_username":"julian_schaefer93@web.de","actor_via_sso":false,"log_type":"account","traits":{"provider":"email"}}	2024-01-19 15:22:53.345846+00	
 \.
 
 
@@ -354,7 +355,7 @@ COPY "auth"."users" ("instance_id", "id", "aud", "role", "email", "encrypted_pas
 00000000-0000-0000-0000-000000000000	8651fc35-cc34-4209-a1b7-bbf5d3845ebc	authenticated	authenticated	schaefer@synyx.de	$2a$10$4jYr4Qn2dcG/ZLHESluDleDNszI9dhk5iGPRhtRKlvxv62gvnpMNO	2023-07-14 12:49:47.039601+00	\N		2023-07-14 12:49:33.62445+00		\N			\N	2023-12-01 15:13:20.286043+00	{"provider": "email", "providers": ["email"]}	{}	\N	2023-07-14 12:49:33.612205+00	2023-12-01 15:13:20.291716+00	\N	\N			\N		0	\N		\N	f	\N
 00000000-0000-0000-0000-000000000000	16406e41-34f8-427e-b837-3a48ae51c519	authenticated	authenticated	lea.brock1@web.de	$2a$10$jD5ztuohh5DEFFHTkbADE./OY5LCdsMYD2pSYxs0wlkZSeCEedmiq	2023-10-02 13:05:05.523741+00	\N		2023-10-02 13:04:56.383588+00		\N			\N	2024-01-03 19:11:59.456976+00	{"provider": "email", "providers": ["email"]}	{}	\N	2023-10-02 13:04:56.346853+00	2024-01-18 07:24:48.474389+00	\N	\N			\N		0	\N		\N	f	\N
 00000000-0000-0000-0000-000000000000	1ffadae7-b351-49a6-8ae5-7438a4cde093	authenticated	authenticated	charismatischriesigerotter@wegwerfemail.de	$2a$10$vAI1fIQlSDUcya6PFQilQuWVeVqBoFg38ClHmnrOJzgdEeL/Jb3ka	2023-09-08 13:19:06.564256+00	\N		2023-09-08 13:18:55.477359+00		\N			\N	2023-09-08 13:19:06.564986+00	{"provider": "email", "providers": ["email"]}	{}	\N	2023-09-08 13:18:55.471292+00	2023-09-08 13:19:06.567013+00	\N	\N			\N		0	\N		\N	f	\N
-00000000-0000-0000-0000-000000000000	d669b21b-62c6-4d0f-8f76-40738e274c87	authenticated	authenticated	julian_schaefer93@web.de	$2a$10$Tlc08EcExt/vbdn587TBv.sVq5DxeHLgIsnsGfoiO30VouRfL74de	2023-09-08 13:08:34.965872+00	\N		2023-09-08 13:08:10.643674+00		\N			\N	2024-01-19 13:44:00.301812+00	{"provider": "email", "providers": ["email"]}	{}	\N	2023-09-08 13:08:10.631374+00	2024-01-19 13:44:00.310727+00	\N	\N			\N		0	\N		\N	f	\N
+00000000-0000-0000-0000-000000000000	d669b21b-62c6-4d0f-8f76-40738e274c87	authenticated	authenticated	julian_schaefer93@web.de	$2a$10$Tlc08EcExt/vbdn587TBv.sVq5DxeHLgIsnsGfoiO30VouRfL74de	2023-09-08 13:08:34.965872+00	\N		2023-09-08 13:08:10.643674+00		\N			\N	2024-01-19 15:22:53.348996+00	{"provider": "email", "providers": ["email"]}	{}	\N	2023-09-08 13:08:10.631374+00	2024-01-19 15:22:53.357713+00	\N	\N			\N		0	\N		\N	f	\N
 \.
 
 
@@ -386,6 +387,7 @@ COPY "auth"."sessions" ("id", "user_id", "created_at", "updated_at", "factor_id"
 a89a7079-8084-4d21-a7ff-092626059bfc	1ffadae7-b351-49a6-8ae5-7438a4cde093	2023-09-08 13:19:06.565048+00	2023-09-08 13:19:06.565048+00	\N	aal1	\N	\N	\N	\N	\N
 180d1c39-2b1a-41c8-a277-a58f1958750f	16406e41-34f8-427e-b837-3a48ae51c519	2024-01-03 19:11:59.457061+00	2024-01-18 07:24:48.488133+00	\N	aal1	\N	2024-01-18 07:24:48.488042	Mozilla/5.0 (iPhone; CPU iPhone OS 17_2_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1	46.223.162.197	\N
 00520f25-13ce-41a9-940c-2c0a2973c7f9	d669b21b-62c6-4d0f-8f76-40738e274c87	2024-01-19 13:44:00.301932+00	2024-01-19 13:44:00.301932+00	\N	aal1	\N	\N	Mozilla/5.0 (Android 14; Mobile; rv:121.0) Gecko/121.0 Firefox/121.0	46.223.162.197	\N
+392f4a9a-d088-4f19-a7ac-79a3665ddd1b	d669b21b-62c6-4d0f-8f76-40738e274c87	2024-01-19 15:22:53.349077+00	2024-01-19 15:22:53.349077+00	\N	aal1	\N	\N	Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:121.0) Gecko/20100101 Firefox/121.0	46.223.162.197	\N
 \.
 
 
@@ -397,6 +399,7 @@ COPY "auth"."mfa_amr_claims" ("session_id", "created_at", "updated_at", "authent
 a89a7079-8084-4d21-a7ff-092626059bfc	2023-09-08 13:19:06.567322+00	2023-09-08 13:19:06.567322+00	otp	25cd1bbc-95d3-4389-b8b6-be579552e3c0
 180d1c39-2b1a-41c8-a277-a58f1958750f	2024-01-03 19:11:59.459146+00	2024-01-03 19:11:59.459146+00	password	c72638a4-cf81-4878-934a-4002cc777650
 00520f25-13ce-41a9-940c-2c0a2973c7f9	2024-01-19 13:44:00.311265+00	2024-01-19 13:44:00.311265+00	password	6cf2846d-9227-40b2-9488-d5e451f459a8
+392f4a9a-d088-4f19-a7ac-79a3665ddd1b	2024-01-19 15:22:53.358013+00	2024-01-19 15:22:53.358013+00	password	c37750d0-8f2d-430b-8f85-d88ddc02eded
 \.
 
 
@@ -422,6 +425,7 @@ COPY "auth"."mfa_challenges" ("id", "factor_id", "created_at", "verified_at", "i
 
 COPY "auth"."refresh_tokens" ("instance_id", "id", "token", "user_id", "revoked", "created_at", "updated_at", "parent", "session_id") FROM stdin;
 00000000-0000-0000-0000-000000000000	153	Jq57uB6LFzBzFMoQYS7X1Q	16406e41-34f8-427e-b837-3a48ae51c519	t	2024-01-04 17:58:33.803806+00	2024-01-18 07:24:48.450791+00	irIfQ3RlRHrB1GhvlYOgMA	180d1c39-2b1a-41c8-a277-a58f1958750f
+00000000-0000-0000-0000-000000000000	167	SiddY90vreJnE2Du5O-qiQ	d669b21b-62c6-4d0f-8f76-40738e274c87	f	2024-01-19 15:22:53.352854+00	2024-01-19 15:22:53.352854+00	\N	392f4a9a-d088-4f19-a7ac-79a3665ddd1b
 00000000-0000-0000-0000-000000000000	19	jlM2zYUBslnZUvj40qeWtw	1ffadae7-b351-49a6-8ae5-7438a4cde093	f	2023-09-08 13:19:06.565885+00	2023-09-08 13:19:06.565885+00	\N	a89a7079-8084-4d21-a7ff-092626059bfc
 00000000-0000-0000-0000-000000000000	152	irIfQ3RlRHrB1GhvlYOgMA	16406e41-34f8-427e-b837-3a48ae51c519	t	2024-01-03 19:11:59.45781+00	2024-01-04 17:58:33.803354+00	\N	180d1c39-2b1a-41c8-a277-a58f1958750f
 00000000-0000-0000-0000-000000000000	159	H_Umiakvm5ms1sryHJXl0w	16406e41-34f8-427e-b837-3a48ae51c519	f	2024-01-18 07:24:48.462888+00	2024-01-18 07:24:48.462888+00	Jq57uB6LFzBzFMoQYS7X1Q	180d1c39-2b1a-41c8-a277-a58f1958750f
@@ -548,7 +552,7 @@ COPY "vault"."secrets" ("id", "name", "description", "secret", "key_id", "nonce"
 -- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: supabase_auth_admin
 --
 
-SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 166, true);
+SELECT pg_catalog.setval('"auth"."refresh_tokens_id_seq"', 167, true);
 
 
 --
