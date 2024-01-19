@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import BaseInput from '@/components/forms/BaseInput.vue'
-import Button from '@/components/ui/button/Button.vue'
+import { Button } from '@/components/ui/button/'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { useAuth } from '@/composables/useAuth'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import { computed, ref } from 'vue'
@@ -20,10 +21,22 @@ const submitText = computed<string>(() => {
 <template>
   <BaseLayout>
     <form class="flex flex-col gap-4" @submit.prevent="register(email, password)">
-      <BaseInput type="email" label="Email" v-model="email" v-focus />
-      <BaseInput type="email" label="Confirm Email" v-model="emailConfirmation" />
-      <BaseInput type="password" label="Password" v-model="password" />
-      <BaseInput type="password" label="Confirm Password" v-model="passwordConfirmation" />
+      <div class="grid w-full max-w-sm items-center gap-1.5">
+        <Label for="email">Email</Label>
+        <Input id="email" type="email" v-model="email" v-focus />
+      </div>
+      <div class="grid w-full max-w-sm items-center gap-1.5">
+        <Label for="confirm-email">Confirm Email</Label>
+        <Input id="confirm-email" type="email" v-model="emailConfirmation" />
+      </div>
+      <div class="grid w-full max-w-sm items-center gap-1.5">
+        <Label for="password">Password</Label>
+        <Input id="password" type="password" v-model="password" />
+      </div>
+      <div class="grid w-full max-w-sm items-center gap-1.5">
+        <Label for="confirm-password">Confirm Password</Label>
+        <Input id="confirm-password" type="password" v-model="passwordConfirmation" />
+      </div>
       <div>
         <Button>{{ submitText }}</Button>
       </div>

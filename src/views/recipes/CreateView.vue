@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import RecipeGrid from '@/components/RecipeGrid.vue'
-import BaseInput from '@/components/forms/BaseInput.vue'
 import BaseTextArea from '@/components/forms/BaseTextArea.vue'
 import ImageUpload from '@/components/images/ImageUpload.vue'
 import RecipeRating from '@/components/rating/RecipeRating.vue'
 import CookingTime from '@/components/recipes/CookingTime.vue'
 import Button from '@/components/ui/button/Button.vue'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
 import StickyBottomLayout from '@/layouts/StickyBottomLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
@@ -37,7 +38,10 @@ const btnText = computed(() => (loading.value ? 'Loading ...' : 'Create Recipe')
       <RecipeGrid>
         <template #left>
           <ImageUpload v-model="recipe!.images" />
-          <BaseInput v-model="recipe.name" type="text" label="Name" v-focus />
+          <div class="grid w-full max-w-sm items-center gap-1.5">
+            <Label for="name">Name</Label>
+            <Input id="name" v-model="recipe.name" type="text" v-focus />
+          </div>
           <RecipeRating v-model="recipe.rating" :is-readonly="false" />
           <CookingTime v-model="recipe.cookingTime" :is-readonly="false" />
         </template>
