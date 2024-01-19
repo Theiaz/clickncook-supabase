@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import RecipeGrid from '@/components/RecipeGrid.vue'
-import BaseTextArea from '@/components/forms/BaseTextArea.vue'
 import ImageUpload from '@/components/images/ImageUpload.vue'
 import RecipeRating from '@/components/rating/RecipeRating.vue'
 import CookingTime from '@/components/recipes/CookingTime.vue'
 import Button from '@/components/ui/button/Button.vue'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 import StickyBottomLayout from '@/layouts/StickyBottomLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import type { Recipe } from '@/types/recipe'
@@ -84,7 +84,10 @@ const btnText = computed(() => (submitting.value ? 'Updating ...' : 'Update Reci
           <CookingTime v-model="tempRecipe.cookingTime" :is-readonly="false" />
         </template>
         <template #right>
-          <BaseTextArea v-model="tempRecipe.description" label="Description" />
+          <div class="grid w-full gap-1.5">
+            <Label for="description">Description</Label>
+            <Textarea id="description" v-model="tempRecipe.description" />
+          </div>
         </template>
       </RecipeGrid>
       <p v-else>Something went wrong! Please try to reload this page.</p>

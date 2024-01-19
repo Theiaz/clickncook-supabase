@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import RecipeGrid from '@/components/RecipeGrid.vue'
-import BaseTextArea from '@/components/forms/BaseTextArea.vue'
 import ImageUpload from '@/components/images/ImageUpload.vue'
 import RecipeRating from '@/components/rating/RecipeRating.vue'
 import CookingTime from '@/components/recipes/CookingTime.vue'
 import Button from '@/components/ui/button/Button.vue'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-
+import { Textarea } from '@/components/ui/textarea'
 import StickyBottomLayout from '@/layouts/StickyBottomLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import { storeToRefs } from 'pinia'
@@ -46,7 +45,10 @@ const btnText = computed(() => (loading.value ? 'Loading ...' : 'Create Recipe')
           <CookingTime v-model="recipe.cookingTime" :is-readonly="false" />
         </template>
         <template #right>
-          <BaseTextArea v-model="recipe.description" label="Description" />
+          <div class="grid w-full gap-1.5">
+            <Label for="description">Description</Label>
+            <Textarea id="description" v-model="recipe.description" />
+          </div>
         </template>
       </RecipeGrid>
     </template>
