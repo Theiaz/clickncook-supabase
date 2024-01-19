@@ -36,7 +36,11 @@ const onDelete = async () => {
   <div class="flex justify-between text-primary items-center h-10">
     <h3 class="font-bold">{{ recipe.name }}</h3>
     <div v-if="shouldDisplayActions" class="flex gap-4">
-      <router-link v-if="isMyRecipeScreen" :to="{ name: 'details', params: { id: recipe.id } }" v-slot="{ href, navigate }">
+      <router-link
+        v-if="isMyRecipeScreen"
+        :to="{ name: 'details', params: { id: recipe.id } }"
+        v-slot="{ href, navigate }"
+      >
         <Button variant="ghost" size="icon" :href="href" @click="navigate">
           <DetailsIcon />
         </Button>

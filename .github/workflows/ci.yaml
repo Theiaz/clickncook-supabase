@@ -8,11 +8,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
+  lintAndFormat:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [16, 18, 20]
+        node: [18, 20]
     steps:
       - uses: actions/checkout@v3
 
@@ -31,6 +31,9 @@ jobs:
 
       - name: Run linter
         run: pnpm lint
+
+      - name: Run formatter
+        run: pnpm format-check
 
   test:
     runs-on: ubuntu-latest

@@ -57,7 +57,9 @@ function deleteImage(file: File) {
   <p v-if="hasError">An error occured during image upload!</p>
   <ImageCarousel class="full-width" :images="files!">
     <template v-slot:actions="slotProps">
-      <label class="p-2 hover:cursor-pointer hover:bg-accent hover:text-accent-foreground rounded-md">
+      <label
+        class="p-2 hover:cursor-pointer hover:bg-accent hover:text-accent-foreground rounded-md"
+      >
         <input class="hidden" type="file" accept="image/*" multiple @change="addImages($event)" />
         <AddIcon />
       </label>
