@@ -48,9 +48,7 @@ watch(
 <template>
   <div class="relative text-white">
     <div class="relative">
-      <div
-        class="absolute top-0 z-10 w-full flex justify-end gap-4 px-6 bg-black/30 rounded-t-2xl"
-      >
+      <div class="absolute top-0 z-10 w-full flex justify-end gap-4 px-6 bg-black/30 rounded-t-2xl">
         <slot name="actions" :currentImage="props.images[index]"></slot>
       </div>
     </div>
