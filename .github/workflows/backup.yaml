@@ -1,33 +1,32 @@
-name: "backup-database"
+name: Backup Database
 on:
-  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *" # Runs every day at midnight
 jobs:
-  build:
+  run_db_backup:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
-      supabase_db_url: ${{ secrets.SUPABASE_DB_URL }} # For example: postgresql://postgres:[YOUR-PASSWORD]@db.<ref>.supabase.co:5432/postgres
+      supabase_db_url: ${{ secrets.SUPABASE_DB_URL }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
       - uses: supabase/setup-cli@v1
         with:
           version: latest
       - name: Backup roles
-        run: supabase db dump --db-url "$supabase_db_url" -f supabase/roles.sql --role-only
+        run: supabase db dump --db-url "$supabase_db_url" -f backup/roles.sql --role-only
       - name: Backup schema
-        run: supabase db dump --db-url "$supabase_db_url" -f supabase/schema.sql
+        run: supabase db dump --db-url "$supabase_db_url" -f backup/schema.sql
       - name: Backup data
-        run: supabase db dump --db-url "$supabase_db_url" -f supabase/data.sql --data-only --use-copy
-      - uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: supabase/
+        run: supabase db dump --db-url "$supabase_db_url" -f backup/data.sql --data-only --use-copy
 
-      - uses: actions/checkout@v3
-        
-      - uses: actions/download-artifact@v3
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          name: my-artifact
-          path: supabase
-      - name: Display structure of downloaded files
-        run: ls -R
-        working-directory: supabase
+          branch: ${{ github.head_ref }}
+          commit_message: "ci: automated supabase backup"
