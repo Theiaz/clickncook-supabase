@@ -1,6 +1,7 @@
 # clickncook-supabase
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ef79e64d-48f1-4ad6-9461-328b06b86385/deploy-status)](https://app.netlify.com/sites/jolly-cocada-5deecb/deploys)
+[![CI](https://github.com/Theiaz/clickncook-supabase/actions/workflows/ci.yaml/badge.svg)](https://github.com/Theiaz/clickncook-supabase/actions/workflows/ci.yaml)
 
 ## Setup
 
