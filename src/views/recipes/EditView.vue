@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import RecipeGrid from '@/components/RecipeGrid.vue'
-import BaseInput from '@/components/forms/BaseInput.vue'
 import BaseTextArea from '@/components/forms/BaseTextArea.vue'
 import ImageUpload from '@/components/images/ImageUpload.vue'
 import RecipeRating from '@/components/rating/RecipeRating.vue'
 import CookingTime from '@/components/recipes/CookingTime.vue'
 import Button from '@/components/ui/button/Button.vue'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import StickyBottomLayout from '@/layouts/StickyBottomLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
 import type { Recipe } from '@/types/recipe'
@@ -75,7 +76,10 @@ const btnText = computed(() => (submitting.value ? 'Updating ...' : 'Update Reci
       <RecipeGrid v-if="tempRecipe">
         <template #left>
           <ImageUpload v-model="tempRecipe.images" />
-          <BaseInput v-model="tempRecipe.name" type="text" label="Name" v-focus />
+          <div class="grid w-full max-w-sm items-center gap-1.5">
+            <Label for="name">Name</Label>
+            <Input id="name" v-model="tempRecipe.name" type="text" v-focus />
+          </div>
           <RecipeRating v-model="tempRecipe.rating" :is-readonly="false" />
           <CookingTime v-model="tempRecipe.cookingTime" :is-readonly="false" />
         </template>

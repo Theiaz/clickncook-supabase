@@ -2,10 +2,10 @@
 <template>
   <div class="recipe-container">
     <div class="recipe">
-      <div>
+      <div class="flex flex-col gap-4">
         <slot name="left" />
       </div>
-      <div>
+      <div class="flex flex-col gap-4">
         <slot name="right" />
       </div>
     </div>

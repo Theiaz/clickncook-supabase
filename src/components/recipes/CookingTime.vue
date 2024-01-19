@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { computed } from 'vue'
 import ClockIcon from '../icons/ClockIcon.vue'
 
@@ -34,13 +36,8 @@ const text = computed(() => (props.modelValue ? props.modelValue : '-'))
     <ClockIcon />
     <span>{{ text }} min</span>
   </div>
-  <div v-else>
-    <label class="block mb-2 text-sm font-medium" for="cookingtime">Cooking Time</label>
-    <input
-      class="border border-primary text-sm rounded-lg block w-full p-2.5"
-      id="cookingtime"
-      type="number"
-      v-model="cookingTime"
-    />
+  <div v-else class="grid w-full max-w-sm items-center gap-1.5">
+    <Label for="cookingtime">Cooking Time</Label>
+    <Input id="cookingtime" type="number" v-model="cookingTime" />
   </div>
 </template>
