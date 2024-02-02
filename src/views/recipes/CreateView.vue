@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { getCategories } from '@/api/categories/api'
 import RecipeGrid from '@/components/RecipeGrid.vue'
+import RecipeCategories from '@/components/categories/RecipeCategories.vue'
 import ImageUpload from '@/components/images/ImageUpload.vue'
 import RecipeRating from '@/components/rating/RecipeRating.vue'
 import CookingTime from '@/components/recipes/CookingTime.vue'
@@ -9,6 +11,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import StickyBottomLayout from '@/layouts/StickyBottomLayout.vue'
 import { useCurrentRecipeStore } from '@/stores/currentRecipe'
+import type { Category } from '@/types/category'
 import { storeToRefs } from 'pinia'
 import { computed, onBeforeMount, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -18,8 +21,9 @@ const recipeStore = useCurrentRecipeStore()
 const { recipe } = storeToRefs(recipeStore)
 const router = useRouter()
 
-onBeforeMount(() => {
+onBeforeMount(async () => {
   recipeStore.$reset()
+  categories.value = await getCategories()
 })
 
 const onSubmit = async () => {
@@ -30,6 +34,8 @@ const onSubmit = async () => {
 }
 
 const btnText = computed(() => (loading.value ? 'Loading ...' : 'Create Recipe'))
+
+const categories = ref<Category[]>([])
 </script>
 <template>
   <StickyBottomLayout>
@@ -49,6 +55,7 @@ const btnText = computed(() => (loading.value ? 'Loading ...' : 'Create Recipe')
             <Label for="description">Description</Label>
             <Textarea id="description" v-model="recipe.description" />
           </div>
+          <RecipeCategories :categories="categories" />
         </template>
       </RecipeGrid>
     </template>
