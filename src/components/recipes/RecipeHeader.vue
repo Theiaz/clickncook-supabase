@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import RecipeActions from '@/components/actions/RecipeActions.vue'
+import RecipeCategories from '@/components/categories/RecipeCategories.vue'
 import RecipeRating from '@/components/rating/RecipeRating.vue'
 import { useUser } from '@/composables/useUser'
 import type { Recipe } from '@/types/recipe'
@@ -26,4 +27,5 @@ const shouldDisplayActions = computed(() => isOwnRecipe.value && !isHomeScreen.v
     <RecipeRating :model-value="recipe.rating" />
     <CookingTime :model-value="recipe.cookingTime" />
   </div>
+  <RecipeCategories />
 </template>
