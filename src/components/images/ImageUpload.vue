@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AddIcon from '@/components/icons/AddIcon.vue'
+import CameraAddIcon from '@/components/icons/CameraAddIcon.vue'
 import TrashIcon from '@/components/icons/TrashIcon.vue'
 import { onBeforeMount, ref, watch } from 'vue'
 import Button from '../ui/button/Button.vue'
@@ -61,7 +61,7 @@ function deleteImage(file: File) {
         class="p-2 hover:cursor-pointer hover:bg-accent hover:text-accent-foreground rounded-md"
       >
         <input class="hidden" type="file" accept="image/*" multiple @change="addImages($event)" />
-        <AddIcon />
+        <CameraAddIcon />
       </label>
       <Button size="icon" variant="ghost" @click="deleteImage(slotProps.currentImage)">
         <TrashIcon />
