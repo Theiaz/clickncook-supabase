@@ -50,7 +50,7 @@ const btnText = computed(() => (loading.value ? 'Loading ...' : 'Create Recipe')
             <Label for="description">Description</Label>
             <Textarea id="description" v-model="recipe.description" />
           </div>
-          <RecipeCategories />
+          <RecipeCategories v-model="recipe.categories" :is-readonly="false" />
         </template>
       </RecipeGrid>
     </template>

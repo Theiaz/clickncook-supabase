@@ -1,9 +1,12 @@
+import type { Category } from './category'
+
 type RecipeData = {
   name: string | null
   description?: string
   images: File[]
   rating: number
   cookingTime?: number
+  categories: Category[]
 }
 
 type RecipeMeta = {
