@@ -47,6 +47,7 @@ const resetHover = () => {
     <label v-if="!isReadonly" class="block mb-2 text-sm font-medium">Rating</label>
     <ul class="flex items-center">
       <li
+        :class="{ 'cursor-pointer': !isReadonly }"
         v-for="index in 5"
         v-on="
           isReadonly
