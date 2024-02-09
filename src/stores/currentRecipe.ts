@@ -19,7 +19,8 @@ export const useCurrentRecipeStore = defineStore('currentRecipe', () => {
     description: '',
     images: [],
     rating: 0,
-    cookingTime: undefined
+    cookingTime: undefined,
+    categories: []
   })
   const myRecipeStore = useMyRecipesStore()
 
@@ -31,7 +32,8 @@ export const useCurrentRecipeStore = defineStore('currentRecipe', () => {
       description: '',
       images: [],
       rating: 0,
-      cookingTime: undefined
+      cookingTime: undefined,
+      categories: []
     }
   }
 
