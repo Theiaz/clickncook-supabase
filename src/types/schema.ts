@@ -131,6 +131,13 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
+      create_recipe: {
+        Args: {
+          recipe_data: unknown
+          category_ids: string[]
+        }
+        Returns: undefined
+      }
       get_random_recipe: {
         Args: Record<PropertyKey, never>
         Returns: {
