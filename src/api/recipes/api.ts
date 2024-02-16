@@ -42,7 +42,10 @@ const createRecipeForUser = async (recipe: RecipeData, userId: string): Promise<
     author_id: userId // TODO schaefer - can we delete this cause supabase tracks it?
   }
 
-  const { data, error } = await supabase.from('recipes').insert(dto).select().maybeSingle()
+  const category_ids = recipe.categories.map((c) => c.id)
+  const { data, error } = await supabase
+    .rpc('create_recipe', { recipe_data: dto, category_ids })
+    .maybeSingle()
 
   if (!data) {
     throw new Error('Creation of recipe failed')

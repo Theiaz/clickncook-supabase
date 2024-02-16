@@ -14,10 +14,15 @@ CREATE UNIQUE INDEX index_categories_pkey ON public.categories USING btree (id);
 -- policies
 alter table "public"."categories" enable row level security;
 
+CREATE POLICY "Enable read access for all users" ON "public"."categories"
+  AS PERMISSIVE FOR SELECT
+  TO public
+  USING (true);
+
 -- recipe to categories
 create table
   public.recipes_to_categories (
-    id uuid not null default gen_random_uuid (),
+    id uuid not null default gen_random_uuid(),
     created_at timestamp with time zone not null default now(),
     recipe_id uuid null,
     category_id uuid null,
@@ -26,10 +31,10 @@ create table
     constraint recipes_to_categories_category_id_fkey foreign key (category_id) references categories (id) on update cascade on delete cascade
   ) tablespace pg_default;
 
-  -- policies
-  alter table "public"."recipes_to_categories" enable row level security;
+-- policies
+alter table "public"."recipes_to_categories" enable row level security;
 
-CREATE POLICY "Enable read access for all users" ON "public"."categories"
-  AS PERMISSIVE FOR SELECT
-  TO public
-  USING (true)
+CREATE POLICY "Allow user to insert categories for his recipe" ON "public"."recipes_to_categories"
+  AS PERMISSIVE FOR INSERT
+  TO authenticated
+  with check (true); -- TODO check if owner of recipe with auth.uid() =
