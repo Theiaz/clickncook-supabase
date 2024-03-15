@@ -92,22 +92,19 @@ export interface Database {
       }
       recipes_to_categories: {
         Row: {
-          category_id: string | null
+          category_id: string
           created_at: string
-          id: string
-          recipe_id: string | null
+          recipe_id: string
         }
         Insert: {
-          category_id?: string | null
+          category_id: string
           created_at?: string
-          id?: string
-          recipe_id?: string | null
+          recipe_id: string
         }
         Update: {
-          category_id?: string | null
+          category_id?: string
           created_at?: string
-          id?: string
-          recipe_id?: string | null
+          recipe_id?: string
         }
         Relationships: [
           {
@@ -140,22 +137,26 @@ export interface Database {
       }
       get_random_recipe: {
         Args: Record<PropertyKey, never>
-        Returns: {
-          author_id: string | null
-          cooking_time: number | null
-          created_at: string | null
-          description: string | null
-          id: string
-          name: string | null
-          rating: number
-        }[]
+        Returns: Database["public"]["CompositeTypes"]["recipe_with_categories"][]
       }
     }
     Enums: {
       [_ in never]: never
     }
     CompositeTypes: {
-      [_ in never]: never
+      category_info: {
+        id: string
+        name: string
+      }
+      recipe_with_categories: {
+        id: string
+        name: string
+        description: string
+        author_id: string
+        rating: number
+        cooking_time: number
+        categories: unknown
+      }
     }
   }
   storage: {
