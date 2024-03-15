@@ -27,5 +27,5 @@ const shouldDisplayActions = computed(() => isOwnRecipe.value && !isHomeScreen.v
     <RecipeRating :model-value="recipe.rating" />
     <CookingTime :model-value="recipe.cookingTime" />
   </div>
-  <RecipeCategories />
+  <RecipeCategories :model-value="recipe.categories" :is-readonly="true" />
 </template>
