@@ -3,10 +3,12 @@ import type { Recipe, RecipeData } from '@/types/recipe'
 import type { RecipeDto, RecipeInsertDto, RecipeUpdateDto } from './dto'
 import { mapToDomain } from './mapper'
 
+const RECIPE_QUERY = `*, categories (*)`
+
 const findRecipesByAuthorId = async (id: string): Promise<Recipe[]> => {
   const { data, error } = await supabase
     .from('recipes')
-    .select()
+    .select(RECIPE_QUERY)
     .eq('author_id', id)
     .returns<RecipeDto[]>()
 
@@ -16,7 +18,11 @@ const findRecipesByAuthorId = async (id: string): Promise<Recipe[]> => {
 }
 
 const findRecipeById = async (id: string): Promise<Recipe> => {
-  const { data, error } = await supabase.from('recipes').select('*').eq('id', id).maybeSingle()
+  const { data, error } = await supabase
+    .from('recipes')
+    .select(RECIPE_QUERY)
+    .eq('id', id)
+    .maybeSingle()
 
   if (error) throw error
 
