@@ -1,6 +1,7 @@
 CREATE TYPE category_info AS (
     id uuid,
-    name text
+    name text,
+    created_at timestamptz
 );
 
 CREATE TYPE recipe_with_categories AS (
@@ -10,6 +11,7 @@ CREATE TYPE recipe_with_categories AS (
     author_id uuid,
     rating int4,
     cooking_time int4,
+    created_at timestamptz,
     categories category_info[]
 );
 
@@ -27,9 +29,10 @@ BEGIN
         r.author_id AS recipe_author_id,
         r.rating AS recipe_rating,
         r.cooking_time AS recipe_cooking_time,
+        r.created_at AS recipe_created_at,
         ARRAY(
             SELECT
-                ROW(c.id, c.name) 
+                ROW(c.id, c.name, c.created_at) 
             FROM
                 public.categories c
             JOIN
