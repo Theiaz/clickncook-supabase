@@ -45,6 +45,10 @@ BEGIN
         RANDOM()
     LIMIT 1;
     
-    RETURN NEXT random_recipe;
+    IF random_recipe IS NULL THEN
+        RETURN;
+    ELSE
+        RETURN NEXT random_recipe;
+    END IF;
 END;
 $$ LANGUAGE plpgsql;
