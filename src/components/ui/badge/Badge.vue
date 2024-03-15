@@ -1,7 +1,8 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
+import { cn } from '@/util/shadcn'
 import type { VariantProps } from 'class-variance-authority'
 import { badgeVariants } from '.'
-import { cn } from '@/util/shadcn'
 
 interface BadgeVariantProps extends VariantProps<typeof badgeVariants> {}
 
