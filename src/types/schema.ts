@@ -147,6 +147,7 @@ export interface Database {
       category_info: {
         id: string
         name: string
+        created_at: string
       }
       recipe_with_categories: {
         id: string
@@ -155,7 +156,8 @@ export interface Database {
         author_id: string
         rating: number
         cooking_time: number
-        categories: unknown
+        created_at: string
+        categories: Database["public"]["CompositeTypes"]["category_info"][] // this need to be set manually, generating uses 'unknown'
       }
     }
   }
