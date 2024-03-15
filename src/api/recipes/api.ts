@@ -34,7 +34,14 @@ const findRecipeById = async (id: string): Promise<Recipe> => {
 }
 
 const findRandomRecipe = async (): Promise<Recipe | null> => {
-  const { data } = await supabase.rpc('get_random_recipe').maybeSingle()
+  // maybeSingle throws 406 error https://github.com/supabase/postgrest-js/issues/361
+  const { data, error } = await supabase.rpc('get_random_recipe').maybeSingle()
+
+  if (error) throw error
+
+  if (!data) {
+    return null
+  }
 
   return data ? await mapToDomain(data) : null
 }
