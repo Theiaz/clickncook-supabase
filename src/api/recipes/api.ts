@@ -61,6 +61,7 @@ const createRecipeForUser = async (recipe: RecipeData, userId: string): Promise<
     .maybeSingle()
 
   if (!data) {
+    // TODO schaefer - return data from rpc to upload images!
     throw new Error('Creation of recipe failed')
   }
 
@@ -72,13 +73,19 @@ const createRecipeForUser = async (recipe: RecipeData, userId: string): Promise<
 
 const updateRecipe = async (recipe: Recipe): Promise<void> => {
   const dto: RecipeUpdateDto = {
+    id: recipe.id,
     name: recipe.name,
     description: recipe.description!,
     rating: recipe.rating,
     cooking_time: recipe.cookingTime
   }
 
-  const { error } = await supabase.from('recipes').update(dto).eq('id', recipe.id)
+  // TODO schaefer - update related categories
+  // maybe we could also do a second api call for creating instead of relying on rpc?
+  const category_ids = recipe.categories.map((c) => c.id)
+  const { error } = await supabase
+    .rpc('update_recipe', { recipe_data: dto, category_ids })
+    .maybeSingle()
 
   if (error) throw error
 
