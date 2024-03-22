@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Badge } from '@/components/ui/badge'
-import type { Category } from '@/types/category'
-import EditIcon from '@/components/icons/EditIcon.vue'
 import { getCategories } from '@/api/categories/api'
-import { onBeforeMount, ref, watch } from 'vue'
+import EditIcon from '@/components/icons/EditIcon.vue'
+import { Badge } from '@/components/ui/badge'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import type { Category } from '@/types/category'
+import { onBeforeMount, ref, watch } from 'vue'
 
 const props = withDefaults(
   defineProps<{
@@ -36,8 +36,8 @@ watch(
 )
 
 const toggleSelection = (selectedCategory: Category) => {
-  if (selectedCategories.value.includes(selectedCategory)) {
-    selectedCategories.value = selectedCategories.value.filter((c) => c !== selectedCategory)
+  if (selectedCategories.value.map((c) => c.id).includes(selectedCategory.id)) {
+    selectedCategories.value = selectedCategories.value.filter((c) => c.id !== selectedCategory.id)
   } else {
     selectedCategories.value.push(selectedCategory)
   }
@@ -56,7 +56,9 @@ const toggleSelection = (selectedCategory: Category) => {
           v-for="category in availableCategories"
           :key="category.id"
           class="snap-center cursor-pointer"
-          :variant="selectedCategories.includes(category) ? 'default' : 'outline'"
+          :variant="
+            selectedCategories.map((c) => c.id).includes(category.id) ? 'default' : 'outline'
+          "
           @click="toggleSelection(category)"
         >
           {{ category.name }}

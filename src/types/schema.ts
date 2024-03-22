@@ -139,6 +139,13 @@ export interface Database {
         Args: Record<PropertyKey, never>
         Returns: Database["public"]["CompositeTypes"]["recipe_with_categories"][]
       }
+      update_recipe: {
+        Args: {
+          recipe_data: unknown
+          category_ids: string[]
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

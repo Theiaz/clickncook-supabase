@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import RecipeGrid from '@/components/RecipeGrid.vue'
+import RecipeCategories from '@/components/categories/RecipeCategories.vue'
 import ImageUpload from '@/components/images/ImageUpload.vue'
 import RecipeRating from '@/components/rating/RecipeRating.vue'
 import CookingTime from '@/components/recipes/CookingTime.vue'
@@ -88,6 +89,7 @@ const btnText = computed(() => (submitting.value ? 'Updating ...' : 'Update Reci
             <Label for="description">Description</Label>
             <Textarea id="description" v-model="tempRecipe.description" />
           </div>
+          <RecipeCategories v-model="tempRecipe.categories" :is-readonly="false" />
         </template>
       </RecipeGrid>
       <p v-else>Something went wrong! Please try to reload this page.</p>
