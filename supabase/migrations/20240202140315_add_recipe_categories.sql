@@ -37,8 +37,3 @@ CREATE POLICY "Enable read access for all users" ON "public"."recipes_to_categor
   AS PERMISSIVE FOR SELECT
   TO public
   USING (true);
-
-CREATE POLICY "Allow user to insert categories for his recipe" ON "public"."recipes_to_categories"
-  AS PERMISSIVE FOR INSERT
-  TO authenticated
-  with check (true); -- TODO check if owner of recipe with auth.uid() =
