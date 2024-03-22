@@ -6,13 +6,15 @@ const session = ref<Session>()
 
 export function useSession() {
   const getSession = () => {
-    supabase.auth.getSession().then(({ data }) => {
-      session.value = data.session!
-    })
+    if (supabase) {
+      supabase.auth.getSession().then(({ data }) => {
+        session.value = data.session!
+      })
 
-    supabase.auth.onAuthStateChange((_, _session) => {
-      session.value = _session!
-    })
+      supabase.auth.onAuthStateChange((_, _session) => {
+        session.value = _session!
+      })
+    }
   }
 
   const hasSession = computed<boolean>(() => {

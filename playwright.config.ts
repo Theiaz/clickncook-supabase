@@ -59,7 +59,7 @@ export default defineConfig({
      * Use the dev server by default for faster feedback loop.
      * Playwright will re-use the local server if there is already a dev-server running.
      */
-    command: 'vite dev --mode=production --host',
+    command: 'vite dev --mode=production',
     url: 'http://localhost:5173',
     reuseExistingServer: false,
     timeout: 120000
