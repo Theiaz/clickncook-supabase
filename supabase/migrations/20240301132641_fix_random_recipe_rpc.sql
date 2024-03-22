@@ -1,20 +1,3 @@
-CREATE TYPE category_info AS (
-    id uuid,
-    name text,
-    created_at timestamptz
-);
-
-CREATE TYPE recipe_with_categories AS (
-    id uuid,
-    name text,
-    description text,
-    author_id uuid,
-    rating int4,
-    cooking_time int4,
-    created_at timestamptz,
-    categories category_info[]
-);
-
 DROP FUNCTION IF EXISTS get_random_recipe;
 
 CREATE OR REPLACE FUNCTION get_random_recipe()
@@ -31,21 +14,14 @@ BEGIN
         r.cooking_time AS recipe_cooking_time,
         r.created_at AS recipe_created_at,
         ARRAY(
-            SELECT
-                ROW(c.id, c.name, c.created_at) 
-            FROM
-                public.categories c
-            JOIN
-                public.recipes_to_categories rtc ON c.id = rtc.category_id
-            WHERE
-                rtc.recipe_id = r.id
+            SELECT ROW(c.id, c.name, c.created_at) 
+            FROM public.categories c
+            JOIN public.recipes_to_categories rtc ON c.id = rtc.category_id
+            WHERE rtc.recipe_id = r.id
         ) AS categories
-    INTO
-        random_recipe
-    FROM
-        public.recipes r
-    ORDER BY
-        RANDOM()
+    INTO random_recipe
+    FROM public.recipes r
+    ORDER BY RANDOM()
     LIMIT 1;
     
     IF random_recipe IS NULL THEN

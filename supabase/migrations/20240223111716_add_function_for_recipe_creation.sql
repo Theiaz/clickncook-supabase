@@ -1,14 +1,32 @@
 -- CREATE
+CREATE TYPE category_info AS (
+    id uuid,
+    name text,
+    created_at timestamptz
+);
+
+CREATE TYPE recipe_with_categories AS (
+    id uuid,
+    name text,
+    description text,
+    author_id uuid,
+    rating int4,
+    cooking_time int4,
+    created_at timestamptz,
+    categories category_info[]
+);
+
 CREATE OR REPLACE FUNCTION create_recipe(
     recipe_data public.recipes,
     category_ids uuid[]
 )
-RETURNS void AS $$
+RETURNS SETOF recipe_with_categories AS $$
 DECLARE
     _tmp_recipe_id uuid;
     _tmp_category_id uuid;
+    created_recipe recipe_with_categories;
 BEGIN
-    -- insert recipes
+    -- insert recipe
     INSERT INTO public.recipes (name, description, author_id, rating, cooking_time)
     VALUES (recipe_data.name, recipe_data.description, recipe_data.author_id, recipe_data.rating, recipe_data.cooking_time)
     RETURNING id INTO _tmp_recipe_id;
@@ -19,6 +37,30 @@ BEGIN
         INSERT INTO public.recipes_to_categories (recipe_id, category_id)
         VALUES (_tmp_recipe_id, _tmp_category_id);
     END LOOP;
+
+    SELECT
+        r.id AS recipe_id,
+        r.name AS recipe_name,
+        r.description AS recipe_description,
+        r.author_id AS recipe_author_id,
+        r.rating AS recipe_rating,
+        r.cooking_time AS recipe_cooking_time,
+        r.created_at AS recipe_created_at,
+        ARRAY(
+            SELECT ROW(c.id, c.name, c.created_at) 
+            FROM public.categories c
+            JOIN public.recipes_to_categories rtc ON c.id = rtc.category_id
+            WHERE rtc.recipe_id = r.id
+        ) AS categories
+    INTO created_recipe
+    FROM public.recipes r
+    WHERE r.id = _tmp_recipe_id;
+
+    IF created_recipe IS NULL THEN
+        RETURN;
+    ELSE
+        RETURN NEXT created_recipe;
+    END IF;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -66,6 +108,3 @@ CREATE POLICY "Allow user to delete categories for his recipe" ON "public"."reci
   AS PERMISSIVE FOR DELETE 
   TO authenticated 
   USING (true);
-
-
--- CREATE POLICY "Users can update their own recipe" ON "public"."recipes" FOR UPDATE TO "authenticated" USING (("auth"."uid"() = "author_id"));

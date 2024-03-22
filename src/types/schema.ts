@@ -133,7 +133,7 @@ export interface Database {
           recipe_data: unknown
           category_ids: string[]
         }
-        Returns: undefined
+        Returns: Database["public"]["CompositeTypes"]["recipe_with_categories"][]
       }
       get_random_recipe: {
         Args: Record<PropertyKey, never>
