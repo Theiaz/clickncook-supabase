@@ -17,7 +17,7 @@ const { logout } = useAuth()
   >
     <router-link class="mr-auto text-primary-text flex items-center gap-2" :to="{ name: 'home' }">
       <ClicknCookIcon />
-      <div class="flex items-end italic flex-nowrap">
+      <div class="flex items-end italic flex-nowrap" data-test="claim">
         <span class="font-bold">C</span>
         <span>lick &nbsp;</span>
         <span class="font-bold">'n' &nbsp;</span>
