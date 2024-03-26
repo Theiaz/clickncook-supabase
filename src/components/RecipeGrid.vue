@@ -17,7 +17,7 @@
   container-type: inline-size;
 }
 .recipe {
-  @apply grid gap-4;
+  @apply grid gap-4 grid-cols-1;
 }
 @container recipe (width > 700px) {
   .recipe {
