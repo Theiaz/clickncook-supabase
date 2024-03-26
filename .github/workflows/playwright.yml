@@ -17,6 +17,11 @@ jobs:
         run: npm install -g pnpm && pnpm install
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Start Supabase local development setup
+        run: supabase start
       - name: Run Playwright tests
         run: pnpm exec playwright test
       - uses: actions/upload-artifact@v4
