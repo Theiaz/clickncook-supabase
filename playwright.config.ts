@@ -61,7 +61,6 @@ export default defineConfig({
      */
     command: 'vite dev --mode=production',
     url: 'http://localhost:5173',
-    reuseExistingServer: false,
-    timeout: 120000
+    reuseExistingServer: !process.env.CI,
   }
 })
