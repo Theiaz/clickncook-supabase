@@ -59,8 +59,8 @@ export default defineConfig({
      * Use the dev server by default for faster feedback loop.
      * Playwright will re-use the local server if there is already a dev-server running.
      */
-    command: 'vite dev --mode=production',
+    command: 'npx vite dev',
     url: 'http://localhost:5173',
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !process.env.CI
   }
 })
