@@ -44,7 +44,7 @@ const getRandomRecipe = async () => {
       <router-link :to="{ name: 'details', params: { id: recipe.id } }" v-slot="{ href, navigate }">
         <Button variant="secondary" :href="href" @click="navigate">Show Details</Button>
       </router-link>
-      <Button @click="getRandomRecipe">Next Recipe</Button>
+      <Button @click="getRandomRecipe" data-test="next-button">Next Recipe</Button>
     </template>
   </StickyBottomLayout>
 </template>

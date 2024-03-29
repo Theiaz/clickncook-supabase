@@ -23,22 +23,32 @@ const submitText = computed<string>(() => {
     <form class="flex flex-col gap-4" @submit.prevent="register(email, password)">
       <div class="grid w-full max-w-sm items-center gap-1.5">
         <Label for="email">Email</Label>
-        <Input id="email" type="email" v-model="email" v-focus />
+        <Input id="email" type="email" v-model="email" v-focus data-test="email-input" />
       </div>
       <div class="grid w-full max-w-sm items-center gap-1.5">
         <Label for="confirm-email">Confirm Email</Label>
-        <Input id="confirm-email" type="email" v-model="emailConfirmation" />
+        <Input
+          id="confirm-email"
+          type="email"
+          v-model="emailConfirmation"
+          data-test="email-confirm-input"
+        />
       </div>
       <div class="grid w-full max-w-sm items-center gap-1.5">
         <Label for="password">Password</Label>
-        <Input id="password" type="password" v-model="password" />
+        <Input id="password" type="password" v-model="password" data-test="password-input" />
       </div>
       <div class="grid w-full max-w-sm items-center gap-1.5">
         <Label for="confirm-password">Confirm Password</Label>
-        <Input id="confirm-password" type="password" v-model="passwordConfirmation" />
+        <Input
+          id="confirm-password"
+          type="password"
+          v-model="passwordConfirmation"
+          data-test="password-confirm-input"
+        />
       </div>
       <div>
-        <Button>{{ submitText }}</Button>
+        <Button data-test="submit-button">{{ submitText }}</Button>
       </div>
     </form>
   </BaseLayout>
