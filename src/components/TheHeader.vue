@@ -36,11 +36,11 @@ const { logout } = useAuth()
       </Button>
     </router-link>
     <router-link v-if="!isAuthenticated" :to="{ name: 'login' }" v-slot="{ href, navigate }">
-      <Button variant="outline" size="icon" :href="href" @click="navigate">
+      <Button variant="outline" size="icon" :href="href" @click="navigate" data-test="login-button">
         <LoginIcon />
       </Button>
     </router-link>
-    <Button variant="outline" size="icon" v-else @click="logout">
+    <Button variant="outline" size="icon" v-else @click="logout" data-test="logout-button">
       <LogoutIcon />
     </Button>
   </header>
