@@ -2,6 +2,7 @@
 import { compressImages } from '@/api/image-compression/api'
 import CameraAddIcon from '@/components/icons/CameraAddIcon.vue'
 import TrashIcon from '@/components/icons/TrashIcon.vue'
+import { config } from '@/config'
 import { onBeforeMount, ref, watch } from 'vue'
 import Button from '../ui/button/Button.vue'
 import ImageCarousel from './ImageCarousel.vue'
@@ -40,9 +41,14 @@ async function addImages(event: Event) {
     return
   }
 
-  const compressedImages = await compressImages(target.files)
-  if (compressedImages && compressedImages.length > 0) {
-    files.value.push(...compressedImages)
+  if (config.enableImageCompression) {
+    const compressedImages = await compressImages(target.files)
+    if (compressedImages && compressedImages.length > 0) {
+      files.value.push(...compressedImages)
+      emit('update:modelValue', files.value)
+    }
+  } else {
+    files.value.push(...target.files)
     emit('update:modelValue', files.value)
   }
 }
