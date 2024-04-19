@@ -32,9 +32,6 @@ const router = createRouter({
       path: '/:id',
       name: 'details',
       props: true,
-      meta: {
-        requiresAuth: true
-      },
       component: DetailsView
     },
     {
