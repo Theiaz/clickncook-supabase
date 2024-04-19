@@ -59,6 +59,7 @@ const resetHover = () => {
               }
         "
         :key="index"
+        :data-test="'rating-' + index"
       >
         <StarIcon
           class="h-8 w-8 text-secondary"

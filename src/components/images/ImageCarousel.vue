@@ -60,10 +60,10 @@ watch(
       />
       <div v-else class="image bg-primary flex justify-center items-center">No image yet!</div>
       <div v-if="hasMultipleImages" class="absolute top-1/2 w-full flex justify-between px-4">
-        <Button variant="blur" size="icon" @click="previousImage">
+        <Button variant="blur" size="icon" @click="previousImage" data-test="previous-image">
           <ChevronLeftIcon />
         </Button>
-        <Button variant="blur" size="icon" @click="nextImage">
+        <Button variant="blur" size="icon" @click="nextImage" data-test="next-image">
           <ChevronRightIcon />
         </Button>
       </div>

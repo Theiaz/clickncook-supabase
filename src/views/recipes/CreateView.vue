@@ -40,7 +40,7 @@ const btnText = computed(() => (loading.value ? 'Loading ...' : 'Create Recipe')
           <ImageUpload v-model="recipe!.images" />
           <div class="grid w-full max-w-sm items-center gap-1.5">
             <Label for="name">Name</Label>
-            <Input id="name" v-model="recipe.name" type="text" v-focus />
+            <Input id="name" v-model="recipe.name" type="text" v-focus data-test="name-input" />
           </div>
           <RecipeRating v-model="recipe.rating" :is-readonly="false" />
           <CookingTime v-model="recipe.cookingTime" :is-readonly="false" />
@@ -48,14 +48,14 @@ const btnText = computed(() => (loading.value ? 'Loading ...' : 'Create Recipe')
         <template #right>
           <div class="grid w-full gap-1.5">
             <Label for="description">Description</Label>
-            <Textarea id="description" v-model="recipe.description" />
+            <Textarea id="description" v-model="recipe.description" data-test="description-input" />
           </div>
           <RecipeCategories v-model="recipe.categories" :is-readonly="false" />
         </template>
       </RecipeGrid>
     </template>
     <template #actions>
-      <Button @click="onSubmit">{{ btnText }}</Button>
+      <Button @click="onSubmit" data-test="create-btn">{{ btnText }}</Button>
     </template>
   </StickyBottomLayout>
 </template>
