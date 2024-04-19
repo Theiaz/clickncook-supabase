@@ -38,6 +38,6 @@ const text = computed(() => (props.modelValue ? props.modelValue : '-'))
   </div>
   <div v-else class="grid w-full max-w-sm items-center gap-1.5">
     <Label for="cookingtime">Cooking Time</Label>
-    <Input id="cookingtime" type="number" v-model="cookingTime" />
+    <Input id="cookingtime" type="number" v-model="cookingTime" data-test="time-input" />
   </div>
 </template>

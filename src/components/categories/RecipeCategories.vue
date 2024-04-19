@@ -48,18 +48,19 @@ const toggleSelection = (selectedCategory: Category) => {
   <label class="block text-sm font-medium">Categories</label>
   <div class="flex gap-4">
     <Popover v-if="!isReadonly">
-      <PopoverTrigger>
+      <PopoverTrigger data-test="categories-button">
         <EditIcon />
       </PopoverTrigger>
       <PopoverContent class="flex gap-4 flex-wrap mx-8 my-2">
         <Badge
-          v-for="category in availableCategories"
+          v-for="(category, index) in availableCategories"
           :key="category.id"
           class="snap-center cursor-pointer"
           :variant="
             selectedCategories.map((c) => c.id).includes(category.id) ? 'default' : 'outline'
           "
           @click="toggleSelection(category)"
+          :data-test="'category-' + index"
         >
           {{ category.name }}
         </Badge>

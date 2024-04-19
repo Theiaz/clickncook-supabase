@@ -60,7 +60,14 @@ function deleteImage(file: File) {
       <label
         class="p-2 hover:cursor-pointer hover:bg-accent hover:text-accent-foreground rounded-md"
       >
-        <input class="hidden" type="file" accept="image/*" multiple @change="addImages($event)" />
+        <input
+          class="hidden"
+          type="file"
+          accept="image/*"
+          multiple
+          @change="addImages($event)"
+          data-test="image-upload"
+        />
         <CameraAddIcon />
       </label>
       <Button size="icon" variant="ghost" @click="deleteImage(slotProps.currentImage)">

@@ -26,7 +26,7 @@ const { logout } = useAuth()
       </div>
     </router-link>
     <router-link :to="{ name: 'newRecipe' }" v-slot="{ href, navigate }">
-      <Button variant="outline" size="icon" :href="href" @click="navigate">
+      <Button variant="outline" size="icon" :href="href" @click="navigate" data-test="new-recipe">
         <AddDocument />
       </Button>
     </router-link>
