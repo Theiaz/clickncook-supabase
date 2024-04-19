@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { compressImages } from '@/api/image-compression/api'
 import CameraAddIcon from '@/components/icons/CameraAddIcon.vue'
 import TrashIcon from '@/components/icons/TrashIcon.vue'
 import { onBeforeMount, ref, watch } from 'vue'
@@ -39,8 +40,11 @@ async function addImages(event: Event) {
     return
   }
 
-  files.value.push(...Array.from(target.files))
-  emit('update:modelValue', files.value)
+  const compressedImages = await compressImages(target.files)
+  if (compressedImages && compressedImages.length > 0) {
+    files.value.push(...compressedImages)
+    emit('update:modelValue', files.value)
+  }
 }
 
 function deleteImage(file: File) {
