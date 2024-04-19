@@ -63,6 +63,6 @@ For the last two environments a [github action automatically deploys new migrati
 - push local migrations to remote [`supabase db push`](https://supabase.com/docs/reference/cli/supabase-db-push)
 
 ## Edge functions
-
+- `supabase functions serve <function_name> --no-verify-jwt` for local development
 -  `supabase functions deploy` deploy all functions to production
 -  `supabase functions deploy <function_name>` deploy specfic function to production
