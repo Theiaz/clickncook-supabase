@@ -61,3 +61,8 @@ For the last two environments a [github action automatically deploys new migrati
 - identify diffs (like updated policies in the UI) between local and remote: [supabase db diff](https://supabase.com/docs/reference/cli/supabase-db-diff)
 - apply database migration locally [`supabase db reset`](https://supabase.com/docs/reference/cli/supabase-db-reset)
 - push local migrations to remote [`supabase db push`](https://supabase.com/docs/reference/cli/supabase-db-push)
+
+## Edge functions
+
+-  `supabase functions deploy` deploy all functions to production
+-  `supabase functions deploy <function_name>` deploy specfic function to production
