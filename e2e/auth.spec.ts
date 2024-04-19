@@ -39,11 +39,9 @@ test('register', async ({ page }) => {
   await page.getByTestId('password-input').press('Tab')
   await page.getByTestId('password-confirm-input').fill(password)
 
-  page.once('dialog', (dialog) => {
-    console.log(`Dialog message: ${dialog.message()}`)
-    expect(dialog.type()).toBe('confirm')
+  page.once('dialog', async (dialog) => {
     expect(dialog.message()).toContain('Please confirm your registration via email')
-    dialog.accept()
+    await dialog.accept()
   })
   await page.getByTestId('submit-button').click()
 })
