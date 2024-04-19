@@ -1,8 +1,7 @@
-# example netlify.toml
 [build]
-  command = "npm run build"
-  functions = "netlify/functions"
   publish = "dist"
+  command = "pnpm run build"
+  functions = "netlify/functions"
 
 ## Uncomment to use this redirect for Single Page Applications
 ## Not needed for static site generators.
@@ -10,3 +9,18 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# register the correct MIME type for the web manifest
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+# files in /assets/ can have a very long cache time, as everything in there should contain a hash in the filename
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    cache-control = '''
+    max-age=31536000,
+    immutable
+    '''
