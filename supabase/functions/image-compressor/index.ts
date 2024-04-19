@@ -1,22 +1,50 @@
-// Follow this setup guide to integrate the Deno language server with your editor:
-// https://deno.land/manual/getting_started/setup_your_environment
-// This enables autocomplete, go to definition, etc.
-
-
 // https://gist.github.com/Joeao/240ba519b8bc9cf5090f81e173716656
+// https://deno.com/blog/build-image-resizing-api
 
-console.log("Hello from Functions!")
+import { serve } from 'https://deno.land/std@0.173.0/http/server.ts'
+import {
+  ImageMagick,
+  initializeImageMagick,
+  MagickGeometry
+} from 'https://deno.land/x/imagemagick_deno@0.0.14/mod.ts'
+import { corsHeaders } from '../_shared/cors.ts'
 
-Deno.serve(async (req) => {
-  const { name } = await req.json()
-  const data = {
-    message: `Hello ${name}!`,
+await initializeImageMagick()
+
+function modifyImage(
+  imageBuffer: Uint8Array,
+  params: { width: number; height: number; mode: string }
+) {
+  const sizingData = new MagickGeometry(params.width, params.height)
+  sizingData.ignoreAspectRatio = params.height > 0 && params.width > 0
+  return new Promise<Uint8Array>((resolve) => {
+    ImageMagick.read(imageBuffer, (image) => {
+      image.resize(sizingData)
+      image.write((data) => resolve(data))
+    })
+  })
+}
+
+serve(async (req: Request) => {
+  // This is needed if you're planning to invoke your function from a browser.
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders })
   }
 
-  return new Response(
-    JSON.stringify(data),
-    { headers: { "Content-Type": "application/json" } },
-  )
+  const payloadImage: {
+    buffer: Uint8Array
+    mediaType: string
+  } = {
+    buffer: new Uint8Array(await req.arrayBuffer()),
+    mediaType: req.headers.get('Content-Type')!
+  }
+
+  // TODO we need to keep the aspect ratio
+  const params = { width: 1000, height: 1000, mode: 'fit' }
+  const modifiedImage = await modifyImage(payloadImage.buffer, params)
+  return new Response(modifiedImage, {
+    headers: { ...corsHeaders, 'Content-Type': 'image/jpeg' }
+  })
 })
 
 /* To invoke locally:
