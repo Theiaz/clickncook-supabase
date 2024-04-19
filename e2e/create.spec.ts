@@ -1,7 +1,23 @@
 import { expect, test } from '@playwright/test'
+import { SupabaseClient, createClient } from '@supabase/supabase-js'
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { join } from 'path'
+
+const supabaseUrl = 'http://localhost:54321'
+// we are using service role key to bypass RLS for data deletion
+const supabaseServiceRoleKey =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU'
+const supabase: SupabaseClient = createClient(supabaseUrl, supabaseServiceRoleKey)
+
+test.afterEach(async () => {
+  const { data } = await supabase.from('recipes').select()
+  if (data) {
+    const id = data[0].id
+    await supabase.from('recipes').delete().eq('id', id)
+    await supabase.storage.emptyBucket('recipe_images')
+  }
+})
 
 test('create a recipe without images', async ({ page }) => {
   await page.goto('/')

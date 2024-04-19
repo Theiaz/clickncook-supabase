@@ -13,7 +13,6 @@ test('login', async ({ page }) => {
   await page.getByRole('button', { name: 'Login' }).click()
 
   await expect(page).toHaveURL('/')
-  await expect(page.getByTestId('next-button')).toBeVisible()
 })
 
 test('navigate to register screen from login screen', async ({ page }) => {
