@@ -29,7 +29,7 @@ serve(async (req: Request) => {
   }
 
   // we need to keep the aspect ratio, therefore height is 0
-  const params: ImageParams = { width: 2000, height: 0, mode: 'fit' }
+  const params: ImageParams = { width: 1000, height: 0, mode: 'fit' }
   //const modifiedImage = await _modifyImage(payloadImage.buffer, params)
   return new Response(payloadImage, {
     headers: { ...corsHeaders, 'Content-Type': 'image/webp' }
