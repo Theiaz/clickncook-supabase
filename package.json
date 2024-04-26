@@ -12,7 +12,7 @@
     "generate-types": "npx supabase gen types typescript --local > ./src/types/schema.ts",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "preview": "vite preview",
-    "test:e2e": "supabase functions serve & playwright test",
+    "test:e2e": "playwright test",
     "test:unit": "vitest",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
   },
