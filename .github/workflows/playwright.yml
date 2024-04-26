@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [main, master]
 jobs:
-  test:
+  e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -22,15 +22,14 @@ jobs:
           version: latest
       - name: Start Supabase local development setup
         run: supabase start
-      - name: Start Supabase functions server
-        run: |
-          nohup supabase functions serve > /dev/null 2>&1 &
-          disown
       - name: Run Playwright tests
         env:
           VITE_SUPABASE_URL: http://localhost:54321
           VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
-        run: pnpm test:e2e
+        run: |
+          nohup supabase functions serve > /dev/null 2>&1 &
+          disown
+          pnpm test:e2e
       - uses: actions/upload-artifact@v4
         if: always()
         with:
