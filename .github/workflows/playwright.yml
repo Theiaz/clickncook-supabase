@@ -29,7 +29,6 @@ jobs:
         run: |
           nohup supabase functions serve --debug &
           disown
-          sleep 15
           pnpm test:e2e
       - uses: actions/upload-artifact@v4
         if: always()
