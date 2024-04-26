@@ -5,28 +5,17 @@ import { serve } from 'https://deno.land/std@0.173.0/http/server.ts'
 import {
   ImageMagick,
   initializeImageMagick,
+  MagickFormat,
   MagickGeometry
 } from 'https://deno.land/x/imagemagick_deno@0.0.14/mod.ts'
 import { corsHeaders } from '../_shared/cors.ts'
 
 await initializeImageMagick()
 
-function modifyImage(
-  imageBuffer: Uint8Array,
-  params: { width: number; height: number; mode: string }
-) {
-  const sizingData = new MagickGeometry(params.width, params.height)
-  sizingData.ignoreAspectRatio = params.height > 0 && params.width > 0
-  return new Promise<Uint8Array>((resolve) => {
-    ImageMagick.read(imageBuffer, (image) => {
-      image.resize(sizingData)
-      image.write((data) => resolve(data))
-    })
-  })
-}
+type ImageParams = { width: number; height: number; mode: string }
 
 serve(async (req: Request) => {
-  // This is needed if you're planning to invoke your function from a browser.
+  // This is needed if you're planning to invoke your function from a browser
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
   }
@@ -39,13 +28,28 @@ serve(async (req: Request) => {
     mediaType: req.headers.get('Content-Type')!
   }
 
-  // TODO we need to keep the aspect ratio
-  const params = { width: 1000, height: 1000, mode: 'fit' }
-  const modifiedImage = await modifyImage(payloadImage.buffer, params)
+  // we need to keep the aspect ratio, therefore height is 0
+  const params: ImageParams = { width: 2000, height: 0, mode: 'fit' }
+  const modifiedImage = await _modifyImage(payloadImage.buffer, params)
   return new Response(modifiedImage, {
-    headers: { ...corsHeaders, 'Content-Type': 'image/jpeg' }
+    headers: { ...corsHeaders, 'Content-Type': 'image/webp' }
   })
 })
+
+function _modifyImage(imageBuffer: Uint8Array, params: ImageParams) {
+  const sizingData = new MagickGeometry(params.width, params.height)
+  sizingData.ignoreAspectRatio = params.height > 0 && params.width > 0
+
+  return new Promise<Uint8Array>((resolve) => {
+    ImageMagick.read(imageBuffer, (image) => {
+      image.resize(sizingData)
+
+      image.write((data) => {
+        resolve(data)
+      }, MagickFormat.Webp)
+    })
+  })
+}
 
 /* To invoke locally:
 
