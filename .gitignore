@@ -29,5 +29,5 @@ coverage
 *.sw?
 /test-results/
 /blob-report/
-/playwright/*
+/playwright
 
