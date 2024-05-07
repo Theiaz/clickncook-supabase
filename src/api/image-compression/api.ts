@@ -1,35 +1,24 @@
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
-
 async function compressImages(images: FileList): Promise<File[]> {
   const files: File[] = []
-  await Promise.all(
-    [...images].map(async (image) => {
-      const url = `${supabaseUrl}/functions/v1/image-compressor`
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${supabaseAnonKey}`,
-          'Content-Type': 'application/octet-stream'
-        },
-        body: image
-      }
+  if (window.Worker) {
+    const myWorker = new Worker(new URL('./worker.ts', import.meta.url))
 
-      try {
-        const response = await fetch(url, requestOptions)
+    for (const image of images) {
+      myWorker.postMessage(image)
+      console.log('Message posted to worker')
 
-        if (response.ok) {
-          const blob = await response.blob()
-          const file = new File([blob], image.name, { type: blob.type })
-          files.push(file)
-        } else {
-          console.error('Failed to upload image', image.name)
+      await new Promise<void>((resolve) => {
+        myWorker.onmessage = (e: MessageEvent<File>) => {
+          console.log('Message received from worker', e.data)
+          files.push(e.data)
+          resolve()
         }
-      } catch (error) {
-        console.error('Error uploading image: ', image.name, error)
-      }
-    })
-  )
+      })
+    }
+  } else {
+    console.log("Your browser doesn't support web workers.")
+  }
+  // lazy load new recipe page
 
   return files
 }
