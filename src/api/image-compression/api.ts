@@ -18,8 +18,6 @@ async function compressImages(images: FileList): Promise<File[]> {
   } else {
     console.log("Your browser doesn't support web workers.")
   }
-  // lazy load new recipe page
-
   return files
 }
 
