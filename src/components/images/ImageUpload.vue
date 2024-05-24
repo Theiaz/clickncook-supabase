@@ -73,7 +73,7 @@ function deleteImage(file: File) {
         <input
           class="hidden"
           type="file"
-          accept="image/*"
+          accept="image/*,text/plain" 
           multiple
           @change="addImages($event)"
           data-test="image-upload"
