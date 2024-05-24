@@ -48,7 +48,8 @@ test('create a recipe without images', async ({ page }) => {
   await expect(page).toHaveURL('/')
 })
 
-test('create a recipe with multiple images', async ({ page }) => {
+// TODO schaefer - waiting for https://github.com/microsoft/playwright/issues/31004
+test.skip('create a recipe with multiple images', async ({ page }) => {
   await page.goto('/')
   await page.getByTestId('new-recipe').click()
 
