@@ -17,9 +17,9 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
   },
   "dependencies": {
-    "@silvia-odwyer/photon": "^0.3.2",
     "@supabase/supabase-js": "^2.39.8",
     "@vueuse/core": "^10.7.2",
+    "browser-image-compression": "^2.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "lucide-vue-next": "^0.309.0",
@@ -42,7 +42,6 @@
     "@vue/test-utils": "^2.4.3",
     "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.16",
-    "compressorjs": "^1.2.1",
     "eslint": "^8.56.0",
     "eslint-plugin-vue": "^9.19.2",
     "jsdom": "^23.0.1",

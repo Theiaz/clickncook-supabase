@@ -1,22 +1,21 @@
-const loadWasm = async () => {
-  const compressor = await import('compressorjs')
-  return compressor
+const loadCompressionLib = async () => {
+  const { default: imageCompression } = await import('browser-image-compression')
+  return imageCompression
 }
 
 onmessage = async (msg: MessageEvent<File>) => {
   const image: File = msg.data
-  const compressor = await loadWasm()
-  new compressor.default(image, {
-    quality: 0.6,
+  const imageCompression = await loadCompressionLib()
 
-    // The compression process is asynchronous,
-    // which means you have to access the `result` in the `success` hook function.
-    success(result) {
-      console.log('Compressed image size: ', result.size)
-      postMessage(result)
-    },
-    error(err) {
-      console.log(err.message)
-    }
-  })
+  const options = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1920,
+    useWebWorker: false
+  }
+  try {
+    const compressedFile = await imageCompression(image, options)
+    postMessage(compressedFile)
+  } catch (error) {
+    console.log(error)
+  }
 }
