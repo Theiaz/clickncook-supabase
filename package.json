@@ -17,9 +17,9 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
   },
   "dependencies": {
-    "@silvia-odwyer/photon": "^0.3.2",
     "@supabase/supabase-js": "^2.39.8",
     "@vueuse/core": "^10.7.2",
+    "browser-image-compression": "^2.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "lucide-vue-next": "^0.309.0",
