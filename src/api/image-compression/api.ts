@@ -1,7 +1,7 @@
 async function compressImages(images: FileList): Promise<File[]> {
   const files: File[] = []
   if (window.Worker) {
-    const myWorker = new Worker(new URL('./worker.ts', import.meta.url))
+    const myWorker = new Worker(new URL('./worker.ts', import.meta.url), { type: 'module' })
 
     for (const image of images) {
       myWorker.postMessage(image)

@@ -1,13 +1,8 @@
 import type { Options } from 'browser-image-compression'
-
-const loadCompressionLib = async () => {
-  const { default: imageCompression } = await import('browser-image-compression')
-  return imageCompression
-}
+import imageCompression from 'browser-image-compression'
 
 onmessage = async (msg: MessageEvent<File>) => {
   const image: File = msg.data
-  const imageCompression = await loadCompressionLib()
 
   const options: Options = {
     maxSizeMB: 1,
