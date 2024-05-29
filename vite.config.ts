@@ -2,14 +2,10 @@ import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
-import topLevelAwait from 'vite-plugin-top-level-await'
-import wasm from 'vite-plugin-wasm'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    wasm(),
-    topLevelAwait(),
     vue(),
     VitePWA({
       registerType: 'autoUpdate',
@@ -54,7 +50,6 @@ export default defineConfig({
     }
   },
   worker: {
-    plugins: () => [wasm(), topLevelAwait()],
     format: 'es'
   }
 })
