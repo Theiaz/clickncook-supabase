@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import InstallButton from '@/components/InstallButton.vue'
 import AddDocument from '@/components/icons/AddDocument.vue'
 import ClicknCookIcon from '@/components/icons/ClicknCookIcon.vue'
 import LoginIcon from '@/components/icons/LoginIcon.vue'
@@ -25,6 +26,7 @@ const { logout } = useAuth()
         <span>ook</span>
       </div>
     </router-link>
+    <InstallButton id="install" variant="default" size="icon" />
     <router-link :to="{ name: 'newRecipe' }" v-slot="{ href, navigate }">
       <Button variant="outline" size="icon" :href="href" @click="navigate" data-test="new-recipe">
         <AddDocument />
