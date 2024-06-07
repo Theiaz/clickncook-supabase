@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import InstallButton from '@/components/InstallButton.vue'
 import AddDocument from '@/components/icons/AddDocument.vue'
 import ClicknCookIcon from '@/components/icons/ClicknCookIcon.vue'
 import LoginIcon from '@/components/icons/LoginIcon.vue'
 import LogoutIcon from '@/components/icons/LogoutIcon.vue'
 import RecipeListIcon from '@/components/icons/RecipeListIcon.vue'
+import InstallButton from '@/components/installation/InstallButton.vue'
 import { useAuth } from '@/composables/useAuth'
 import { useUser } from '@/composables/useUser'
 import Button from './ui/button/Button.vue'
@@ -26,7 +26,7 @@ const { logout } = useAuth()
         <span>ook</span>
       </div>
     </router-link>
-    <InstallButton id="install" variant="default" size="icon" />
+    <InstallButton />
     <router-link :to="{ name: 'newRecipe' }" v-slot="{ href, navigate }">
       <Button variant="outline" size="icon" :href="href" @click="navigate" data-test="new-recipe">
         <AddDocument />
