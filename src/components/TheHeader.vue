@@ -13,37 +13,59 @@ const { isAuthenticated } = useUser()
 const { logout } = useAuth()
 </script>
 <template>
-  <header
-    class="flex gap-4 justify-end items-center px-8 py-2 text-primary sticky top-0 bg-white z-10"
-  >
-    <router-link class="mr-auto text-primary-text flex items-center gap-2" :to="{ name: 'home' }">
-      <ClicknCookIcon />
-      <div class="flex items-end italic flex-nowrap" data-test="claim">
-        <span class="font-bold">C</span>
-        <span>lick &nbsp;</span>
-        <span class="font-bold">'n' &nbsp;</span>
-        <span class="font-bold">C</span>
-        <span>ook</span>
-      </div>
-    </router-link>
-    <InstallButton />
-    <router-link :to="{ name: 'newRecipe' }" v-slot="{ href, navigate }">
-      <Button variant="outline" size="icon" :href="href" @click="navigate" data-test="new-recipe">
-        <AddDocument />
-      </Button>
-    </router-link>
-    <router-link :to="{ name: 'myRecipes' }" v-slot="{ href, navigate }">
-      <Button variant="outline" size="icon" :href="href" @click="navigate">
-        <RecipeListIcon />
-      </Button>
-    </router-link>
-    <router-link v-if="!isAuthenticated" :to="{ name: 'login' }" v-slot="{ href, navigate }">
-      <Button variant="outline" size="icon" :href="href" @click="navigate" data-test="login-button">
-        <LoginIcon />
-      </Button>
-    </router-link>
-    <Button variant="outline" size="icon" v-else @click="logout" data-test="logout-button">
-      <LogoutIcon />
-    </Button>
+  <header class="px-8 py-2 text-primary sticky top-0 bg-white z-10">
+    <nav class="flex gap-4 justify-end items-center">
+      <ul class="mr-auto">
+        <router-link class="text-primary-text flex items-center gap-2" :to="{ name: 'home' }">
+          <ClicknCookIcon />
+          <div class="flex italic flex-nowrap" data-test="claim">
+            <span class="font-bold">C</span>
+            <span>lick &nbsp;</span>
+            <span class="font-bold">'n' &nbsp;</span>
+            <span class="font-bold">C</span>
+            <span>ook</span>
+          </div>
+        </router-link>
+      </ul>
+      <ul>
+        <InstallButton />
+      </ul>
+      <ul>
+        <router-link :to="{ name: 'newRecipe' }" v-slot="{ href, navigate }">
+          <Button
+            variant="outline"
+            size="icon"
+            :href="href"
+            @click="navigate"
+            data-test="new-recipe"
+          >
+            <AddDocument />
+          </Button>
+        </router-link>
+      </ul>
+      <ul>
+        <router-link :to="{ name: 'myRecipes' }" v-slot="{ href, navigate }">
+          <Button variant="outline" size="icon" :href="href" @click="navigate">
+            <RecipeListIcon />
+          </Button>
+        </router-link>
+      </ul>
+      <ul>
+        <router-link v-if="!isAuthenticated" :to="{ name: 'login' }" v-slot="{ href, navigate }">
+          <Button
+            variant="outline"
+            size="icon"
+            :href="href"
+            @click="navigate"
+            data-test="login-button"
+          >
+            <LoginIcon />
+          </Button>
+        </router-link>
+        <Button v-else variant="outline" size="icon" @click="logout" data-test="logout-button">
+          <LogoutIcon />
+        </Button>
+      </ul>
+    </nav>
   </header>
 </template>
