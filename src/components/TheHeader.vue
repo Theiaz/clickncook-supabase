@@ -17,14 +17,7 @@ const { logout } = useAuth()
     <nav class="flex gap-4 justify-end items-center">
       <ul class="mr-auto">
         <router-link class="text-primary-text flex items-center gap-2" :to="{ name: 'home' }">
-          <ClicknCookIcon />
-          <div class="flex italic flex-nowrap" data-test="claim">
-            <span class="font-bold">C</span>
-            <span>lick &nbsp;</span>
-            <span class="font-bold">'n' &nbsp;</span>
-            <span class="font-bold">C</span>
-            <span>ook</span>
-          </div>
+          <ClicknCookIcon data-test="claim" />
         </router-link>
       </ul>
       <ul>
