@@ -41,6 +41,9 @@ export default defineConfig({
             purpose: 'maskable'
           }
         ]
+      },
+      devOptions: {
+        enabled: false // enable sw on development
       }
     })
   ],
