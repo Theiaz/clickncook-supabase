@@ -45,14 +45,14 @@ export default defineConfig({
           {
             name: 'Create new recipe',
             short_name: 'Create',
-            icons: [ { src: '/shortcut-new.png', sizes: '24x24' } ],
+            icons: [{ src: '/shortcut-new.png', sizes: '24x24' }],
             description: 'Create a new recipe',
             url: '/new'
           },
           {
             name: 'View my recipes',
             short_name: 'My recipes',
-            icons: [ { src: '/shortcut-my.png', sizes: '24x24' } ],
+            icons: [{ src: '/shortcut-my.png', sizes: '24x24' }],
             description: 'View your saved recipes',
             url: '/my'
           }
@@ -65,8 +65,11 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  build: {
+    target: 'es2022'
   },
   worker: {
     format: 'es'
