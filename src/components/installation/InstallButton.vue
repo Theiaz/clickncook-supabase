@@ -29,7 +29,7 @@ const registerInstallPrompt = (e: BeforeInstallPromptEvent) => {
 
 const triggerInstall = async () => {
   if (hasBeforeInstallPromptEvent.value) {
-    const result = await installPrompt.value!.prompt()
+    await installPrompt.value!.prompt()
 
     // disable install prompt
     installPrompt.value = null
