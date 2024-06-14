@@ -40,6 +40,36 @@ export default defineConfig({
             type: 'image/png',
             purpose: 'maskable'
           }
+        ],
+        shortcuts: [
+          {
+            name: 'Create new recipe',
+            short_name: 'Create',
+            icons: [ { src: '/shortcut-new.png', sizes: '24x24' } ],
+            description: 'Create a new recipe',
+            icons: [
+              {
+                src: '/shortcut-new.svg',
+                sizes: '24x24',
+                type: 'image/svg+xml'
+              }
+            ],
+            url: '/new'
+          },
+          {
+            name: 'View my recipes',
+            short_name: 'My recipes',
+            icons: [ { src: '/shortcut-my.png', sizes: '24x24' } ],
+            description: 'View your saved recipes',
+            icons: [
+              {
+                src: '/shortcut-my.svg',
+                sizes: '24x24',
+                type: 'image/svg+xml'
+              }
+            ],
+            url: '/my'
+          }
         ]
       },
       devOptions: {
