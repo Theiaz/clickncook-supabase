@@ -43,16 +43,30 @@ export default defineConfig({
         ],
         shortcuts: [
           {
-            name: 'Create new recipe',
+            name: 'Create a new recipe',
             short_name: 'Create',
-            icons: [{ src: '/shortcut-new.png', sizes: '24x24' }],
+            icons: [
+              {
+                src: '/shortcut-new.png',
+                sizes: '192x192',
+                type: 'image/png',
+                purpose: 'any'
+              }
+            ],
             description: 'Create a new recipe',
             url: '/new'
           },
           {
-            name: 'View my recipes',
+            name: 'View my recipes list',
             short_name: 'My recipes',
-            icons: [{ src: '/shortcut-my.png', sizes: '24x24' }],
+            icons: [
+              {
+                src: '/shortcut-my.png',
+                sizes: '192x192',
+                type: 'image/png',
+                purpose: 'any'
+              }
+            ],
             description: 'View your saved recipes',
             url: '/my'
           }
