@@ -6,10 +6,7 @@ export function useUser() {
   const { session, hasSession } = useSession()
 
   const user = computed<User | undefined>(() => {
-    if (hasSession.value) {
-      return session.value?.user
-    }
-    return undefined
+    return hasSession.value ? session.value?.user : undefined
   })
 
   const isAuthenticated = computed<boolean>(() => !!user.value)

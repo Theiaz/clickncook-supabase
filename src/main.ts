@@ -3,7 +3,14 @@ import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 import App from './App.vue'
 import './assets/main.css'
+import { useSession } from './composables/useSession'
 import router from './router'
+
+// load session once before the app is initiliazed
+const { hasSession, getSession } = useSession()
+if (!hasSession.value) {
+  await getSession()
+}
 
 const app = createApp(App)
 // custom directives
