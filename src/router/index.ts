@@ -1,4 +1,4 @@
-import { useUser } from '@/composables/useUser'
+import { useSession } from '@/composables/useSession'
 import HomeView from '@/views/HomeView.vue'
 import CreateView from '@/views/recipes/CreateView.vue'
 import DetailsView from '@/views/recipes/DetailsView.vue'
@@ -68,10 +68,9 @@ const router = createRouter({
     }
   ]
 })
-
-const { isAuthenticated } = useUser()
-router.beforeEach((to) => {
-  if (to.meta.requiresAuth && !isAuthenticated.value) {
+const { hasSession } = useSession()
+router.beforeEach(async (to) => {
+  if (to.meta.requiresAuth && !hasSession.value) {
     return {
       name: 'login',
       query: { redirect: to.fullPath }

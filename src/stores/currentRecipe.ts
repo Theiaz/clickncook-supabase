@@ -42,8 +42,6 @@ export const useCurrentRecipeStore = defineStore('currentRecipe', () => {
       // load from my recipes if available
       const myRecipe = myRecipeStore.getRecipeById(id)
       if (myRecipe) {
-        console.log('fetch from my store', myRecipe)
-
         currentRecipe.value = myRecipe
         return
       }
