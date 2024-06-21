@@ -73,7 +73,7 @@ export default defineConfig({
         ]
       },
       devOptions: {
-        enabled: true // enable sw on development
+        enabled: false // enable sw on development
       }
     })
   ],
