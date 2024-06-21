@@ -3,17 +3,10 @@
   command = "pnpm run build"
   functions = "netlify/functions"
 
-## Uncomment to use this redirect for Single Page Applications
-## Not needed for static site generators.
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
 ## used for Digital Asset Links File on Play store
 [[redirects]]
-  from = "/.well_known/*"
-  to = "/well_known/:splat"
+  from = "/.well-known/*"
+  to = "/well-known/:splat"
   status = 200
 
 # register the correct MIME type for the web manifest
