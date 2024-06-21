@@ -10,6 +10,12 @@
   to = "/index.html"
   status = 200
 
+## used for Digital Asset Links File on Play store
+[[redirects]]
+  from = "/.well_known/*"
+  to = "/well_known/:splat"
+  status = 200
+
 # register the correct MIME type for the web manifest
 [[headers]]
   for = "/manifest.webmanifest"
