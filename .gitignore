@@ -32,6 +32,3 @@ coverage
 /blob-report/
 /playwright
 
-
-# Sentry Config File
-.env.sentry-build-plugin
