@@ -17,7 +17,10 @@ const app = createApp(App)
 // custom directives
 app.directive('focus', FocusDirective)
 
-initAppMonitoring(app)
+if (process.env.NODE_ENV === 'production') {
+  initAppMonitoring(app)
+}
+
 
 const pinia = createPinia()
 app.use(pinia)
