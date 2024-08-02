@@ -4,6 +4,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './assets/main.css'
 import { useSession } from './composables/useSession'
+import { initAppMonitoring } from './monitoring'
 import router from './router'
 
 // load session once before the app is initiliazed
@@ -15,6 +16,8 @@ if (!hasSession.value) {
 const app = createApp(App)
 // custom directives
 app.directive('focus', FocusDirective)
+
+initAppMonitoring(app)
 
 const pinia = createPinia()
 app.use(pinia)
