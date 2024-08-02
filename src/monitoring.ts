@@ -1,7 +1,7 @@
 import type { App } from 'vue'
 
 const initAppMonitoring = async (app: App) => {
-  const Sentry = await import('@sentry/vue')
+  const Sentry = await import('@sentry/vue') // because of async import it may happen that monitoring is not available for a short time after the app has been initialized
   Sentry.init({
     app,
     dsn: 'https://ab990ff9b0e7ad987ed329038dff51d2@o4507707540570112.ingest.de.sentry.io/4507707542601808',
