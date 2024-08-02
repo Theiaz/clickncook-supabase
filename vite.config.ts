@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from '@sentry/vite-plugin'
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
@@ -75,6 +76,10 @@ export default defineConfig({
       devOptions: {
         enabled: false // enable sw on development
       }
+    }),
+    sentryVitePlugin({
+      org: 'julian-schaefer',
+      project: 'clickncook-supabase'
     })
   ],
   resolve: {
@@ -83,7 +88,8 @@ export default defineConfig({
     }
   },
   build: {
-    target: 'es2022'
+    target: 'es2022',
+    sourcemap: true
   },
   worker: {
     format: 'es'
