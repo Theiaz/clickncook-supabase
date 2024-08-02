@@ -1,7 +1,7 @@
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 const plugins = [
@@ -77,11 +77,14 @@ const plugins = [
   })
 ]
 
-export default defineConfig(({ command }) => {
+export default defineConfig(({ command, mode }) => {
   const isProduction = command === 'build'
   if (isProduction) {
+    const env = loadEnv(mode, process.cwd(), '') // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
+
     plugins.push(
       sentryVitePlugin({
+        authToken: env.SENTRY_AUTH_TOKEN,
         org: 'julian-schafer-b1',
         project: 'clickncook-supabase'
       })
