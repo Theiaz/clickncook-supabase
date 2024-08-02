@@ -1,7 +1,7 @@
-import * as Sentry from '@sentry/vue'
 import type { App } from 'vue'
 
-const initAppMonitoring = (app: App) =>
+const initAppMonitoring = async (app: App) => {
+  const Sentry = await import('@sentry/vue')
   Sentry.init({
     app,
     dsn: 'https://ab990ff9b0e7ad987ed329038dff51d2@o4507707540570112.ingest.de.sentry.io/4507707542601808',
@@ -14,5 +14,6 @@ const initAppMonitoring = (app: App) =>
     replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
     replaysOnErrorSampleRate: 1.0 // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
   })
+}
 
 export { initAppMonitoring }
