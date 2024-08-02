@@ -3,66 +3,49 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ef79e64d-48f1-4ad6-9461-328b06b86385/deploy-status)](https://app.netlify.com/sites/jolly-cocada-5deecb/deploys)
 [![CI](https://github.com/Theiaz/clickncook-supabase/actions/workflows/ci.yaml/badge.svg)](https://github.com/Theiaz/clickncook-supabase/actions/workflows/ci.yaml)
 
+This is a progressive web app for your recipes using free tier of netlify and supabase. You can use the [hosted instance](https://jolly-cocada-5deecb.netlify.app/) or [deploy it yourself](#installation-for-self-hosting)!
+
+# Table of Contents
+
+- [Features](#features)
+- [Setup](#setup)
+- [Installation for self hosting](#installation-for-self-hosting)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+- ✅ image store with clientside image compression
+- ✅ progressive web app (installable, app shortcuts)
+- ✅ authentication and authorization with postgres Row Level Security
+- ✅ multiple environment support (local, staging, production)
+- ✅ E2E tests using playwright
+
 ## Setup
 
-### Connect to your local supabase instance
+1. Clone or fork the repository:
 
-1. Setup supabase [locally](https://supabase.com/docs/guides/cli/local-development) and start your local environment with `supabase start`
-1. Have a look at the dashboard http://localhost:54323/project/default
-1. Create a environment file `env.local` which contains the local supabase credentials
-   ```txt
-   VITE_SUPABASE_URL=http://localhost:54321
-   VITE_SUPABASE_ANON_KEY=<anon api key>
+   ```sh
+   git clone git@github.com:Theiaz/clickncook-supabase.git
+   cd clickncook-supabase
    ```
-1. Run `npm run dev`
 
-### Connectt your remote supabase instance
+2. Install dependencies:
 
-1. Create a environment file `.env` which contains the remote supabase credentials
-   ```txt
-   VITE_SUPABASE_URL=<remote supabase url>
-   VITE_SUPABASE_ANON_KEY=<anon api key>
+   ```sh
+   npm install
    ```
-2. Connect your supabase cli with your remote instance `supabase link --project-ref <PROJECT_REF>`
 
-## Local development and environment
+3. Setup local supabase instance - follow this [instructions](/docs/environments.md)
 
-### Dump local database
+## Installation for self hosting
 
-- connect with `psql <DB_URL>`to your db
-- find `<DB_URL>`> via `supabase status`
-- use `pg_dump <DB_URL>` for exporting db and `pg_restore -d <DB_URL>`for importing
-  - `pg_dump postgresql://postgres:postgres@localhost:54322/postgres -N _realtime -N _analytics > backup.sql  `
+If you want your own recipe app feel free to host it on yourself. A detailed guide can be found [here](/docs/selfhosting.md)
 
-### Local dummy user
+## Contributing
 
-For creating a local user u can register once, dump the data and seed it via `seed.sql `
+Contributions are welcome! Please open an issue or submit a pull request for any changes.
 
-- Dump via `pg_dump postgresql://postgres:postgres@localhost:54322/postgres --data-only --inserts --column-inserts -n public -n auth > backup.sql`
-- copy lines `auth.users` and `auth.identities` into `seed.sql`
+## License
 
-### Generate types for local setup
-
-- `supabase gen types typescript --local > ./src/types/schema.ts`
-
-## Staging and production
-
-For each environment we got a separate supabase project:
-
-- dev/local environment on your computer
-- [staging environment](https://staging--jolly-cocada-5deecb.netlify.app/) (branch `staging`)
-- [production environment](https://jolly-cocada-5deecb.netlify.app/) (branch `main`)
-
-For the last two environments a [github action automatically deploys new migrations](https://supabase.com/docs/guides/cli/managing-environments?environment=staging#deploy-a-migration) to the related supabase project.
-
-### Useful commands
-
-- Connect your supabase cli with your remote instance `supabase link --project-ref <PROJECT_REF>`
-- identify diffs (like updated policies in the UI) between local and remote: [supabase db diff](https://supabase.com/docs/reference/cli/supabase-db-diff)
-- apply database migration locally [`supabase db reset`](https://supabase.com/docs/reference/cli/supabase-db-reset)
-- push local migrations to remote [`supabase db push`](https://supabase.com/docs/reference/cli/supabase-db-push)
-
-## Edge functions
-- `supabase functions serve <function_name> --no-verify-jwt` for local development
--  `supabase functions deploy` deploy all functions to production
--  `supabase functions deploy <function_name>` deploy specfic function to production
+This project is licensed under the MIT License. See the LICENSE file for details.
