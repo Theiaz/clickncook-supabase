@@ -45,7 +45,7 @@ const toggleSelection = (selectedCategory: Category) => {
 }
 </script>
 <template>
-  <label class="block text-sm font-medium">Categories</label>
+  <label v-if="!isReadonly" class="block text-sm font-medium">Categories</label>
   <div class="flex gap-4">
     <Popover v-if="!isReadonly">
       <PopoverTrigger data-test="categories-button">
