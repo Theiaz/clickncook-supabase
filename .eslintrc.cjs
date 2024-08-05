@@ -16,7 +16,7 @@ module.exports = {
     'vue/multi-word-component-names': [
       'error',
       {
-        ignores: ['Button', 'Input', 'Label', 'Textarea']
+        ignores: ['Button', 'Input', 'Label', 'Textarea', 'Skeleton']
       }
     ]
     //'@typescript-eslint/no-floating-promises': 'error' // playwright best practice
