@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Slider } from '@/components/ui/slider'
+import { cn } from '@/util/shadcn'
 import { computed } from 'vue'
 import ClockIcon from '../icons/ClockIcon.vue'
 
@@ -14,30 +15,43 @@ const props = withDefaults(
   }
 )
 const emits = defineEmits<{
-  'update:modelValue': [modelValue: number]
+  'update:modelValue': [modelValue: number | undefined]
 }>()
 
 const cookingTime = computed({
   get() {
-    return props.modelValue
+    return [props.modelValue!]
   },
   set(value) {
     if (!value) {
       return
     }
-    emits('update:modelValue', value)
+    emits('update:modelValue', value[0])
   }
 })
 
-const text = computed(() => (props.modelValue ? props.modelValue : '-'))
+const cookingTimeText = computed(() => {
+  if (cookingTime.value[0] === undefined) {
+    return '-'
+  }
+  return cookingTime.value[0] > 180 ? `180+` : `${cookingTime.value[0]}`
+})
 </script>
 <template>
   <div v-if="isReadonly" class="flex items-center gap-2">
     <ClockIcon />
-    <span>{{ text }} min</span>
+    <span>{{ cookingTimeText }} min</span>
   </div>
   <div v-else class="grid w-full max-w-sm items-center gap-1.5">
     <Label for="cookingtime">Cooking Time</Label>
-    <Input id="cookingtime" type="number" v-model="cookingTime" data-test="time-input" />
+    <Slider
+      v-model="cookingTime"
+      :min="5"
+      :max="185"
+      :step="5"
+      :class="cn('w-3/5', $attrs.class ?? '')"
+    />
+
+    <span>{{ cookingTimeText }} min</span>
   </div>
 </template>
