@@ -4,6 +4,7 @@ import animate from 'tailwindcss-animate'
 export default {
   darkMode: ['class'],
   safelist: ['dark'],
+  prefix: '',
 
   content: [
     './pages/**/*.{ts,tsx,vue}',
@@ -57,6 +58,7 @@ export default {
         }
       },
       borderRadius: {
+        xl: 'calc(var(--radius) + 4px)',
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)'
