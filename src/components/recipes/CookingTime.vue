@@ -50,6 +50,7 @@ const cookingTimeText = computed(() => {
       :max="185"
       :step="5"
       :class="cn('w-3/5', $attrs.class ?? '')"
+      data-test="cooking-time"
     />
 
     <span>{{ cookingTimeText }} min</span>
