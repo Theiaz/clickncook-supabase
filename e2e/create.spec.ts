@@ -29,9 +29,8 @@ test('create a recipe without images', async ({ page }) => {
 
   await page.getByTestId('rating-3').click()
 
-  await page.getByTestId('time-input').click()
-  await page.getByTestId('time-input').fill('35')
-  await page.getByTestId('time-input').press('Tab')
+  await page.getByTestId('cooking-time').click()
+  await page.getByTestId('cooking-time').press('Tab')
 
   await page
     .getByTestId('description-input')
@@ -48,8 +47,7 @@ test('create a recipe without images', async ({ page }) => {
   await expect(page).toHaveURL('/')
 })
 
-// TODO schaefer - waiting for https://github.com/microsoft/playwright/issues/31004
-test.skip('create a recipe with multiple images', async ({ page }) => {
+test('create a recipe with multiple images', async ({ page, browserName }) => {
   await page.goto('/')
   await page.getByTestId('new-recipe').click()
 
@@ -59,9 +57,8 @@ test.skip('create a recipe with multiple images', async ({ page }) => {
 
   await page.getByTestId('rating-3').click()
 
-  await page.getByTestId('time-input').click()
-  await page.getByTestId('time-input').fill('35')
-  await page.getByTestId('time-input').press('Tab')
+  await page.getByTestId('cooking-time').click()
+  await page.getByTestId('cooking-time').press('Tab')
 
   await page
     .getByTestId('description-input')
@@ -72,14 +69,16 @@ test.skip('create a recipe with multiple images', async ({ page }) => {
   await page.getByTestId('category-1').click()
   await page.getByTestId('category-2').click()
 
-  // img upload
-  const _dirname = dirname(fileURLToPath(import.meta.url))
-  const img1 = join(_dirname, './testdata/img1.jpg')
-  const img2 = join(_dirname, './testdata/img2.jpg')
-  await page.getByTestId('image-upload').setInputFiles([img1, img2])
+  // img upload is not working for webkit because we got a "Image not defined" error inside web worker
+  if (browserName !== 'webkit') {
+    const _dirname = dirname(fileURLToPath(import.meta.url))
+    const img1 = join(_dirname, './testdata/img1.jpg')
+    const img2 = join(_dirname, './testdata/img2.jpg')
+    await page.getByTestId('image-upload').setInputFiles([img1, img2])
 
-  await expect(page.getByTestId('previous-image')).toBeVisible()
-  await expect(page.getByTestId('next-image')).toBeVisible()
+    await expect(page.getByTestId('previous-image')).toBeVisible()
+    await expect(page.getByTestId('next-image')).toBeVisible()
+  }
 
   // submit
   await page.getByTestId('create-btn').click()
