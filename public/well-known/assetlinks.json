@@ -1,8 +1,12 @@
-[{
+[
+  {
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "app.netlify.jolly_cocada_5deecb.twa",
-      "sha256_cert_fingerprints": ["7D:6A:8C:AF:2A:62:F5:3C:4E:22:CB:60:87:9D:83:03:A2:5F:34:AE:1A:C0:5D:AF:7E:35:26:AD:8E:78:99:74"]
+      "package_name": "",
+      "sha256_cert_fingerprints": [
+        "3F:B7:EF:DF:79:77:61:C8:BD:84:75:91:20:AF:17:31:20:44:1B:74:9C:5D:AF:AC:40:CD:55:3E:64:F2:66:34"
+      ]
     }
-  }]
+  }
+]
