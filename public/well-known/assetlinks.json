@@ -3,9 +3,9 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "",
+      "package_name": "app.netlify.jolly_cocada_5deecb.twa",
       "sha256_cert_fingerprints": [
-        "3F:B7:EF:DF:79:77:61:C8:BD:84:75:91:20:AF:17:31:20:44:1B:74:9C:5D:AF:AC:40:CD:55:3E:64:F2:66:34"
+        "F6:3B:96:65:73:56:FD:93:BF:DF:7D:85:1B:46:B8:C4:28:53:78:92:CE:1C:26:B5:9B:36:9C:8D:EF:9E:81:55"
       ]
     }
   }
