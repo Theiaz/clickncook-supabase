@@ -16,8 +16,9 @@ coverage
 *.local
 .env**
 
-/cypress/videos/
-/cypress/screenshots/
+/pwa-builder
+*.jks
+*.pem
 
 # Editor directories and files
 .vscode/*
